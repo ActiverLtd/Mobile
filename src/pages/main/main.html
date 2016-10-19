@@ -1,10 +1,8 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons start>
-      <button ion-button icon-only (click)="openProfile()">
-        <ion-icon name="contact"></ion-icon>
-      </button>
-    </ion-buttons>
+  <ion-navbar>
+    <button ion-button icon-only (click)="openProfile()">
+      <ion-icon name="contact"></ion-icon>
+    </button>
     <ion-title>
       Activer
     </ion-title>
@@ -14,7 +12,7 @@
         <ion-badge danger>2</ion-badge>
       </button>
     </ion-buttons>
-  </ion-toolbar>
+  </ion-navbar>
 </ion-header>
 <ion-content class="card-background-page">
   <div>
@@ -24,7 +22,7 @@
     </ion-select>
   </div>
   <ion-card *ngFor="let activity of activities" (click)="openActivity(activity, $event)">
-    <img src="assets/images/{{activity.sport}}.jpg" class="background" />
+    <img src="assets/images/{{activity.sport}}.jpg" class="background"/>
     <div class="card-sport">{{ activity.sport | translate }}</div>
     <div class="card-locked">
       <ion-icon name="lock" [hidden]="!activity.locked"></ion-icon>
@@ -43,10 +41,10 @@
       </div>
     </div>
     <div class="card-join">
-            <span>
-                {{'join' | translate}}<br/>
-                >>
-                </span>
+      <span>
+          {{'join' | translate}}<br/>
+          >>
+      </span>
     </div>
     <div class="card-organizer-image">
       <img [src]="activity.organizer.image"/>

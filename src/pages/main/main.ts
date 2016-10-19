@@ -3,6 +3,7 @@ import { ProfilePage } from '../profile/profile';
 import { ActivitiesPage } from '../activities/activities';
 import { Component } from '@angular/core';
 import { CreateActivityPage } from '../activities/create-activity';
+import { ShowActivityPage } from '../activities/show-activity/show-activity';
 
 
 @Component({
@@ -14,10 +15,12 @@ export class MainPage {
     {
       id: 24,
       sport: 'football',
-      location: 'Tampere',
+      address: 'Hippoksen tie 6, 20720',
+      city: 'Turku, Finland',
       time: '14-17',
       date: '6. huhtikuuta',
-      participants: 10,
+      participants: [{}, {},{}, {}, {}, {}, {}, {}],
+      participants_max: 10,
       locked: false,
       organizer: {
         name: 'Roope',
@@ -28,10 +31,12 @@ export class MainPage {
     {
       id: 52,
       sport: 'basketball',
-      location: 'Turku',
+      address: 'Hippoksen tie 6, 20720',
+      city: 'Turku, Finland',
       time: '17-20',
       date: '25. toukokuuta',
-      participants: 4,
+      participants: [{}, {}, {}, {}],
+      participants_max: 5,
       locked: true,
       organizer: {
         name: 'Jesse',
@@ -42,10 +47,12 @@ export class MainPage {
     {
       id: 12,
       sport: 'tennis',
-      location: 'Oulu',
+      address: 'Hippoksen tie 6, 20720',
+      city: 'Turku, Finland',
       time: '17-18',
       date: '21. kesäkuuta',
-      participants: 2,
+      participants: [{}, {}],
+      participants_max: 6,
       locked: true,
       organizer: {
         name: 'Tomi',
@@ -67,7 +74,7 @@ export class MainPage {
   }
 
   openActivity(activity, $event) {
-    let popover = this.popoverCtrl.create(ProfilePage);
+    let popover = this.popoverCtrl.create(ShowActivityPage, {activity}, {cssClass: 'show-activity-popover'});
     popover.present({
       ev: $event
     });

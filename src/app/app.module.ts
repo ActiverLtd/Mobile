@@ -9,6 +9,7 @@ import { Http } from '@angular/http';
 import { CreateActivityPage } from '../pages/activities/create-activity';
 import { InvitationsPage } from '../pages/activities/invitations/invitations';
 import { CalendarPage } from '../pages/activities/calendar/calendar';
+import { ShowActivityPage } from '../pages/activities/show-activity/show-activity';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CalendarPage } from '../pages/activities/calendar/calendar';
     ProfilePage,
     CreateActivityPage,
     InvitationsPage,
-    CalendarPage
+    CalendarPage,
+    ShowActivityPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -36,7 +38,8 @@ import { CalendarPage } from '../pages/activities/calendar/calendar';
     ProfilePage,
     CreateActivityPage,
     InvitationsPage,
-    CalendarPage
+    CalendarPage,
+    ShowActivityPage
   ],
   providers: []
 })

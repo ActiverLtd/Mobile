@@ -1,0 +1,32 @@
+.show-activity-popover {
+  .popover-content {
+    background: inherit !important;
+    position: fixed !important;
+    left: 5% !important;
+    right: 5% !important;
+    top: 5% !important;
+    bottom: inherit !important;
+    width: 90% !important;
+    height: 90% !important;
+    .popover-viewport {
+      height: 100%;
+    }
+    .scroll-content {
+      height: 100%;
+    }
+  }
+  ion-content.show-activity {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+
+    ion-row {
+      text-align: center;
+      h1, h2, h3, h4, h5, h6 {
+        margin: 0;
+      }
+      h1 {
+        color: cadetblue;
+      }
+    }
+  }
+}
