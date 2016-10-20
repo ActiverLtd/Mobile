@@ -21,7 +21,7 @@
       <ion-option value="popularity">Suosituimmuuden mykaan</ion-option>
     </ion-select>
   </div>
-  <ion-card *ngFor="let activity of activities" (click)="openActivity(activity, $event)">
+  <ion-card *ngFor="let activity of activitiesByOrder" (click)="openActivity(activity, $event)">
     <img src="assets/images/{{activity.sport}}.jpg" class="background"/>
     <div class="card-sport">{{ activity.sport | translate }}</div>
     <div class="card-locked">

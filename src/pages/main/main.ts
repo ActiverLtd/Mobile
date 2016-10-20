@@ -65,6 +65,17 @@ export class MainPage {
   constructor(private nav: NavController, private popoverCtrl: PopoverController) {
   }
 
+  get activitiesByOrder() {
+    return this.activities.sort((a, b) => {
+      if (this.orderBy === 'date') {
+        return a.date - b.date;
+      }
+      else {
+        return b.participants.length - a.participants.length;
+      }
+    })
+  }
+
   openActivities() {
     this.nav.push(ActivitiesPage);
   }

@@ -1,4 +1,10 @@
 .card-background-page {
+  background-color: black;
+  ion-select {
+    color: cadetblue;
+    width: 175px;
+    max-width: inherit;
+  }
   ion-card {
     position: relative;
     text-align: center;
@@ -6,6 +12,9 @@
     color: white;
     background: linear-gradient(to right,  #1e5799 0%, #2989d8 20%, transparent 50%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     background-color: white;
+    &:last-of-type {
+      margin-bottom: 40px;
+    }
 
     img.background {
       max-width: initial;
