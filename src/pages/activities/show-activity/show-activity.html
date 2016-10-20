@@ -27,39 +27,45 @@
 
       </ion-col>
     </ion-row>
-    <ion-row *ngIf="true">
+    <ion-row *ngIf="isUserParticipating()">
+      <ion-col>
+        Comments
+
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="!isUserParticipating()">
       <ion-col>
         <ion-row>
           <ion-col>
-            <ion-icon name="star" color="danger"></ion-icon>
-            <ion-icon name="star" color="danger"></ion-icon>
-            <ion-icon name="star" color="danger"></ion-icon>
-            <ion-icon name="star" color="danger"></ion-icon>
-            <ion-icon name="star" color="danger"></ion-icon>
+            <ion-icon name="star" color="star"></ion-icon>
+            <ion-icon name="star" color="star"></ion-icon>
+            <ion-icon name="star" color="star"></ion-icon>
+            <ion-icon name="star" color="star"></ion-icon>
+            <ion-icon name="star" color="star"></ion-icon>
              x {{participantsByLevel(5)}}</ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-icon name="star" color="danger"></ion-icon>
-            <ion-icon name="star" color="danger"></ion-icon>
-            <ion-icon name="star" color="danger"></ion-icon>
-            <ion-icon name="star" color="danger"></ion-icon>
+            <ion-icon name="star" color="star"></ion-icon>
+            <ion-icon name="star" color="star"></ion-icon>
+            <ion-icon name="star" color="star"></ion-icon>
+            <ion-icon name="star" color="star"></ion-icon>
             <ion-icon name="star"></ion-icon>
              x {{participantsByLevel(4)}}</ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-icon name="star" color="danger"></ion-icon>
-            <ion-icon name="star" color="danger"></ion-icon>
-            <ion-icon name="star" color="danger"></ion-icon>
+            <ion-icon name="star" color="star"></ion-icon>
+            <ion-icon name="star" color="star"></ion-icon>
+            <ion-icon name="star" color="star"></ion-icon>
             <ion-icon name="star"></ion-icon>
             <ion-icon name="star"></ion-icon>
              x {{participantsByLevel(3)}}</ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-icon name="star" color="danger"></ion-icon>
-            <ion-icon name="star" color="danger"></ion-icon>
+            <ion-icon name="star" color="star"></ion-icon>
+            <ion-icon name="star" color="star"></ion-icon>
             <ion-icon name="star"></ion-icon>
             <ion-icon name="star"></ion-icon>
             <ion-icon name="star"></ion-icon>
@@ -67,7 +73,7 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-icon name="star" color="danger"></ion-icon>
+            <ion-icon name="star" color="star"></ion-icon>
             <ion-icon name="star"></ion-icon>
             <ion-icon name="star"></ion-icon>
             <ion-icon name="star"></ion-icon>
@@ -79,8 +85,8 @@
       </ion-col>
     </ion-row>
   </div>
-  <div class="bottom">
-    <div class="round-button">
+  <div class="bottom" *ngIf="!isUserParticipating()">
+    <div class="round-button" (click)="join();">
       <span>{{'join' | translate}}<br/>>></span>
     </div>
   </div>

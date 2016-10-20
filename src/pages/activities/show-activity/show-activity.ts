@@ -18,4 +18,12 @@ export class ShowActivityPage {
   close() {
     this.viewController.dismiss();
   }
+
+  join() {
+
+  }
+
+  isUserParticipating() {
+    return this.activity.participants.map(participant => participant.id).includes(10);
+  }
 }

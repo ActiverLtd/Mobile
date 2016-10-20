@@ -19,7 +19,7 @@ export class MainPage {
       city: 'Turku, Finland',
       time: '14-17',
       date: '6. huhtikuuta',
-      participants: [{}, {},{}, {}, {}, {}, {}, {}],
+      participants: [{id: 10}, {},{}, {}, {}, {}, {}, {}],
       participants_max: 10,
       locked: false,
       organizer: {
