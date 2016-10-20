@@ -1,42 +1,92 @@
 <ion-content class="show-activity">
-  <ion-row>
-    <ion-col>
-      <h1>{{activity.sport | translate}}</h1>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col><h4>{{activity.date}} | {{activity.time}}</h4></ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col><h2>{{activity.city}}</h2></ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col><h5>{{activity.address}}</h5></ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col><hr/></ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>{{activity.participants.length}} / {{activity.participants_max}}</ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-
-    </ion-col>
-  </ion-row>
-  <div *ngIf="true">
+  <div class="top">
     <ion-row>
       <ion-col>
-        <ion-row><ion-col>5* x {{participantsByLevel(5)}}</ion-col></ion-row>
-        <ion-row><ion-col>4* x {{participantsByLevel(4)}}</ion-col></ion-row>
-        <ion-row><ion-col>3* x {{participantsByLevel(3)}}</ion-col></ion-row>
-        <ion-row><ion-col>2* x {{participantsByLevel(2)}}</ion-col></ion-row>
-        <ion-row><ion-col>1* x {{participantsByLevel(1)}}</ion-col></ion-row>
-        <ion-row><ion-col>Lue lisää</ion-col></ion-row>
+        <h1>{{activity.sport | translate}}</h1>
       </ion-col>
     </ion-row>
-    <div class="round-button bottom">
+    <ion-row>
+      <ion-col><h4>{{activity.date}} | {{activity.time}}</h4></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col><h2>{{activity.city}}</h2></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col><h5>{{activity.address}}</h5></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <hr/>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>{{activity.participants.length}} / {{activity.participants_max}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="true">
+      <ion-col>
+        <ion-row>
+          <ion-col>
+            <ion-icon name="star" color="danger"></ion-icon>
+            <ion-icon name="star" color="danger"></ion-icon>
+            <ion-icon name="star" color="danger"></ion-icon>
+            <ion-icon name="star" color="danger"></ion-icon>
+            <ion-icon name="star" color="danger"></ion-icon>
+             x {{participantsByLevel(5)}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-icon name="star" color="danger"></ion-icon>
+            <ion-icon name="star" color="danger"></ion-icon>
+            <ion-icon name="star" color="danger"></ion-icon>
+            <ion-icon name="star" color="danger"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+             x {{participantsByLevel(4)}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-icon name="star" color="danger"></ion-icon>
+            <ion-icon name="star" color="danger"></ion-icon>
+            <ion-icon name="star" color="danger"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+             x {{participantsByLevel(3)}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-icon name="star" color="danger"></ion-icon>
+            <ion-icon name="star" color="danger"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+             x {{participantsByLevel(2)}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-icon name="star" color="danger"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon> x {{participantsByLevel(1)}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>Lue lisää</ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="bottom">
+    <div class="round-button">
       <span>{{'join' | translate}}<br/>>></span>
+    </div>
+  </div>
+  <div class="top-left">
+    <div class="round-button small close" (click)="close();">
+      <span>x<br/>>></span>
     </div>
   </div>
 </ion-content>

@@ -2,23 +2,37 @@
   .popover-content {
     background: inherit !important;
     position: fixed !important;
-    left: 5% !important;
-    right: 5% !important;
+    left: 2% !important;
+    right: 2% !important;
     top: 5% !important;
     bottom: inherit !important;
-    width: 90% !important;
-    height: 90% !important;
-    .popover-viewport {
-      height: 100%;
-    }
-    .scroll-content {
-      height: 100%;
-    }
+    width: 96% !important;
+    max-height: 90% !important;
   }
   ion-content.show-activity {
-    background-color: rgba(0, 0, 0, 0.9);
     color: white;
+    position: relative;
+    background-color: transparent;
 
+    .top {
+      padding: 10px 10px 40px;
+      margin: 10px 10px 40px;
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+    .bottom {
+      position: absolute;
+      top: calc(100% - 80px);
+      bottom: 0;
+      height: 80px;
+      left: calc(50% - 40px);
+    }
+    .top-left {
+      position: absolute;
+      top: 0;
+      height: 40px;
+      left: 0;
+      width: 40px;
+    }
     ion-row {
       text-align: center;
       h1, h2, h3, h4, h5, h6 {
