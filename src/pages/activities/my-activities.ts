@@ -4,9 +4,9 @@ import { Component } from '@angular/core';
 
 
 @Component({
-  templateUrl: './activities.html'
+  templateUrl: './my-activities.html'
 })
-export class ActivitiesPage {
+export class MyActivitiesPage {
   invitationsTab: InvitationsPage;
   calendarTab: CalendarPage;
 

@@ -4,7 +4,6 @@ import { StatusBar } from 'ionic-native';
 import { MainPage } from '../pages/main/main';
 import { TranslateService } from 'ng2-translate';
 
-
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`
 })

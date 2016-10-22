@@ -4,34 +4,34 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-card *ngFor="let invitation of invitations">
-    <img src="img/card-madison.png"/>
-    <div class="card-sport">{{invitation.sport}}</div>
-    <div class="card-locked">
-      <ion-icon name="lock" [hidden]="!invitation.locked"></ion-icon>
-    </div>
-    <div class="card-bottom">
-      <div class="card-organizer-details">
-        <div class="card-organizer-name">{{invitation.organizer.name}}</div>
-        <div class="card-organizer-rating">
-          <ion-icon name="star"></ion-icon>
-        </div>
-      </div>
-      <div class="card-invitation-details">
-        <span class="invitation-name">{{invitation.location}}</span><br/>
-        Klo {{invitation.time}}<br/>
-        {{invitation.date}}
-      </div>
-    </div>
-    <div class="card-join">
-            <span>
-                Liity<br/>
-                >>
-                </span>
-    </div>
-    <div class="card-organizer-image">
-      <img [src]="invitation.organizer.image"/>
-      <span class="number">#{{invitation.id}}</span>
-    </div>
-  </ion-card>
+  <!--<ion-card *ngFor="let invitation of invitations">-->
+    <!--<img src="img/card-madison.png"/>-->
+    <!--<div class="card-sport">{{invitation.sport}}</div>-->
+    <!--<div class="card-locked">-->
+      <!--<ion-icon name="lock" [hidden]="!invitation.locked"></ion-icon>-->
+    <!--</div>-->
+    <!--<div class="card-bottom">-->
+      <!--<div class="card-organizer-details">-->
+        <!--<div class="card-organizer-name">{{invitation.organizer.name}}</div>-->
+        <!--<div class="card-organizer-rating">-->
+          <!--<ion-icon name="star"></ion-icon>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="card-invitation-details">-->
+        <!--<span class="invitation-name">{{invitation.location}}</span><br/>-->
+        <!--Klo {{invitation.time}}<br/>-->
+        <!--{{invitation.date}}-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="card-join">-->
+            <!--<span>-->
+                <!--Liity<br/>-->
+                <!--&gt;>-->
+                <!--</span>-->
+    <!--</div>-->
+    <!--<div class="card-organizer-image">-->
+      <!--<img [src]="invitation.organizer.image"/>-->
+      <!--<span class="number">#{{invitation.id}}</span>-->
+    <!--</div>-->
+  <!--</ion-card>-->
 </ion-content>
