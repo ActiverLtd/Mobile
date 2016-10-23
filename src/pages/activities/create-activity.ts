@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFire } from 'angularfire2';
 
 
 @Component({
@@ -10,7 +11,11 @@ export class CreateActivityPage {
     time: '22:22'
   };
 
-  create() {
+  constructor(private af: AngularFire) {
 
+  }
+
+  create() {
+    this.af.database.list('/activities').push(this.activity);
   }
 }
