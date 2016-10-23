@@ -14,6 +14,8 @@ import { ShowActivityPage } from '../pages/activities/show-activity/show-activit
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { FacebookLoginComponent } from './facebook-login/facebook-login.component';
 import { ActivitiesComponent } from '../pages/activities/activities.component';
+import { LoginPage } from '../pages/login/login';
+import { ToastService } from './toast.service';
 
 const myFirebaseConfig = {
   apiKey: 'AIzaSyCG67JRlhHpSZ2pAVOCUcfGiYLjQ6JIqBA',
@@ -35,6 +37,7 @@ export function createTranslateLoader(http: Http) {
 @NgModule({
   declarations: [
     MyApp,
+    LoginPage,
     MyActivitiesPage,
     MainPage,
     ProfilePage,
@@ -57,6 +60,7 @@ export function createTranslateLoader(http: Http) {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    LoginPage,
     MyActivitiesPage,
     MainPage,
     ProfilePage,
@@ -67,6 +71,6 @@ export function createTranslateLoader(http: Http) {
     ActivitiesComponent,
     FacebookLoginComponent
   ],
-  providers: []
+  providers: [ToastService]
 })
 export class AppModule {}

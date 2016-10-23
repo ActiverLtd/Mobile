@@ -1,30 +1,34 @@
-import { Facebook, FacebookLoginResponse } from 'ionic-native';
+import { Facebook } from 'ionic-native';
 import { Component } from '@angular/core';
 import { AngularFire } from 'angularfire2';
+import { Platform } from 'ionic-angular';
+import { ToastService } from '../toast.service';
 
 @Component({
   selector: 'app-facebook-login',
   templateUrl: `./facebook-login.component.html`
 })
 export class FacebookLoginComponent {
-  constructor(public af: AngularFire) {
+  constructor(private platform: Platform, private toastService: ToastService, public af: AngularFire) {
   }
 
   login() {
-    // Facebook.browserInit(375866282577187).then(() => {
-    Facebook.login(['email']).then(
-      response => this.angularFireAuth(response),
-      error => alert(`Facebook login failed. Error: ${JSON.stringify(error)}`)
-    );
-    // });
+    if (this.platform.is('cordova')) {
+      Facebook.login(['email']).then(
+        response => this.angularFireAuth(response.authResponse.accessToken),
+        error => alert(`Facebook login failed. Error: ${JSON.stringify(error)}`)
+      );
+    }
+    else { // If we aren't in native environment where FB login works, use localStorage-stored value for token
+      this.angularFireAuth(localStorage.getItem('FACEBOOK_ACCESS_TOKEN'));
+    }
   }
 
-  private angularFireAuth(response: FacebookLoginResponse) {
-    const provider = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
-
+  private angularFireAuth(accessToken) {
+    const provider = firebase.auth.FacebookAuthProvider.credential(accessToken);
     firebase.auth().signInWithCredential(provider)
       .then((success) => {
-        alert("Firebase success: " + JSON.stringify(success));
+        this.toastService.show('Successfully signed in!');
       })
       .catch((error) => {
         alert("Firebase failure: " + JSON.stringify(error));

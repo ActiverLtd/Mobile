@@ -1,9 +1,8 @@
 <ion-content>
-  <div>Signed in as: {{ (af.auth | async)?.currentUser?.displayName }} </div>
-  <div>User data: {{ af.auth | async | json}} </div>
-  <div>User data: {{ (af.auth | async)?.currentUser | json}} </div>
-  <img src="{{(af.auth | async)?.currentUser?.photoURL}}" style="width: 200px;" />
+  <div>Signed in as: {{ (af.auth | async)?.auth?.displayName }} </div>
+  <!--<div>User data: {{ af.auth | async | json}} </div>-->
+  <img src="{{(af.auth | async)?.auth?.photoURL}}" style="width: 200px;" />
 
   <app-facebook-login *ngIf="!(af.auth | async)"></app-facebook-login>
-  <button ion-button color="danger" *ngIf="(af.auth | async)">Sign out</button>
+  <button ion-button color="danger" *ngIf="(af.auth | async)" (click)="signOut();">Sign out</button>
 </ion-content>
