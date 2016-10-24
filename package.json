@@ -37,7 +37,7 @@
     "@types/request": "0.0.30",
     "typescript": "^2.0.3"
   },
-  "description": "Mobile: An Ionic project",
+  "description": "Activer",
   "cordovaPlugins": [
     "cordova-plugin-code-push",
     "cordova-plugin-device",
@@ -52,5 +52,8 @@
   "cordovaPlatforms": [
     "android",
     "ios"
-  ]
+  ],
+  "config": {
+    "ionic_rollup": "config/rollup.config.js"
+  }
 }

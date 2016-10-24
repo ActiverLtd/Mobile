@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { StatusBar } from 'ionic-native';
+import { StatusBar, CodePush } from 'ionic-native';
 import { TranslateService } from 'ng2-translate';
 import { LoginPage } from '../pages/login/login';
 
@@ -22,5 +22,9 @@ export class MyApp {
       // the lang to use, if the lang isn't available, it will use the current loader to get them
       translate.use('fi');
     });
+
+    if (platform.is('cordova')) {
+      CodePush.sync().subscribe((syncStatus) => console.log(syncStatus));
+    }
   }
 }
