@@ -1,0 +1,21 @@
+.activity-cards {
+  padding-bottom: 50px;
+}
+
+.ion-select-container {
+  position: relative;
+}
+
+#create-activity-button-container {
+  position: fixed ;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  #create-activity-button {
+    background-color: white;
+    padding: 0 10px;
+    border-radius: 20px;
+    color: green;
+    font-size: 32px;
+  }
+}

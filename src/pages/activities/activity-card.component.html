@@ -1,0 +1,30 @@
+<ion-card (click)="open.emit()" class="activity-card">
+  <img src="assets/images/{{activity.sport}}.jpg" class="background"/>
+  <div class="card-sport">{{ activity.sport | translate }}</div>
+  <div class="card-locked">
+    <ion-icon name="lock" [hidden]="activity.participants.length < activity.participants_max"></ion-icon>
+  </div>
+  <div class="card-bottom">
+    <div class="card-organizer-details">
+      <div class="card-organizer-name">{{activity.organizer.name}}</div>
+      <div class="card-organizer-rating">
+        <ion-icon name="star"></ion-icon>
+      </div>
+    </div>
+    <div class="card-activity-details">
+      <span class="activity-name">{{activity.location.address}}</span><br/>
+      Klo {{activity.timestamp | date:'HH:mm'}}<br/>
+      {{activity.timestamp | date:'d.M.y'}}
+    </div>
+  </div>
+  <div class="card-join">
+        <span>
+            {{'join' | translate}}<br/>
+            >>
+        </span>
+  </div>
+  <div class="card-organizer-image">
+    <img [src]="activity.organizer.image"/>
+    <span class="number">#{{activity.id}}</span>
+  </div>
+</ion-card>

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
+import { Activity } from '../../../app/activity.interface';
 
 @Component({
   templateUrl: './show-activity.html'
 })
 export class ShowActivityPage {
-  activity: any;
+  activity: Activity;
 
   constructor(params: NavParams, private viewController: ViewController) {
     this.activity = params.get('activity');
@@ -24,6 +25,6 @@ export class ShowActivityPage {
   }
 
   isUserParticipating() {
-    return this.activity.participants.map(participant => participant.id).includes(10);
+    return this.activity.participants.includes('10');
   }
 }

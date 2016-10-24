@@ -1,41 +1,18 @@
 <div class="card-background-page">
-  <div style="position: relative;">
+  <div class="ion-select-container">
     <ion-select [ngModel]="orderBy" (ionChange)="setOrderBy($event)">
       <ion-option value="timestamp">Päivämäärän mukaan</ion-option>
       <ion-option value="popularity">Suosituimmuuden mykaan</ion-option>
     </ion-select>
   </div>
-  <ion-card *ngFor="let activity of activities | async" (click)="openActivity(activity, $event)">
-    <img src="assets/images/{{activity.sport}}.jpg" class="background"/>
-    <div class="card-sport">{{ activity.sport | translate }}</div>
-    <div class="card-locked">
-      <ion-icon name="lock" [hidden]="!activity.locked"></ion-icon>
-    </div>
-    <div class="card-bottom">
-      <div class="card-organizer-details">
-        <div class="card-organizer-name">{{activity.organizer.name}}</div>
-        <div class="card-organizer-rating">
-          <ion-icon name="star"></ion-icon>
-        </div>
-      </div>
-      <div class="card-activity-details">
-        <span class="activity-name">{{activity.location}}</span><br/>
-        Klo {{activity.time}}<br/>
-        {{activity.date}}
-      </div>
-    </div>
-    <div class="card-join">
-        <span>
-            {{'join' | translate}}<br/>
-            >>
-        </span>
-    </div>
-    <div class="card-organizer-image">
-      <img [src]="activity.organizer.image"/>
-      <span class="number">#{{activity.id}}</span>
-    </div>
-  </ion-card>
+  <div class="activity-cards">
+    <app-activity-card
+      *ngFor="let activity of activities | async"
+      [activity]="activity"
+      (open)="openActivity(activity)">
+    </app-activity-card>
+  </div>
   <div id="create-activity-button-container">
-    <span (click)="createActivity($event)" id="create-activity-button">+</span>
+    <span (click)="showCreateActivity($event)" id="create-activity-button">+</span>
   </div>
 </div>

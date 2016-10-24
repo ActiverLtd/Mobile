@@ -6,13 +6,13 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col><h4>{{activity.date}} | {{activity.time}}</h4></ion-col>
+      <ion-col><h4>{{activity.timestamp | date:'HH:mm'}} | {{activity.timestamp | date:'d.M.y'}}</h4></ion-col>
     </ion-row>
     <ion-row>
-      <ion-col><h2>{{activity.city}}</h2></ion-col>
+      <ion-col><h2>{{activity.location.city}}</h2></ion-col>
     </ion-row>
     <ion-row>
-      <ion-col><h5>{{activity.address}}</h5></ion-col>
+      <ion-col><h5>{{activity.location.address}}</h5></ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
@@ -92,7 +92,7 @@
   </div>
   <div class="top-left">
     <div class="round-button small close" (click)="close();">
-      <span>x<br/>>></span>
+      <span>x</span>
     </div>
   </div>
 </ion-content>

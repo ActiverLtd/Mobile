@@ -16,6 +16,7 @@ import { FacebookLoginComponent } from './facebook-login/facebook-login.componen
 import { ActivitiesComponent } from '../pages/activities/activities.component';
 import { LoginPage } from '../pages/login/login';
 import { ToastService } from './toast.service';
+import { ActivityCardComponent } from '../pages/activities/activity-card.component';
 
 const myFirebaseConfig = {
   apiKey: 'AIzaSyCG67JRlhHpSZ2pAVOCUcfGiYLjQ6JIqBA',
@@ -46,6 +47,7 @@ export function createTranslateLoader(http: Http) {
     CalendarPage,
     ShowActivityPage,
     ActivitiesComponent,
+    ActivityCardComponent,
     FacebookLoginComponent
   ],
   imports: [
@@ -69,6 +71,7 @@ export function createTranslateLoader(http: Http) {
     CalendarPage,
     ShowActivityPage,
     ActivitiesComponent,
+    ActivityCardComponent,
     FacebookLoginComponent
   ],
   providers: [ToastService]

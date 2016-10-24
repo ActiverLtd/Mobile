@@ -1,7 +1,14 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{'profile_title' | translate}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 <ion-content>
-  <div>Signed in as: {{ (af.auth | async)?.auth?.displayName }} </div>
+  <div>Signed in as: {{ (af.auth | async)?.auth?.displayName }}</div>
   <!--<div>User data: {{ af.auth | async | json}} </div>-->
-  <img src="{{(af.auth | async)?.auth?.photoURL}}" style="width: 200px;" />
+  <img src="{{(af.auth | async)?.auth?.photoURL}}" style="width: 200px;"/>
 
   <app-facebook-login *ngIf="!(af.auth | async)"></app-facebook-login>
   <button ion-button color="danger" *ngIf="(af.auth | async)" (click)="signOut();">Sign out</button>

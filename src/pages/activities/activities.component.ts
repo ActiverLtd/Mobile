@@ -4,6 +4,7 @@ import { CreateActivityPage } from '../activities/create-activity';
 import { ShowActivityPage } from '../activities/show-activity/show-activity';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { BehaviorSubject } from 'rxjs';
+import { Activity } from '../../app/activity.interface';
 
 @Component({
   selector: 'app-activities',
@@ -11,7 +12,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ActivitiesComponent {
   orderBy: string = 'timestamp';
-  activities: FirebaseListObservable<any[]>;
+  activities: FirebaseListObservable<Activity[]>;
   orderBySubject: BehaviorSubject<string>;
 
   constructor(private popoverCtrl: PopoverController, private af: AngularFire) {
@@ -29,14 +30,12 @@ export class ActivitiesComponent {
     this.orderBySubject.next(value);
   }
 
-  openActivity(activity, $event) {
+  openActivity(activity: Activity) {
     let popover = this.popoverCtrl.create(ShowActivityPage, {activity}, {cssClass: 'show-activity-popover'});
-    popover.present({
-      ev: $event
-    });
+    popover.present();
   }
 
-  createActivity($event) {
+  showCreateActivity($event) {
     let popover = this.popoverCtrl.create(CreateActivityPage, {}, {cssClass: 'large-popover'});
     popover.present({
       ev: $event
