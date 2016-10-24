@@ -25,6 +25,9 @@ export class ShowActivityPage {
   }
 
   isUserParticipating() {
-    return this.activity.participants.includes('10');
+    if (this.activity.participants) {
+      return this.activity.participants.includes('10');
+    }
+    return false;
   }
 }

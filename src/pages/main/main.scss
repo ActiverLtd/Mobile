@@ -30,9 +30,23 @@
   button {
     margin: 0 auto;
   }
-  input {
+  input, textarea, ion-select, .datetime-text {
     color: white;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.32);
+    padding: 4px;
+    border-radius: 4px;
+  }
+
+  ion-select {
+    margin-left: 8px;
+  }
+
+  .datetime-text {
+    min-height: 24px;
+  }
+
+  .datetime-md {
+    padding-left: 7px;
   }
 }
 

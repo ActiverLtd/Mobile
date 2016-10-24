@@ -1,35 +1,40 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFire } from 'angularfire2';
 import { Activity } from '../../app/activity.interface';
-import { User } from '../../app/user.interface';
+import { SportService } from '../../app/sport.service';
 
 
 @Component({
   templateUrl: `./create-activity.html`
 })
 export class CreateActivityPage implements OnInit {
+  date: any;
+  time: any;
   activity: Activity = {
-    timestamp: Date.now() + 1000 * 60 * 60 * 24,
+    timestamp: 0,
     sport: 'football',
     location: '',
     participants: [],
     organizer: null,
-    participants_max: 2
+    participants_max: 2,
+    additional_info: '',
+    shape: 'open'
   };
 
-  @Input()
-  user: User;
+  minDate: string = new Date().toISOString();
+  maxDate: string = new Date().getFullYear() + 2 + '';
 
-  constructor(private af: AngularFire) {
+  constructor(private af: AngularFire, public sportService: SportService) {
   }
 
   ngOnInit() {
     this.af.auth.subscribe(auth => {
       this.activity.organizer = auth.auth.uid;
-    })
+    });
   }
 
   create() {
+    this.activity.timestamp = Date.parse(`${this.date}T${this.time}:00`);
     this.af.database.list('/activities').push(this.activity);
   }
 }

@@ -1,58 +1,75 @@
 <ion-content>
-  <form>
-    <ion-row>
+  <form #f="ngForm">
+    <ion-row center>
       <ion-col width-25><span class="colored">Laji</span></ion-col>
       <ion-col width-75>
-        <!--<ion-select [(ngModel)]="activity.sport">-->
-        <!--<ion-option value="football" selected="true">Jalkapallo</ion-option>-->
-        <!--<ion-option value="tennis">Tennis</ion-option>-->
-        <!--</ion-select>-->
+        <ion-select [(ngModel)]="activity.sport" name="sport">
+          <ion-option
+            *ngFor="let option of sportService.getSports()"
+            [value]="option"
+            [selected]="activity.sport === option">
+            {{option | translate}}
+          </ion-option>
+        </ion-select>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row center>
       <ion-col width-25><span class="colored">Paikka</span></ion-col>
       <ion-col width-75>
-        <ion-input type="text" [(ngModel)]="activity.location" name="location"></ion-input>
+        <ion-input type="text" [(ngModel)]="activity.location" name="location" required></ion-input>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row center>
       <ion-col width-25>
         <span class="colored">Päivämäärä</span>
-        <ion-icon name="calendar"></ion-icon>
+        <!--<ion-icon name="calendar"></ion-icon>-->
       </ion-col>
-      <ion-col width-75>
-        <!--<ion-datetime displayFormat="D.M." pickerFormat="D.M." [(ngModel)]="activity.date"></ion-datetime>-->
-        <ion-input type="text" [(ngModel)]="activity.date" name="date"></ion-input>
+      <ion-col width-75 style="position: relative;">
+        <ion-datetime
+          displayFormat="D.M.YYYY"
+          pickerFormat="D M YYYY"
+          [min]="minDate"
+          [max]="maxDate"
+          [(ngModel)]="date"
+          name="date"
+          required></ion-datetime>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row center>
       <ion-col width-25>
         <span class="colored">Kellonaika</span>
-        <ion-icon name="clock"></ion-icon>
+        <!--<ion-icon name="clock"></ion-icon>-->
       </ion-col>
-      <ion-col width-75>
-        <ion-row>
-          <!--<ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="activity.time"></ion-datetime>-->
-          <ion-input type="text" [(ngModel)]="activity.time" name="time"></ion-input>
-        </ion-row>
+      <ion-col width-75 style="position: relative;">
+        <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="time" name="time" required></ion-datetime>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row center>
       <ion-col width-25><span class="colored">Lisätiedot</span></ion-col>
       <ion-col width-75>
-        <ion-input type="textarea" [(ngModel)]="activity.additional" name="additional"></ion-input>
+        <ion-textarea [(ngModel)]="activity.additional_info" name="additional-info"></ion-textarea>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row center>
       <ion-col width-25><span class="colored">Muoto</span></ion-col>
+      <ion-col width-75>
+        <ion-segment [(ngModel)]="shape" name="shape" required>
+          <ion-segment-button value="open">
+            Avoin
+          </ion-segment-button>
+          <ion-segment-button value="closed">
+            Suljettu
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+    <ion-row center>
+      <ion-col width-25><span class="colored">Kutsu osallistujia ({{activity.participants.length + 1}}/12)</span>
+      </ion-col>
       <ion-col width-75></ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col width-25><span class="colored">Kutsu osallistujia (6/12)</span></ion-col>
-      <ion-col width-75></ion-col>
-    </ion-row>
-    <ion-row>
-      <button ion-button (click)="create()">Luo tapahtuma >></button>
+    <ion-row center>
+      <button ion-button (click)="create()" [disabled]="f.invalid">Luo tapahtuma >></button>
     </ion-row>
   </form>
 </ion-content>

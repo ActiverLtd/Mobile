@@ -6,4 +6,6 @@ export interface Activity {
   organizer: string;
   participants: string[];
   participants_max: number;
+  shape: string;
+  additional_info?: string;
 }

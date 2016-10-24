@@ -17,6 +17,7 @@ import { ActivitiesComponent } from '../pages/activities/activities.component';
 import { LoginPage } from '../pages/login/login';
 import { ToastService } from './toast.service';
 import { ActivityCardComponent } from '../pages/activities/activity-card.component';
+import { SportService } from './sport.service';
 
 const myFirebaseConfig = {
   apiKey: 'AIzaSyCG67JRlhHpSZ2pAVOCUcfGiYLjQ6JIqBA',
@@ -74,7 +75,7 @@ export function createTranslateLoader(http: Http) {
     ActivityCardComponent,
     FacebookLoginComponent
   ],
-  providers: [ToastService]
+  providers: [ToastService, SportService]
 })
 export class AppModule {}
 
