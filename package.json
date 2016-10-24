@@ -10,7 +10,8 @@
     "emulate:before": "build",
     "deploy:before": "build",
     "build:before": "build",
-    "run:before": "build"
+    "run:before": "build",
+    "postinstall": "mkdir www || mkdir platforms || ionic state restore"
   },
   "dependencies": {
     "@angular/common": "^2.1.1",

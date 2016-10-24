@@ -42,7 +42,7 @@
   <plugin name="ionic-plugin-keyboard" spec="~2.2.1"/>
   <plugin name="cordova-plugin-x-toast" spec="~2.5.2"/>
   <plugin name="cordova-plugin-facebook4" spec="~1.7.4">
-    <param name="APP_ID" value="375866282577187"/>
-    <param name="APP_NAME" value="Activer"/>
+    <variable name="APP_ID" value="375866282577187"/>
+    <variable name="APP_NAME" value="Activer"/>
   </plugin>
 </widget>
