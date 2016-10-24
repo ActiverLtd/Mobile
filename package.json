@@ -39,12 +39,18 @@
   },
   "description": "Mobile: An Ionic project",
   "cordovaPlugins": [
+    "cordova-plugin-code-push",
     "cordova-plugin-device",
     "cordova-plugin-console",
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
-    "ionic-plugin-keyboard"
+    "cordova-plugin-x-toast",
+    "ionic-plugin-keyboard",
+    "cordova-plugin-facebook4"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [
+    "android",
+    "ios"
+  ]
 }

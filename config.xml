@@ -13,10 +13,12 @@
   <allow-intent href="geo:*"/>
   <platform name="android">
     <allow-intent href="market:*"/>
+    <preference name="CodePushDeploymentKey" value="G0OE-QOWBbaE0e1l3ObDiYHPUVxoEka7zgwJG" />
   </platform>
   <platform name="ios">
     <allow-intent href="itms:*"/>
     <allow-intent href="itms-apps:*"/>
+    <preference name="CodePushDeploymentKey" value="rBGcwXte3D5eGquiAedFl21vpA4FEka7zgwJG" />
   </platform>
   <preference name="orientation" value="portrait"/>
   <preference name="webviewbounce" value="false"/>
@@ -31,12 +33,14 @@
   <feature name="StatusBar">
     <param name="ios-package" onload="true" value="CDVStatusBar"/>
   </feature>
+  <plugin name="cordova-plugin-code-push" spec="~1.9.1-beta"/>
   <plugin name="cordova-plugin-device" spec="~1.1.3"/>
   <plugin name="cordova-plugin-console" spec="~1.0.4"/>
   <plugin name="cordova-plugin-whitelist" spec="~1.3.0"/>
   <plugin name="cordova-plugin-splashscreen" spec="~4.0.0"/>
   <plugin name="cordova-plugin-statusbar" spec="~2.2.0"/>
   <plugin name="ionic-plugin-keyboard" spec="~2.2.1"/>
+  <plugin name="cordova-plugin-x-toast" spec="~2.5.2"/>
   <plugin name="cordova-plugin-facebook4" spec="~1.7.4">
     <param name="APP_ID" value="375866282577187"/>
     <param name="APP_NAME" value="Activer"/>

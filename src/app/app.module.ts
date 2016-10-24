@@ -17,6 +17,7 @@ import { ActivitiesComponent } from '../pages/activities/activities.component';
 import { LoginPage } from '../pages/login/login';
 import { ToastService } from './toast.service';
 import { ActivityCardComponent } from '../pages/activities/activity-card.component';
+import { CodePush } from 'ionic-native';
 
 const myFirebaseConfig = {
   apiKey: 'AIzaSyCG67JRlhHpSZ2pAVOCUcfGiYLjQ6JIqBA',
@@ -77,3 +78,5 @@ export function createTranslateLoader(http: Http) {
   providers: [ToastService]
 })
 export class AppModule {}
+
+CodePush.sync().subscribe((syncStatus) => console.log(syncStatus));
