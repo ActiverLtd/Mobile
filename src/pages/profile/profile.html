@@ -6,10 +6,74 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <div>Signed in as: {{ (af.auth | async)?.auth?.displayName }}</div>
-  <!--<div>User data: {{ af.auth | async | json}} </div>-->
-  <img src="{{(af.auth | async)?.auth?.photoURL}}" style="width: 200px;"/>
 
-  <app-facebook-login *ngIf="!(af.auth | async)"></app-facebook-login>
-  <button ion-button color="danger" *ngIf="(af.auth | async)" (click)="signOut();">Sign out</button>
+  <ion-row class="top" center>
+    <ion-col>
+      <img [src]="profile.photoURL"/>
+    </ion-col>
+    <ion-col width-10>
+      <div class="center"></div>
+    </ion-col>
+
+    <ion-col class="right">
+      <div class="name">
+        <h4 class="first-part">{{getNameParts(0)}}</h4>
+        <h3 class="last-part">{{getNameParts(1)}}</h3>
+      </div>
+      <h2 class="number">#22</h2>
+    </ion-col>
+  </ion-row>
+  <ion-row class="border-bottom">
+    <ion-col>
+      BIO:
+    </ion-col>
+  </ion-row>
+  <ion-row class="border-bottom">
+    <ion-col>
+      {{profile.bio || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non interdum nibh, nec efficitur orci. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque a augue bibendum, commodo orci eget, commodo mi. Maecenas porta metus suscipit arcu tempus consectetur. Curabitur ipsum orci, tincidunt et vulputate sed, efficitur vitae velit. Praesent enim risus, scelerisque nec euismod id, ultrices blandit lorem. Quisque cursus sed ligula vitae luctus. Nulla mi odio, convallis in luctus ut, porttitor dignissim lorem. Suspendisse scelerisque ex sollicitudin odio vulputate semper. Ut varius ipsum nunc, sed fringilla odio malesuada id. Pellentesque finibus purus a metus sollicitudin posuere at ac nibh.'}}
+    </ion-col>
+  </ion-row>
+  <div class="spacer"></div>
+  <ion-row class="border-bottom">
+    <ion-col>
+      TAITOTASOT:
+    </ion-col>
+  </ion-row>
+  <ion-row class="border-bottom">
+    <ion-col>
+      <ion-row>
+        <ion-col>
+          <ion-row>
+            <ion-col>
+              Tennis:
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-icon name="star" color="star"></ion-icon>
+              <ion-icon name="star" color="star"></ion-icon>
+              <ion-icon name="star" color="star"></ion-icon>
+              <ion-icon name="star" color="star"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col>
+          <ion-row>
+            <ion-col>
+              Tennis:
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-icon name="star" color="star"></ion-icon>
+              <ion-icon name="star" color="star"></ion-icon>
+              <ion-icon name="star" color="star"></ion-icon>
+              <ion-icon name="star" color="star"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <button ion-button color="danger" (click)="signOut();">Sign out</button>
 </ion-content>
