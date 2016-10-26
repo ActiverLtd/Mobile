@@ -2,7 +2,7 @@
   <form #f="ngForm">
     <ion-row center>
       <ion-col width-25><span class="colored">Laji</span></ion-col>
-      <ion-col width-75>
+      <ion-col width-75 style="position: relative;">
         <ion-select [(ngModel)]="activity.sport" name="sport">
           <ion-option
             *ngFor="let option of sportService.getSports()"

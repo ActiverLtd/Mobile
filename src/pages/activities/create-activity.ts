@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFire } from 'angularfire2';
 import { Activity } from '../../app/activity.interface';
 import { SportService } from '../../app/sport.service';
+import { ViewController } from 'ionic-angular';
+import { ToastService } from '../../app/toast.service';
 
 
 @Component({
@@ -24,7 +26,12 @@ export class CreateActivityPage implements OnInit {
   minDate: string = new Date().toISOString();
   maxDate: string = new Date().getFullYear() + 2 + '';
 
-  constructor(private af: AngularFire, public sportService: SportService) {
+  constructor(
+    private af: AngularFire,
+    public sportService: SportService,
+    private viewController: ViewController,
+    private toastService: ToastService
+  ) {
   }
 
   ngOnInit() {
@@ -36,5 +43,7 @@ export class CreateActivityPage implements OnInit {
   create() {
     this.activity.timestamp = Date.parse(`${this.date}T${this.time}:00`);
     this.af.database.list('/activities').push(this.activity);
+    this.viewController.dismiss();
+    this.toastService.show('Aktiviteetti luotu!');
   }
 }
