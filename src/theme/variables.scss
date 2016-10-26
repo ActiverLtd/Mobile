@@ -12,6 +12,9 @@
 
 $text-color:        #000;
 $background-color:  #fff;
+$font-family-base: 'San Francisco', sans-serif !default;
+$font-family-ios-base: 'San Francisco', sans-serif !default;
+$font-family-md-base: 'San Francisco', sans-serif !default;
 
 
 // Named Color Variables
@@ -71,3 +74,4 @@ $colors: (
 
 $ionicons-font-path: "../assets/fonts";
 @import "ionicons";
+
