@@ -16,7 +16,9 @@ export class ProfilePage implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.authSubscription = this.af.auth.subscribe(auth => this.profile = auth.auth);
+    this.authSubscription = this.af.auth.subscribe(auth => {
+      this.af.database.object(`/users/${auth.uid}`).subscribe(user => this.profile = user);
+    });
   }
 
   signOut() {
@@ -24,24 +26,6 @@ export class ProfilePage implements OnInit, OnDestroy {
       this.af.auth.logout();
       this.navController.popToRoot();
       this.toastService.show('Signed out');
-    }
-  }
-
-  getNameParts(index: number) {
-    if (this.profile.displayName) {
-      const parts = this.profile.displayName.split(' ');
-      if (parts.length === 1) {
-        return parts[0];
-      }
-      else if (parts.length === 2) {
-        return parts[index];
-      }
-      else if (parts.length > 2) { // More parts than in traditional name (first name + last name)
-        if (index === 1) { // If trying to take last part, lets take the absolutely last part
-          index = parts.length - 1;
-        }
-        return parts[index];
-      }
     }
   }
 

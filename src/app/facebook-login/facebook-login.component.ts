@@ -27,8 +27,16 @@ export class FacebookLoginComponent {
   private angularFireAuth(accessToken) {
     const provider = firebase.auth.FacebookAuthProvider.credential(accessToken);
     firebase.auth().signInWithCredential(provider)
-      .then((success) => {
+      .then((auth) => {
         this.toastService.show('Successfully signed in!');
+        if (true) {
+          this.af.database.object(`/users/${auth.uid}`).set({
+            image: auth.photoURL,
+            email: auth.email,
+            name: auth.displayName,
+            ratings: {}
+          })
+        }
       })
       .catch((error) => {
         alert("Firebase failure: " + JSON.stringify(error));

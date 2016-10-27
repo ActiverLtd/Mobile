@@ -12,17 +12,26 @@ import { Activity } from '../../app/activity.interface';
 })
 export class ActivitiesComponent {
   orderBy: string = 'timestamp';
-  activities: FirebaseListObservable<Activity[]>;
+  activities: Activity[];
   orderBySubject: BehaviorSubject<string>;
 
   constructor(private popoverCtrl: PopoverController, private af: AngularFire) {
     this.orderBySubject = new BehaviorSubject<string>(this.orderBy);
-    this.activities = af.database.list('/activities', {
+    const activities = af.database.list('/activities', {
         query: {
           orderByChild: this.orderBySubject
         }
       }
-      );
+    );
+
+    activities.subscribe(activities => {
+      this.activities = activities;
+      activities.forEach(activity => {
+        this.af.database.object(`/users/${activity.organizer}`).subscribe(user => {
+          activity.organizer = user;
+        });
+      })
+    })
   }
 
   setOrderBy(value: string) {

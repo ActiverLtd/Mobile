@@ -6,7 +6,9 @@
   </div>
   <div class="card-bottom">
     <div class="card-organizer-details">
-      <div class="card-organizer-name">{{activity.organizer.name}}</div>
+      <div class="card-organizer-name">
+        {{activity.organizer?.name | name:0}}
+      </div>
       <div class="card-organizer-rating">
         <ion-icon name="star"></ion-icon>
       </div>
@@ -24,7 +26,7 @@
         </span>
   </div>
   <div class="card-organizer-image">
-    <img [src]="activity.organizer.image"/>
+    <img [src]="activity.organizer.image" *ngIf="activity.organizer.image !== null"/>
     <span class="number">#{{activity.id}}</span>
   </div>
 </ion-card>

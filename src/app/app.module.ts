@@ -18,6 +18,7 @@ import { LoginPage } from '../pages/login/login';
 import { ToastService } from './toast.service';
 import { ActivityCardComponent } from '../pages/activities/activity-card.component';
 import { SportService } from './sport.service';
+import { NamePipe } from './name.pipe';
 
 const myFirebaseConfig = {
   apiKey: 'AIzaSyCG67JRlhHpSZ2pAVOCUcfGiYLjQ6JIqBA',
@@ -49,7 +50,8 @@ export function createTranslateLoader(http: Http) {
     ShowActivityPage,
     ActivitiesComponent,
     ActivityCardComponent,
-    FacebookLoginComponent
+    FacebookLoginComponent,
+    NamePipe
   ],
   imports: [
     IonicModule.forRoot(MyApp),

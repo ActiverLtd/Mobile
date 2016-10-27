@@ -7,7 +7,7 @@
   </div>
   <div class="activity-cards">
     <app-activity-card
-      *ngFor="let activity of activities | async"
+      *ngFor="let activity of activities"
       [activity]="activity"
       (open)="openActivity(activity)">
     </app-activity-card>
