@@ -1,12 +1,13 @@
 <ion-header>
   <ion-navbar hideBackButton="true">
-    <ion-icon
-      name="person"
-      (click)="openProfile()"
-      style="float: left; margin-top: 12px; font-size: 30px; margin-left: 6px;"></ion-icon>
-    <ion-title style="display: inline-block; margin-top: 5px; left: calc(50% - 75px); position: relative;">
+    <button ion-button icon-only menuToggle (click)="openProfile()">
+      <ion-icon name="person"></ion-icon>
+    </button>
+
+    <ion-title>
       <img src="assets/images/logo-only-text.png" style="height: 50px;"/>
     </ion-title>
+
     <ion-buttons end>
       <button ion-button icon-only (click)="openActivities()">
         <ion-icon name="calendar"></ion-icon>
