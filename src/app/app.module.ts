@@ -11,26 +11,16 @@ import { CreateActivityPage } from '../pages/activities/create-activity';
 import { InvitationsPage } from '../pages/activities/invitations/invitations';
 import { CalendarPage } from '../pages/activities/calendar/calendar';
 import { ShowActivityPage } from '../pages/activities/show-activity/show-activity';
-import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
+import { AngularFireModule } from 'angularfire2';
 import { FacebookLoginComponent } from './facebook-login/facebook-login.component';
 import { ActivitiesComponent } from '../pages/activities/activities.component';
 import { LoginPage } from '../pages/login/login';
 import { ToastService } from './toast.service';
 import { ActivityCardComponent } from '../pages/activities/activity-card.component';
 import { SportService } from './sport.service';
-import { NamePipe } from './name.pipe';
-
-const myFirebaseConfig = {
-  apiKey: 'AIzaSyCG67JRlhHpSZ2pAVOCUcfGiYLjQ6JIqBA',
-  authDomain: 'activer-352db.firebaseapp.com',
-  databaseURL: 'https://activer-352db.firebaseio.com',
-  storageBucket: 'activer-352db.appspot.co',
-};
-
-const myFirebaseAuthConfig = {
-  provider: AuthProviders.Facebook,
-  method: AuthMethods.Redirect
-};
+import { NamePipe } from './pipes/name.pipe';
+import { NumberToArrayPipe } from './pipes/number-to-array.pipe';
+import { firebaseConfig, firebaseAuthConfig } from './firebase-config';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -51,7 +41,8 @@ export function createTranslateLoader(http: Http) {
     ActivitiesComponent,
     ActivityCardComponent,
     FacebookLoginComponent,
-    NamePipe
+    NamePipe,
+    NumberToArrayPipe
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -60,7 +51,7 @@ export function createTranslateLoader(http: Http) {
       useFactory: createTranslateLoader,
       deps: [Http]
     }),
-    AngularFireModule.initializeApp(myFirebaseConfig, myFirebaseAuthConfig)
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -79,5 +70,6 @@ export function createTranslateLoader(http: Http) {
   ],
   providers: [ToastService, SportService]
 })
-export class AppModule {}
+export class AppModule {
+}
 

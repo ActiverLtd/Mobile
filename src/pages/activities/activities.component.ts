@@ -2,7 +2,7 @@ import { PopoverController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { CreateActivityPage } from '../activities/create-activity';
 import { ShowActivityPage } from '../activities/show-activity/show-activity';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFire } from 'angularfire2';
 import { BehaviorSubject } from 'rxjs';
 import { Activity } from '../../app/activity.interface';
 

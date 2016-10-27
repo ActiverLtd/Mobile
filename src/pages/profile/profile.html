@@ -41,34 +41,28 @@
   </ion-row>
   <ion-row class="border-bottom">
     <ion-col>
-      <ion-row>
+      <ion-row *ngFor="let row of sports">
         <ion-col>
           <ion-row>
             <ion-col>
-              Tennis:
+              {{row[0] | translate}}:
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              <ion-icon name="star" color="star"></ion-icon>
-              <ion-icon name="star" color="star"></ion-icon>
-              <ion-icon name="star" color="star"></ion-icon>
-              <ion-icon name="star" color="star"></ion-icon>
+              <ion-icon name="star" color="star" *ngFor="let _ of profile.ratings[row[0]] | numberToArray"></ion-icon>
             </ion-col>
           </ion-row>
         </ion-col>
         <ion-col>
           <ion-row>
             <ion-col>
-              Tennis:
+              {{row[1] | translate}}:
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              <ion-icon name="star" color="star"></ion-icon>
-              <ion-icon name="star" color="star"></ion-icon>
-              <ion-icon name="star" color="star"></ion-icon>
-              <ion-icon name="star" color="star"></ion-icon>
+              <ion-icon name="star" color="star" *ngFor="let _ of profile.ratings[row[1]] | numberToArray"></ion-icon>
             </ion-col>
           </ion-row>
         </ion-col>
