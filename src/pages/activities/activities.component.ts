@@ -35,7 +35,6 @@ export class ActivitiesComponent {
   }
 
   setOrderBy(value: string) {
-    alert(`Set order by for activities to be ${value}`);
     this.orderBySubject.next(value);
   }
 

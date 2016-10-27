@@ -36,7 +36,7 @@ ion-card.activity-card {
       border-radius: 50px;
       width: 100px;
       height: 100px;
-      border: 4px solid darkgrey;
+      border: 4px solid rgba(60, 60, 60, 0.7);
     }
     .number {
       position: relative;
@@ -48,17 +48,17 @@ ion-card.activity-card {
 
   .card-join {
     position: absolute;
-    right: 10px;
-    bottom: 20px;
-    height: 100px;
-    width: 100px;
-    border-radius: 50px;
-    background-color: green;
+    right: 6px;
+    bottom: 14px;
+    height: 80px;
+    width: 80px;
+    border-radius: 40px;
+    background-color: rgba(29, 123, 51, 0.75);
     text-align: center;
-    border: 4px solid lightgreen;
+    border: 2px solid #53e34f;
     span {
-      top: 26px;
-      font-size: 22px;
+      top: 16px;
+      font-size: 18px;
       position: relative;
     }
   }
