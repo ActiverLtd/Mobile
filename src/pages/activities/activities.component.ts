@@ -39,7 +39,7 @@ export class ActivitiesComponent {
   }
 
   openActivity(activity: Activity) {
-    let popover = this.popoverCtrl.create(ShowActivityPage, {activity}, {cssClass: 'show-activity-popover'});
+    let popover = this.popoverCtrl.create(ShowActivityPage, {activityId: activity.$key}, {cssClass: 'show-activity-popover'});
     popover.present();
   }
 

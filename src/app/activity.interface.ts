@@ -1,5 +1,5 @@
 export interface Activity {
-  id?: string;
+  $key?: string;
   sport: string;
   location: any;
   timestamp: number;
@@ -8,4 +8,5 @@ export interface Activity {
   participants_max: number;
   shape: string;
   additional_info?: string;
+  comments?: string | any[];
 }

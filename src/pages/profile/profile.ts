@@ -31,7 +31,12 @@ export class ProfilePage implements OnInit, OnDestroy {
 
 
     this.authSubscription = this.af.auth.subscribe(auth => {
-      this.af.database.object(`/users/${auth.uid}`).subscribe(user => this.profile = user);
+      this.af.database.object(`/users/${auth.uid}`).subscribe(user => {
+        this.profile = user;
+        if (!this.profile.ratings) {
+          this.profile.ratings = {};
+        }
+      });
     });
   }
 

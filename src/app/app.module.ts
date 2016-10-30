@@ -21,6 +21,7 @@ import { SportService } from './sport.service';
 import { NamePipe } from './pipes/name.pipe';
 import { NumberToArrayPipe } from './pipes/number-to-array.pipe';
 import { firebaseConfig, firebaseAuthConfig } from './firebase-config';
+import { ValuesPipe } from './pipes/values.pipe';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -42,7 +43,8 @@ export function createTranslateLoader(http: Http) {
     ActivityCardComponent,
     FacebookLoginComponent,
     NamePipe,
-    NumberToArrayPipe
+    NumberToArrayPipe,
+    ValuesPipe
   ],
   imports: [
     IonicModule.forRoot(MyApp),

@@ -11,4 +11,11 @@ export class ActivityCardComponent {
 
   @Output()
   open: EventEmitter<any> = new EventEmitter();
+  myStatusExp: string = 'active';
+
+  constructor() {
+    setInterval(() => {
+      this.myStatusExp = 'inactive';
+    }, 2000);
+  }
 }
