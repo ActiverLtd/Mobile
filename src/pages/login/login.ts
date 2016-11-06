@@ -13,7 +13,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.af.auth.subscribe(auth => {
       if (auth) {
-        this.navCtrl.push(MainPage);
+        this.navCtrl.setRoot(MainPage);
       }
     });
   }

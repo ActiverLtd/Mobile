@@ -4,6 +4,7 @@ import { NavController } from 'ionic-angular';
 import { ToastService } from '../../app/toast.service';
 import { Subscription } from 'rxjs';
 import { SportService } from '../../app/sport.service';
+import { LoginPage } from '../login/login';
 
 
 @Component({
@@ -14,17 +15,17 @@ export class ProfilePage implements OnInit, OnDestroy {
   authSubscription: Subscription;
   sports: string[][] = [];
 
-  constructor(
-    private navController: NavController,
-    private toastService: ToastService,
-    public sportService: SportService,
-    public af: AngularFire) {
+  constructor(private navCtrl: NavController,
+              private toastService: ToastService,
+              public sportService: SportService,
+              public af: AngularFire) {
   }
 
   ngOnInit() {
-    this.sports = this.sportService.getSports().reduce(function(a, b, c){
-      if(c % 2 == 0  && c !== 0){
-        a.push([]); };
+    this.sports = this.sportService.getSports().reduce(function (a, b, c) {
+      if (c % 2 == 0 && c !== 0) {
+        a.push([]);
+      }
       a[a.length - 1].push(b);
       return a;
     }, [[]]);
@@ -43,9 +44,14 @@ export class ProfilePage implements OnInit, OnDestroy {
   signOut() {
     if (confirm('Oletko varma, että haluat kirjautua ulos?')) {
       this.af.auth.logout();
-      this.navController.popToRoot();
+      this.navCtrl.setRoot(LoginPage);
+      this.navCtrl.popToRoot();
       this.toastService.show('Signed out');
     }
+  }
+
+  hasRating(sport: string) {
+    return this.profile.ratings && this.profile.ratings[sport];
   }
 
   ngOnDestroy() {

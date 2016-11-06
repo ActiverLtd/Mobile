@@ -49,8 +49,11 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col>
+            <ion-col *ngIf="hasRating(row[0])">
               <ion-icon name="star" color="star" *ngFor="let _ of profile.ratings[row[0]] | numberToArray"></ion-icon>
+            </ion-col>
+            <ion-col *ngIf="!hasRating(row[0])">
+              Ei asetettu
             </ion-col>
           </ion-row>
         </ion-col>
@@ -61,8 +64,11 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col>
+            <ion-col *ngIf="hasRating(row[1])">
               <ion-icon name="star" color="star" *ngFor="let _ of profile.ratings[row[1]] | numberToArray"></ion-icon>
+            </ion-col>
+            <ion-col *ngIf="!hasRating(row[1])">
+              Ei asetettu
             </ion-col>
           </ion-row>
         </ion-col>

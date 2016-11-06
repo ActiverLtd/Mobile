@@ -29,14 +29,12 @@ export class FacebookLoginComponent {
     firebase.auth().signInWithCredential(provider)
       .then((auth) => {
         this.toastService.show('Successfully signed in!');
-        if (true) {
-          this.af.database.object(`/users/${auth.uid}`).set({
-            image: auth.photoURL,
-            email: auth.email,
-            name: auth.displayName,
-            ratings: {}
-          })
-        }
+        this.af.database.object(`/users/${auth.uid}`).set({
+          image: auth.photoURL,
+          email: auth.email,
+          name: auth.displayName,
+          ratings: {}
+        })
       })
       .catch((error) => {
         alert("Firebase failure: " + JSON.stringify(error));
