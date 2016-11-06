@@ -1,4 +1,3 @@
-import { NavController } from 'ionic-angular';
 import { ProfilePage } from '../profile/profile';
 import { MyActivitiesPage } from '../activities/my-activities';
 import { Component } from '@angular/core';
@@ -7,14 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './main.html'
 })
 export class MainPage {
-  constructor(private nav: NavController) {
-  }
-
-  openActivities() {
-    this.nav.push(MyActivitiesPage);
-  }
-
-  openProfile() {
-    this.nav.push(ProfilePage);
-  }
+  myActivitiesPage = MyActivitiesPage;
+  profilePage = ProfilePage;
 }

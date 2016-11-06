@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar hideBackButton="true">
-    <button ion-button icon-only menuToggle (click)="openProfile()">
+    <button ion-button icon-only menuToggle [navPush]="profilePage">
       <ion-icon name="person"></ion-icon>
     </button>
 
@@ -9,7 +9,7 @@
     </ion-title>
 
     <ion-buttons end>
-      <button ion-button icon-only (click)="openActivities()">
+      <button ion-button icon-only [navPush]="myActivitiesPage">
         <ion-icon name="calendar"></ion-icon>
         <ion-badge color="danger" style="font-size: 8px; margin-top: 2px; margin-left: -2px;">2</ion-badge>
       </button>

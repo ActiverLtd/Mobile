@@ -1,4 +1,13 @@
-<ion-tabs>
-  <ion-tab [root]="invitationsTab" tabTitle="Kutsut"></ion-tab>
-  <ion-tab [root]="calendarTab" tabTitle="Kalenteri"></ion-tab>
-</ion-tabs>
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{tabs.getSelected()?.tabTitle}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-tabs tabsPlacement="top" tabsHighlight="true" #tabs>
+    <ion-tab [root]="invitationsTab" tabTitle="Kutsut"></ion-tab>
+    <ion-tab [root]="calendarTab" tabTitle="Kalenteri"></ion-tab>
+  </ion-tabs>
+</ion-content>
