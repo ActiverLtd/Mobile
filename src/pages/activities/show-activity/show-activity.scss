@@ -8,6 +8,7 @@
     bottom: inherit !important;
     width: 96% !important;
     max-height: 90% !important;
+    box-shadow: 0 0;
   }
   ion-content.show-activity {
     color: white;
@@ -41,6 +42,32 @@
       h1 {
         color: cadetblue;
       }
+    }
+  }
+  .participant-count {
+    font-size: 1.5em;
+    font-weight: 400;
+  }
+  .participant {
+    display: inline-block;
+    width: 60px;
+    .participant-image {
+      border-radius: 20px;
+      width: 40px;
+      height: 40px;
+      margin: 0 2px;
+      display: inline-block;
+    }
+    .participant-name {
+      text-align: center;
+    }
+  }
+  .comment {
+    .comment-author {
+      font-weight: 200;
+    }
+    .comment-text {
+      text-align: left;
     }
   }
 }

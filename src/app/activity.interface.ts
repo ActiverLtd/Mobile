@@ -4,7 +4,7 @@ export interface Activity {
   location: any;
   timestamp: number;
   organizer: string | any;
-  participants: string[];
+  participants: any;
   participants_max: number;
   shape: string;
   additional_info?: string;

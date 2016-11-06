@@ -21,6 +21,7 @@ import { NamePipe } from './pipes/name.pipe';
 import { NumberToArrayPipe } from './pipes/number-to-array.pipe';
 import { firebaseConfig, firebaseAuthConfig } from './firebase-config';
 import { ValuesPipe } from './pipes/values.pipe';
+import { FirebaseService } from './firebase.service';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -69,7 +70,7 @@ export function createTranslateLoader(http: Http) {
     ActivityCardComponent,
     FacebookLoginComponent
   ],
-  providers: [ToastService, SportService]
+  providers: [ToastService, SportService, FirebaseService]
 })
 export class AppModule {
 }

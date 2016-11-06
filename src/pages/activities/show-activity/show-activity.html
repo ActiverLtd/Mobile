@@ -20,22 +20,28 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col>{{participants?.length}} / {{activity.participants_max}} osallistujaa</ion-col>
+      <ion-col><span class="participant-count">{{participants?.length + 1}}</span> / {{activity.participants_max}}
+        osallistujaa
+      </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <!--<span *ngFor="let participant of activity.participants">{{participant.name}}</span>-->
+        <div *ngFor="let participant of participants" class="participant">
+          <img [src]="participant.image" class="participant-image"/>
+          <span class="participant-name">{{participant.name | name:0}}</span>
+        </div>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="isUserParticipating()">
       <ion-col>
         <span *ngIf="!activity.comments">Ei kommentteja..</span>
-        <ion-row *ngFor="let comment of activity.comments | values">
-          <ion-col>{{comment.user.name}}:</ion-col><ion-col>{{comment.text}}</ion-col>
+        <ion-row *ngFor="let comment of activity.comments | values" class="comment">
+          <span class="comment-author">{{comment.user.name}}: </span>
+          <span class="comment-text">{{comment.text}}</span>
         </ion-row>
 
         <ion-row>
-          <ion-input type="text" #comment placeholder="Your comment..."></ion-input>
+          <ion-input type="text" #comment placeholder="Kirjoita muille..."></ion-input>
           <button ion-button (click)="addComment(comment.value); comment.value = '';" [disabled]="!comment.value">
             Lähetä
           </button>
@@ -51,7 +57,8 @@
             <ion-icon name="star" color="star"></ion-icon>
             <ion-icon name="star" color="star"></ion-icon>
             <ion-icon name="star" color="star"></ion-icon>
-             x {{participantsByLevel(5)}}</ion-col>
+            x {{participantsByLevel(5)}}
+          </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
@@ -60,7 +67,8 @@
             <ion-icon name="star" color="star"></ion-icon>
             <ion-icon name="star" color="star"></ion-icon>
             <ion-icon name="star"></ion-icon>
-             x {{participantsByLevel(4)}}</ion-col>
+            x {{participantsByLevel(4)}}
+          </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
@@ -69,7 +77,8 @@
             <ion-icon name="star" color="star"></ion-icon>
             <ion-icon name="star"></ion-icon>
             <ion-icon name="star"></ion-icon>
-             x {{participantsByLevel(3)}}</ion-col>
+            x {{participantsByLevel(3)}}
+          </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
@@ -78,7 +87,8 @@
             <ion-icon name="star"></ion-icon>
             <ion-icon name="star"></ion-icon>
             <ion-icon name="star"></ion-icon>
-             x {{participantsByLevel(2)}}</ion-col>
+            x {{participantsByLevel(2)}}
+          </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
@@ -86,7 +96,9 @@
             <ion-icon name="star"></ion-icon>
             <ion-icon name="star"></ion-icon>
             <ion-icon name="star"></ion-icon>
-            <ion-icon name="star"></ion-icon> x {{participantsByLevel(1)}}</ion-col>
+            <ion-icon name="star"></ion-icon>
+            x {{participantsByLevel(1)}}
+          </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>Lue lisää</ion-col>

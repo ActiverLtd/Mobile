@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
 import { Activity } from '../../../app/activity.interface';
 import { AngularFire } from 'angularfire2';
+import { FirebaseService } from '../../../app/firebase.service';
 
 @Component({
   templateUrl: './show-activity.html'
@@ -10,15 +11,14 @@ export class ShowActivityPage {
   activity: Activity;
   uid: string;
 
-  constructor(params: NavParams, private viewController: ViewController, private af: AngularFire) {
+  constructor(params: NavParams,
+              private viewController: ViewController,
+              private af: AngularFire,
+              private firebaseService: FirebaseService) {
     this.af.database.object(`/activities/${params.get('activityId')}`).subscribe(activity => {
       this.activity = activity;
-      Object.values(this.activity.comments).map(comment => {
-        this.af.database.object(`/users/${comment.user}`).subscribe(user => comment.user = user);
-      });
-      Object.keys(this.activity.participants).map(participant => {
-        this.af.database.object(`/users/${participant}`).subscribe(user => this.activity.participants[participant] = user);
-      });
+      this.firebaseService.fetchUsersWithAttribute(this.activity, 'comments', 'user');
+      this.firebaseService.fetchUsersToArray(this.activity, 'participants');
     });
     this.af.auth.subscribe(auth => this.uid = auth.uid);
   }
@@ -27,7 +27,10 @@ export class ShowActivityPage {
     return level;
   }
 
-  participants() {
+  get participants() {
+    if (!(this.activity.participants instanceof Array)) {
+      return [];
+    }
     return this.activity.participants;
   }
 
@@ -36,14 +39,11 @@ export class ShowActivityPage {
   }
 
   join() {
-    this.af.database.list(`/activities/${this.activity.$key}/participants`).push(this.uid);
+    this.af.database.object(`/activities/${this.activity.$key}/participants/${this.uid}`).set(true);
   }
 
   isUserParticipating() {
-    if (this.activity.participants) {
-      return Object.values(this.activity.participants).includes(this.uid);
-    }
-    return false;
+    return this.participants.map(participant => participant.$key).includes(this.uid);
   }
 
   addComment(text: string) {

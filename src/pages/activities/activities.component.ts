@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { CreateActivityPage } from '../activities/create-activity';
 import { ShowActivityPage } from '../activities/show-activity/show-activity';
 import { AngularFire } from 'angularfire2';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Activity } from '../../app/activity.interface';
 
 @Component({
@@ -24,9 +24,14 @@ export class ActivitiesComponent {
       }
     );
 
-    activities.subscribe(activities => {
-      this.activities = activities;
-      activities.forEach(activity => {
+    Observable.zip(activities, this.af.auth.map(auth => auth.uid)).subscribe(([activities, uid]) => {
+      console.log(activities.length);
+      console.log(uid);
+      this.activities = activities.filter(activity => {
+        return activity.organizer !== uid && (typeof activity.participants !== 'object' || !Object.keys(activity.participants).includes(uid));
+      });
+      console.log('asd: ' + this.activities.length);
+      this.activities.forEach(activity => {
         this.af.database.object(`/users/${activity.organizer}`).subscribe(user => {
           activity.organizer = user;
         });

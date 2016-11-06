@@ -1,6 +1,6 @@
 <ion-card (click)="open.emit()" class="activity-card">
   <img src="assets/images/sports/{{activity.sport}}.jpg" class="background"/>
-  <div class="card-sport">{{ activity.sport | translate | uppercase}}</div>
+  <div class="card-sport">{{ activity.sport | translate | uppercase}} | {{activity.$key}}</div>
   <div class="card-locked">
     <ion-icon name="lock" [hidden]="activity.participants && activity.participants.length < activity.participants_max"></ion-icon>
   </div>

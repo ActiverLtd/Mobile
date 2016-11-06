@@ -4,6 +4,9 @@ import { PipeTransform, Pipe } from '@angular/core';
 })
 export class ValuesPipe implements PipeTransform {
   transform(value: any, args?: any): any {
+    if (typeof value !== 'object') {
+      return [];
+    }
     return Object.values(value);
   }
 
