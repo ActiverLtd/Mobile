@@ -25,12 +25,9 @@ export class ActivitiesComponent {
     );
 
     Observable.zip(activities, this.af.auth.map(auth => auth.uid)).subscribe(([activities, uid]) => {
-      console.log(activities.length);
-      console.log(uid);
       this.activities = activities.filter(activity => {
         return activity.organizer !== uid && (typeof activity.participants !== 'object' || !Object.keys(activity.participants).includes(uid));
       });
-      console.log('asd: ' + this.activities.length);
       this.activities.forEach(activity => {
         this.af.database.object(`/users/${activity.organizer}`).subscribe(user => {
           activity.organizer = user;
