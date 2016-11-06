@@ -2,7 +2,7 @@
   <img src="assets/images/sports/{{activity.sport}}.jpg" class="background"/>
   <div class="card-sport">{{ activity.sport | translate | uppercase}} | {{activity.$key}}</div>
   <div class="card-locked">
-    <ion-icon name="lock" [hidden]="activity.participants && activity.participants.length < activity.participants_max"></ion-icon>
+    <ion-icon name="lock" [hidden]="activity.shape === 'closed'"></ion-icon>
   </div>
   <div class="card-bottom">
     <div class="card-organizer-details">
