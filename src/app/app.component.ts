@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { StatusBar, CodePush, Splashscreen } from 'ionic-native';
+import { StatusBar, CodePush, Splashscreen, SyncStatus } from 'ionic-native';
 import { TranslateService } from 'ng2-translate';
 import { LoginPage } from '../pages/login/login';
+import { ToastService } from './toast.service';
 
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`
@@ -10,7 +11,7 @@ import { LoginPage } from '../pages/login/login';
 export class MyApp {
   rootPage = LoginPage;
 
-  constructor(platform: Platform, translate: TranslateService) {
+  constructor(platform: Platform, translate: TranslateService, toastService: ToastService) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -24,7 +25,11 @@ export class MyApp {
 
 
       if (platform.is('cordova')) {
-        CodePush.sync().subscribe((syncStatus) => console.log(syncStatus));
+        CodePush.sync().subscribe((syncStatus) => {
+          if (syncStatus === SyncStatus.UPDATE_INSTALLED) {
+            toastService.show('Updates were installed. Please restart the application!');
+          }
+        });
         window.setTimeout(() => {
           Splashscreen.hide();
         }, 300);
