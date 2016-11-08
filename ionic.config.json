@@ -1,6 +1,6 @@
 {
-  "name": "Mobile",
-  "app_id": "",
+  "name": "Activer",
+  "app_id": "net.activer.app",
   "v2": true,
   "typescript": true
 }
