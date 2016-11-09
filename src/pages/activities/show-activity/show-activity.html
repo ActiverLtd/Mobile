@@ -2,17 +2,25 @@
   <div class="top">
     <ion-row>
       <ion-col>
-        <h1>{{activity.sport | translate}}</h1>
+        <h1>{{activity.sport | translate | uppercase}}</h1>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col><h4>{{activity.timestamp | date:'d.M.y'}} klo {{activity.timestamp | date:'HH:mm'}}</h4></ion-col>
+      <ion-col class="no-padding">
+        <h4>{{activity.timestamp | date:'d. MMMM' | uppercase}}, klo {{activity.timestamp | date:'HH:mm'}}</h4>
+      </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col><h2>{{activity.location.city}}</h2></ion-col>
+      <ion-col class="no-padding">
+        <h2>{{activity.location.name}}, {{activity.location.address.city}}</h2>
+      </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col><h5>{{activity.location.address}}</h5></ion-col>
+      <ion-col class="no-padding">
+        <h5>
+          {{activity.location.address.street}}, {{activity.location.address.zip}} {{activity.location.address.city}}
+        </h5>
+      </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
@@ -20,7 +28,7 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col><span class="participant-count">{{participants?.length + 1}}</span> / {{activity.participants_max}}
+      <ion-col><span class="participant-count">{{participants?.length}}</span> / {{activity.participants_max}}
         osallistujaa
       </ion-col>
     </ion-row>

@@ -15,6 +15,10 @@
     position: relative;
     background-color: transparent;
 
+    hr {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
     .top {
       padding: 10px 10px 40px;
       margin: 10px 10px 40px;
@@ -63,8 +67,10 @@
     }
   }
   .comment {
+    margin-bottom: 2px;
     .comment-author {
       font-weight: 200;
+      margin-right: 6px;
     }
     .comment-text {
       text-align: left;

@@ -26,16 +26,14 @@ export class CreateActivityPage implements OnInit {
   minDate: string = new Date().toISOString();
   maxDate: string = new Date().getFullYear() + 2 + '';
 
-  constructor(
-    private af: AngularFire,
-    public sportService: SportService,
-    private viewController: ViewController,
-    private toastService: ToastService
-  ) {
+  constructor(private af: AngularFire,
+              public sportService: SportService,
+              private viewController: ViewController,
+              private toastService: ToastService) {
   }
 
   ngOnInit() {
-    this.af.auth.subscribe(auth => {
+    this.af.auth.subscribe((auth: any) => {
       this.activity.organizer = auth.auth.uid;
     });
   }
@@ -45,5 +43,9 @@ export class CreateActivityPage implements OnInit {
     this.af.database.list('/activities').push(this.activity);
     this.viewController.dismiss();
     this.toastService.show('Aktiviteetti luotu!');
+  }
+
+  locationChanged(location) {
+    this.activity.location = location;
   }
 }

@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="card-activity-details">
-      <span class="activity-name">{{activity.location.address}}</span><br/>
+      <span class="activity-name">{{activity.location.address.city}}, {{activity.location.address.country}}</span><br/>
       Klo {{activity.timestamp | date:'HH:mm'}}<br/>
       {{activity.timestamp | date:'d.M.y'}}
     </div>

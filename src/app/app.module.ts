@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { MyActivitiesPage } from '../pages/activities/my-activities';
@@ -22,6 +22,7 @@ import { NumberToArrayPipe } from './pipes/number-to-array.pipe';
 import { firebaseConfig, firebaseAuthConfig } from './firebase-config';
 import { ValuesPipe } from './pipes/values.pipe';
 import { FirebaseService } from './firebase.service';
+import { LocationPickerComponent } from './location-picker/location-picker.component';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -42,6 +43,7 @@ export function createTranslateLoader(http: Http) {
     ActivitiesComponent,
     ActivityCardComponent,
     FacebookLoginComponent,
+    LocationPickerComponent,
     NamePipe,
     NumberToArrayPipe,
     ValuesPipe
@@ -70,7 +72,10 @@ export function createTranslateLoader(http: Http) {
     ActivityCardComponent,
     FacebookLoginComponent
   ],
-  providers: [ToastService, SportService, FirebaseService]
+  providers: [
+    ToastService, SportService, FirebaseService,
+    { provide: LOCALE_ID, useValue: 'fi-FI' }
+  ]
 })
 export class AppModule {
 }

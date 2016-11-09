@@ -17,6 +17,9 @@ export class ShowActivityPage {
               private firebaseService: FirebaseService) {
     this.af.database.object(`/activities/${params.get('activityId')}`).subscribe(activity => {
       this.activity = activity;
+      this.af.database.object(`/users/${activity.organizer}`).subscribe(
+        organizer => this.activity.organizer = organizer
+      );
       this.firebaseService.fetchUsersWithAttribute(this.activity, 'comments', 'user');
       this.firebaseService.fetchUsersToArray(this.activity, 'participants');
     });
@@ -31,7 +34,7 @@ export class ShowActivityPage {
     if (!(this.activity.participants instanceof Array)) {
       return [];
     }
-    return this.activity.participants;
+    return this.activity.participants.concat(this.activity.organizer);
   }
 
   close() {

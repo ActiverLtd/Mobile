@@ -1,5 +1,5 @@
 <ion-content>
-  <form #f="ngForm">
+  <form #f="ngForm" novalidate>
     <ion-row center>
       <ion-col width-25><span class="colored">Laji</span></ion-col>
       <ion-col width-75 style="position: relative;">
@@ -16,7 +16,7 @@
     <ion-row center>
       <ion-col width-25><span class="colored">Paikka</span></ion-col>
       <ion-col width-75>
-        <ion-input type="text" [(ngModel)]="activity.location" name="location" required></ion-input>
+        <app-location-picker (selected)="locationChanged($event)"></app-location-picker>
       </ion-col>
     </ion-row>
     <ion-row center>
@@ -63,11 +63,11 @@
         </ion-segment>
       </ion-col>
     </ion-row>
-    <ion-row center>
-      <ion-col width-25><span class="colored">Kutsu osallistujia ({{activity.participants.length + 1}}/12)</span>
-      </ion-col>
-      <ion-col width-75></ion-col>
-    </ion-row>
+    <!--<ion-row center>-->
+      <!--<ion-col width-25><span class="colored">Kutsu osallistujia ({{activity.participants.length + 1}}/12)</span>-->
+      <!--</ion-col>-->
+      <!--<ion-col width-75></ion-col>-->
+    <!--</ion-row>-->
     <ion-row center>
       <button ion-button (click)="create()" [disabled]="f.invalid">Luo tapahtuma >></button>
     </ion-row>
