@@ -32,7 +32,7 @@ export class ShowActivityPage {
 
   get participants() {
     if (!(this.activity.participants instanceof Array)) {
-      return [];
+      return [this.activity.organizer];
     }
     return this.activity.participants.concat(this.activity.organizer);
   }
@@ -47,6 +47,10 @@ export class ShowActivityPage {
 
   isUserParticipating() {
     return this.participants.map(participant => participant.$key).includes(this.uid);
+  }
+
+  isOwnComment(comment: any) {
+    return comment.user.$key === this.uid;
   }
 
   addComment(text: string) {

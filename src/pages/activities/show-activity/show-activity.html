@@ -44,11 +44,11 @@
       <ion-col>
         <span *ngIf="!activity.comments">Ei kommentteja..</span>
         <ion-row *ngFor="let comment of activity.comments | values" class="comment">
-          <span class="comment-author">{{comment.user.name}}: </span>
+          <span class="comment-author" [class.own-comment]="isOwnComment(comment)"><b>{{comment.user.name}}: </b></span>
           <span class="comment-text">{{comment.text}}</span>
         </ion-row>
 
-        <ion-row>
+        <ion-row class="write-comment">
           <ion-input type="text" #comment placeholder="Kirjoita muille..."></ion-input>
           <button ion-button (click)="addComment(comment.value); comment.value = '';" [disabled]="!comment.value">
             Lähetä
