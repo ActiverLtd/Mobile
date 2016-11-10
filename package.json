@@ -6,12 +6,14 @@
   "scripts": {
     "build": "ionic-app-scripts build",
     "watch": "ionic-app-scripts watch",
+    "ionic:build": "ionic-app-scripts build",
+    "ionic:serve": "ionic-app-scripts serve",
     "serve:before": "watch",
     "emulate:before": "build",
     "deploy:before": "build",
     "build:before": "build",
     "run:before": "build",
-    "postinstall": "mkdir www || mkdir platforms || ionic state restore",
+    "restore-ionic": "mkdir www || mkdir platforms || ionic state restore",
     "pgb": "ionic2-pgb-zipper"
   },
   "dependencies": {
@@ -35,10 +37,10 @@
     "zone.js": "^0.6.21"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "^0.0.41",
+    "@ionic/app-scripts": "^0.0.42",
     "@types/request": "0.0.30",
     "ionic2-pgb-zipper": "0.0.1",
-    "typescript": "2.0.7"
+    "typescript": "2.0.8"
   },
   "description": "Activer",
   "cordovaPlugins": [
