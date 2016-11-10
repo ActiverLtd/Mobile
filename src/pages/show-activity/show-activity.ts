@@ -1,9 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
-import { Activity } from '../../../app/activity.interface';
+import { Activity } from '../../app/activity.interface';
 import { AngularFire } from 'angularfire2';
-import { FirebaseService } from '../../../app/firebase.service';
-import { UserService } from '../../../app/user.service';
+import { FirebaseService } from '../../app/firebase.service';
+import { UserService } from '../../app/user.service';
 import { Subscription } from 'rxjs';
 
 @Component({

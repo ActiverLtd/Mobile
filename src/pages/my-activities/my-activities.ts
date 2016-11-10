@@ -1,5 +1,5 @@
-import { InvitationsPage } from './invitations/invitations';
-import { CalendarPage } from './calendar/calendar';
+import { InvitationsPage } from '../invitations/invitations';
+import { CalendarPage } from '../calendar/calendar';
 import { Component } from '@angular/core';
 
 

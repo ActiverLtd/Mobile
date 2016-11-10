@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from 'ionic-angular';
-import { CreateActivityPage } from '../create-activity';
-import { UserService } from '../../../app/user.service';
+import { CreateActivityPage } from '../create-activity/create-activity';
+import { UserService } from '../../app/user.service';
 
 @Component({
   templateUrl: './invitations.html'

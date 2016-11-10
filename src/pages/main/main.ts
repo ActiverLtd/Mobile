@@ -1,5 +1,5 @@
 import { ProfilePage } from '../profile/profile';
-import { MyActivitiesPage } from '../activities/my-activities';
+import { MyActivitiesPage } from '../my-activities/my-activities';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../app/user.service';
 

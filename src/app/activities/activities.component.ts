@@ -1,10 +1,10 @@
 import { PopoverController } from 'ionic-angular';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CreateActivityPage } from '../activities/create-activity';
-import { ShowActivityPage } from '../activities/show-activity/show-activity';
+import { CreateActivityPage } from '../../pages/create-activity/create-activity';
+import { ShowActivityPage } from '../../pages/show-activity/show-activity';
 import { AngularFire } from 'angularfire2';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { Activity } from '../../app/activity.interface';
+import { Activity } from '../activity.interface';
 
 @Component({
   selector: 'app-activities',
