@@ -29,11 +29,12 @@ export class FacebookLoginComponent {
     firebase.auth().signInWithCredential(provider)
       .then((auth) => {
         this.toastService.show('TOAST_SIGNED_IN');
-        this.af.database.object(`/users/${auth.uid}`).set({
+        this.af.database.object(`/users/${auth.uid}`).update({
           image: auth.photoURL,
           email: auth.email,
           name: auth.displayName,
-          ratings: {}
+          ratings: {},
+          invitations: {abc: true}
         })
       })
       .catch((error) => {

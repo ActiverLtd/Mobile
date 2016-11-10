@@ -24,6 +24,7 @@ import { ValuesPipe } from './pipes/values.pipe';
 import { FirebaseService } from './firebase.service';
 import { LocationPickerComponent } from './location-picker/location-picker.component';
 import { UserService } from './user.service';
+import { InvitationCardComponent } from './invitation-card/invitation-card.component';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -43,6 +44,7 @@ export function createTranslateLoader(http: Http) {
     ShowActivityPage,
     ActivitiesComponent,
     ActivityCardComponent,
+    InvitationCardComponent,
     FacebookLoginComponent,
     LocationPickerComponent,
     NamePipe,

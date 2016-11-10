@@ -1,0 +1,74 @@
+<ion-card (click)="open.emit()" class="invitation-card">
+  <img src="assets/img/sports/{{invitation.activity.sport}}.jpg" class="background" *ngIf="invitation.activity.sport"/>
+  <div class="card-captain">
+    C
+  </div>
+  <div class="details">
+    <ion-row>
+      <ion-col>
+        <h1>{{invitation.activity.sport | translate | uppercase}}</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="no-padding">
+        <h4>{{invitation.activity.timestamp | date:'d. MMMM' | uppercase}}, klo {{invitation.activity.timestamp |
+          date:'HH:mm'}}</h4>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="no-padding">
+        <h2>{{invitation.activity.location.name}}, {{invitation.activity.location.address.city}}</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="no-padding">
+        <h5>
+          {{invitation.activity.location.address.street}}, {{invitation.activity.location.address.zip}}
+          {{invitation.activity.location.address.city}}
+        </h5>
+      </ion-col>
+    </ion-row>
+    <ion-row class="bottom">
+      <ion-col>
+        <ion-row>
+          <ion-col>
+            <div class="option-button reject" (click)="reject.emit(); $event.stopPropagation();">
+              <span>{{'INVITATIONS_REJECT' | translate}}<br/>X</span>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col>
+        <ion-row>
+          <ion-col>
+            <img [src]="invitation.user.image" class="profile-image"/>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            {{invitation.user.name | name:0}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col *ngIf="invitation.activity.organizer.ratings">
+            {{invitation.activity.organizer.ratings[invitation.activity.sport]}} *
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col>
+        <ion-row>
+          <ion-col>
+            <div class="option-button accept" (click)="accept.emit(); $event.stopPropagation();">
+              <span>{{'INVITATIONS_ACCEPT' | translate}}<br/>>></span>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            {{invitation.activity.participants?.length}}{{'ACTIVITIES_PARTICIPANTS' | translate}}
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-card>

@@ -36,6 +36,8 @@
   "INVITATIONS_NO_INVITATIONS_CREATE_BUTTON": "Luo uusi tapahtuma",
   "MY_ACTIVITIES_INVITATIONS_TAB": "Kutsut",
   "MY_ACTIVITIES_CALENDAR_TAB": "Kalenteri",
+  "INVITATIONS_ACCEPT": "Hyväksy",
+  "INVITATIONS_REJECT": "Hylkää",
   "TOAST_ACTIVITY_CREATED": "Aktiviteetti luotu!",
   "TOAST_UPDATES_INSTALLED": "Päivitykset asennettu. Käynnistä sovellus uudestaan käyttääksesi uusinta versiota.",
   "TOAST_SIGNED_IN": "Kirjauduttu sisään",

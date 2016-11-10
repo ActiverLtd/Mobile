@@ -1,7 +1,7 @@
 .invitations {
   background-color: black;
 
-  .background {
+  & > .background {
     opacity: 0.2;
     background: url('../assets/img/logo.png') no-repeat center center;
     background-size: contain;

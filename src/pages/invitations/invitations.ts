@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PopoverController } from 'ionic-angular';
 import { CreateActivityPage } from '../create-activity/create-activity';
 import { UserService } from '../../app/user.service';
+import { Activity } from '../../app/activity.interface';
+import { ShowActivityPage } from '../show-activity/show-activity';
 
 @Component({
   templateUrl: './invitations.html'
@@ -21,5 +23,18 @@ export class InvitationsPage implements OnInit {
     popover.present({
       ev: $event
     });
+  }
+
+  openActivity(activity: Activity) {
+    let popover = this.popoverCtrl.create(ShowActivityPage, {activityId: activity.$key}, {cssClass: 'show-activity-popover'});
+    popover.present();
+  }
+
+  reject() {
+
+  }
+
+  accept() {
+
   }
 }
