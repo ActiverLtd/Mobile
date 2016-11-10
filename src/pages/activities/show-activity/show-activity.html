@@ -29,7 +29,7 @@
     </ion-row>
     <ion-row>
       <ion-col><span class="participant-count">{{participants?.length}}</span> / {{activity.participants_max}}
-        osallistujaa
+        {{'ACTIVITIES_PARTICIPANTS' | translate}}
       </ion-col>
     </ion-row>
     <ion-row>
@@ -42,7 +42,7 @@
     </ion-row>
     <ion-row *ngIf="isUserParticipating()">
       <ion-col>
-        <span *ngIf="!activity.comments">Ei kommentteja..</span>
+        <span *ngIf="!activity.comments">{{'ACTIVITIES_NO_COMMENTS' | translate}}</span>
         <ion-row *ngFor="let comment of activity.comments | values" class="comment">
           <span class="comment-author" [class.own-comment]="isOwnComment(comment)"><b>{{comment.user.name}}: </b></span>
           <span class="comment-text">{{comment.text}}</span>
@@ -51,7 +51,7 @@
         <ion-row class="write-comment">
           <ion-input type="text" #comment placeholder="Kirjoita muille..."></ion-input>
           <button ion-button (click)="addComment(comment.value); comment.value = '';" [disabled]="!comment.value">
-            Lähetä
+            {{'COMMON_SEND' | translate}}
           </button>
         </ion-row>
       </ion-col>
@@ -109,14 +109,14 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col>Lue lisää</ion-col>
+          <ion-col>{{'COMMON_READ_MORE' | translate}}</ion-col>
         </ion-row>
       </ion-col>
     </ion-row>
   </div>
   <div class="bottom" *ngIf="!isUserParticipating()">
     <div class="round-button" (click)="join();">
-      <span>{{'join' | translate}}<br/>>></span>
+      <span>{{'COMMON_JOIN' | translate}}<br/>>></span>
     </div>
   </div>
   <div class="top-left">

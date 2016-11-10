@@ -1,8 +1,8 @@
 <div class="card-background-page">
   <div class="ion-select-container">
     <ion-select [ngModel]="orderBy" (ionChange)="setOrderBy($event)">
-      <ion-option value="timestamp">Päivämäärän mukaan</ion-option>
-      <ion-option value="popularity">Suosituimmuuden mukaan</ion-option>
+      <ion-option value="timestamp">{{'ACTIVITIES_ORDER_BY_DATE' | translate}}</ion-option>
+      <ion-option value="popularity">{{'ACTIVITIES_ORDER_BY_POPULARITY' | translate}}</ion-option>
     </ion-select>
   </div>
   <div class="activity-cards">

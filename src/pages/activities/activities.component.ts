@@ -1,30 +1,40 @@
 import { PopoverController } from 'ionic-angular';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CreateActivityPage } from '../activities/create-activity';
 import { ShowActivityPage } from '../activities/show-activity/show-activity';
 import { AngularFire } from 'angularfire2';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Activity } from '../../app/activity.interface';
 
 @Component({
   selector: 'app-activities',
   templateUrl: './activities.component.html'
 })
-export class ActivitiesComponent {
+export class ActivitiesComponent implements OnInit, OnDestroy {
   orderBy: string = 'timestamp';
   activities: Activity[];
+  activitiesSubscription: Subscription;
   orderBySubject: BehaviorSubject<string>;
 
   constructor(private popoverCtrl: PopoverController, private af: AngularFire) {
+
+  }
+
+  ngOnInit() {
     this.orderBySubject = new BehaviorSubject<string>(this.orderBy);
-    const activities = af.database.list('/activities', {
+    const activities = this.af.database.list('/activities', {
         query: {
           orderByChild: this.orderBySubject
         }
       }
     );
 
-    Observable.zip(activities, this.af.auth.map(auth => auth.uid)).subscribe(([activities, uid]) => {
+    this.activitiesSubscription = Observable.zip(activities, this.af.auth.map(auth => {
+      if (!auth) {
+        return -1;
+      }
+      return auth.uid;
+    })).subscribe(([activities, uid]) => {
       this.activities = activities.filter(activity => {
         return activity.organizer !== uid && (typeof activity.participants !== 'object' || !Object.keys(activity.participants).includes(uid));
       });
@@ -33,7 +43,7 @@ export class ActivitiesComponent {
           activity.organizer = user;
         });
       })
-    })
+    });
   }
 
   setOrderBy(value: string) {
@@ -50,5 +60,9 @@ export class ActivitiesComponent {
     popover.present({
       ev: $event
     });
+  }
+
+  ngOnDestroy() {
+    this.activitiesSubscription.unsubscribe();
   }
 }

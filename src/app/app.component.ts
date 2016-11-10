@@ -27,7 +27,7 @@ export class MyApp {
       if (platform.is('cordova')) {
         CodePush.sync().subscribe((syncStatus) => {
           if (syncStatus === SyncStatus.UPDATE_INSTALLED) {
-            toastService.show('Updates were installed. Please restart the application!');
+            toastService.show('TOAST_UPDATES_INSTALLED');
           }
         });
         window.setTimeout(() => {

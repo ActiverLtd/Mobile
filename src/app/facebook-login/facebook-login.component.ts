@@ -28,7 +28,7 @@ export class FacebookLoginComponent {
     const provider = firebase.auth.FacebookAuthProvider.credential(accessToken);
     firebase.auth().signInWithCredential(provider)
       .then((auth) => {
-        this.toastService.show('Successfully signed in!');
+        this.toastService.show('TOAST_SIGNED_IN');
         this.af.database.object(`/users/${auth.uid}`).set({
           image: auth.photoURL,
           email: auth.email,

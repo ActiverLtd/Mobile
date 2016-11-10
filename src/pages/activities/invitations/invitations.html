@@ -1,11 +1,17 @@
-<ion-content>
-  <ion-row *ngIf="!invitations.length">
-    <ion-col>
-      EI UUSIA KUTSUJA!
-      <br/>
-      <button ion-button (click)="showCreateActivity($event)">Luo uusi tapahtuma >></button>
-    </ion-col>
-  </ion-row>
+<ion-content class="invitations">
+  <div class="background"></div>
+  <div *ngIf="!invitations.length" class="no-invitations">
+    <ion-row>
+      <ion-col>
+        {{'INVITATIONS_NO_INVITATIONS_TITLE' | translate | uppercase}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button (click)="showCreateActivity($event)">{{'INVITATIONS_NO_INVITATIONS_CREATE_BUTTON' | translate}} >></button>
+      </ion-col>
+    </ion-row>
+  </div>
   <ion-row *ngIf="invitations.length">
     <ion-col>
       {{invitations.length}}

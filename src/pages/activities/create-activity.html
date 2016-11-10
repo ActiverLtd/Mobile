@@ -1,7 +1,7 @@
 <ion-content>
   <form #f="ngForm" novalidate>
     <ion-row center>
-      <ion-col width-25><span class="colored">Laji</span></ion-col>
+      <ion-col width-25><span class="colored">{{'CREATE_ACTIVITY_SPORT' | translate}}</span></ion-col>
       <ion-col width-75 style="position: relative;">
         <ion-select [(ngModel)]="activity.sport" name="sport">
           <ion-option
@@ -14,14 +14,14 @@
       </ion-col>
     </ion-row>
     <ion-row center>
-      <ion-col width-25><span class="colored">Paikka</span></ion-col>
+      <ion-col width-25><span class="colored">{{'CREATE_ACTIVITY_LOCATION' | translate}}</span></ion-col>
       <ion-col width-75>
         <app-location-picker (selected)="locationChanged($event)"></app-location-picker>
       </ion-col>
     </ion-row>
     <ion-row center>
       <ion-col width-25>
-        <span class="colored">Päivämäärä</span>
+        <span class="colored">{{'CREATE_ACTIVITY_DATE' | translate}}</span>
         <!--<ion-icon name="calendar"></ion-icon>-->
       </ion-col>
       <ion-col width-75 style="position: relative;">
@@ -37,7 +37,7 @@
     </ion-row>
     <ion-row center>
       <ion-col width-25>
-        <span class="colored">Kellonaika</span>
+        <span class="colored">{{'CREATE_ACTIVITY_TIME' | translate}}</span>
         <!--<ion-icon name="clock"></ion-icon>-->
       </ion-col>
       <ion-col width-75 style="position: relative;">
@@ -45,31 +45,31 @@
       </ion-col>
     </ion-row>
     <ion-row center>
-      <ion-col width-25><span class="colored">Lisätiedot</span></ion-col>
+      <ion-col width-25><span class="colored">{{'CREATE_ACTIVITY_ADDITIONAL' | translate}}</span></ion-col>
       <ion-col width-75>
         <ion-textarea [(ngModel)]="activity.additional_info" name="additional-info"></ion-textarea>
       </ion-col>
     </ion-row>
     <ion-row center>
-      <ion-col width-25><span class="colored">Muoto</span></ion-col>
+      <ion-col width-25><span class="colored">{{'CREATE_ACTIVITY_SHAPE' | translate}}</span></ion-col>
       <ion-col width-75>
         <ion-segment [(ngModel)]="activity.shape" name="shape" required>
           <ion-segment-button value="open">
-            Avoin
+            {{'CREATE_ACTIVITY_SHAPE_OPEN' | translate}}
           </ion-segment-button>
           <ion-segment-button value="closed">
-            Suljettu
+            {{'CREATE_ACTIVITY_SHAPE_CLOSED' | translate}}
           </ion-segment-button>
         </ion-segment>
       </ion-col>
     </ion-row>
     <!--<ion-row center>-->
-      <!--<ion-col width-25><span class="colored">Kutsu osallistujia ({{activity.participants.length + 1}}/12)</span>-->
+      <!--<ion-col width-25><span class="colored">{{'CREATE_ACTIVITY_INVITE' | translate}} ({{activity.participants.length + 1}}/12)</span>-->
       <!--</ion-col>-->
       <!--<ion-col width-75></ion-col>-->
     <!--</ion-row>-->
     <ion-row center>
-      <button ion-button (click)="create()" [disabled]="f.invalid">Luo tapahtuma >></button>
+      <button ion-button (click)="create()" [disabled]="f.invalid">{{'CREATE_ACTIVITY_BUTTON' | translate}} >></button>
     </ion-row>
   </form>
 </ion-content>

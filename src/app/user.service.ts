@@ -9,7 +9,12 @@ export class UserService {
 
   constructor(private af: AngularFire) {
     this.user$ = this.af.auth.switchMap(
-      (auth: FirebaseAuthState) => this.af.database.object(`/users/${auth.auth.uid}`)
+      (auth: FirebaseAuthState) => {
+        if (!auth) {
+          return Observable.of({});
+        }
+        return this.af.database.object(`/users/${auth.auth.uid}`);
+      }
     );
   }
 
@@ -19,6 +24,9 @@ export class UserService {
 
   getInvitations() {
     return this.user$.switchMap(user => {
+      if (!user.invitations) {
+        user.invitations = [];
+      }
       const arr = Object.keys(user.invitations).map(id => this.af.database.object(`/invitations/${id}`).switchMap(invitation => {
         return Observable.zip(this.af.database.object(`/activities/${invitation.activity}`), this.af.database.object(`/users/${invitation.user}`)).map(
           ([activity, user]) => {

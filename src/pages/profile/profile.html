@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      {{'profile_title' | translate}}
+      {{'PROFILE_TITLE' | translate}}
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -10,7 +10,7 @@
   <ion-row class="top" center>
     <div class="background"></div>
     <ion-col>
-      <img [src]="profile.image"/>
+      <img [src]="profile.image" *ngIf="profile.image"/>
     </ion-col>
     <ion-col width-10>
       <div class="center"></div>
@@ -26,7 +26,7 @@
   </ion-row>
   <ion-row class="border-bottom">
     <ion-col text-uppercase>
-      Bio:
+      {{'BIO' | translate}}:
     </ion-col>
   </ion-row>
   <ion-row class="border-bottom">
@@ -37,7 +37,7 @@
   <div class="spacer"></div>
   <ion-row class="border-bottom">
     <ion-col text-uppercase>
-      Taitotasot:
+      {{'PROFILE_RATINGS' | translate}}:
     </ion-col>
   </ion-row>
   <ion-row class="border-bottom">
@@ -54,7 +54,7 @@
               <ion-icon name="star" color="star" *ngFor="let _ of profile.ratings[row[0]] | numberToArray"></ion-icon>
             </ion-col>
             <ion-col *ngIf="!hasRating(row[0])">
-              Ei asetettu
+              {{'NOT_SET' | translate}}
             </ion-col>
           </ion-row>
         </ion-col>
@@ -76,5 +76,5 @@
       </ion-row>
     </ion-col>
   </ion-row>
-  <button ion-button color="danger" (click)="signOut();">Sign out</button>
+  <button ion-button color="danger" (click)="signOut();">{{'SIGN_OUT' | translate}}</button>
 </ion-content>

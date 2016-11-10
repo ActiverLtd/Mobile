@@ -1,16 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
 import { Activity } from '../../../app/activity.interface';
 import { AngularFire } from 'angularfire2';
 import { FirebaseService } from '../../../app/firebase.service';
 import { UserService } from '../../../app/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   templateUrl: './show-activity.html'
 })
-export class ShowActivityPage {
+export class ShowActivityPage implements OnDestroy {
   activity: Activity;
   uid: string;
+  userSubscription: Subscription;
 
   constructor(params: NavParams,
               private viewController: ViewController,
@@ -25,7 +27,7 @@ export class ShowActivityPage {
       this.firebaseService.fetchUsersWithAttribute(this.activity, 'comments', 'user');
       this.firebaseService.fetchUsersToArray(this.activity, 'participants');
     });
-    this.userService.getUser().subscribe(user => this.uid = user.uid);
+    this.userSubscription = this.userService.getUser().subscribe(user => this.uid = user.uid);
   }
 
   participantsByLevel(level: number) {
@@ -60,5 +62,9 @@ export class ShowActivityPage {
       user: this.uid,
       text
     });
+  }
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
   }
 }
