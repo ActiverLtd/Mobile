@@ -23,6 +23,7 @@ import { firebaseConfig, firebaseAuthConfig } from './firebase-config';
 import { ValuesPipe } from './pipes/values.pipe';
 import { FirebaseService } from './firebase.service';
 import { LocationPickerComponent } from './location-picker/location-picker.component';
+import { UserService } from './user.service';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -73,7 +74,7 @@ export function createTranslateLoader(http: Http) {
     FacebookLoginComponent
   ],
   providers: [
-    ToastService, SportService, FirebaseService,
+    ToastService, SportService, FirebaseService, UserService,
     { provide: LOCALE_ID, useValue: 'fi-FI' }
   ]
 })

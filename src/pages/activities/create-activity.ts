@@ -4,6 +4,7 @@ import { Activity } from '../../app/activity.interface';
 import { SportService } from '../../app/sport.service';
 import { ViewController } from 'ionic-angular';
 import { ToastService } from '../../app/toast.service';
+import { UserService } from '../../app/user.service';
 
 
 @Component({
@@ -29,12 +30,13 @@ export class CreateActivityPage implements OnInit {
   constructor(private af: AngularFire,
               public sportService: SportService,
               private viewController: ViewController,
+              private userService: UserService,
               private toastService: ToastService) {
   }
 
   ngOnInit() {
-    this.af.auth.subscribe((auth: any) => {
-      this.activity.organizer = auth.auth.uid;
+    this.userService.getUser().subscribe((user: any) => {
+      this.activity.organizer = user.uid;
     });
   }
 

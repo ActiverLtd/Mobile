@@ -1,5 +1,16 @@
 <ion-content>
-  Kutsut
+  <ion-row *ngIf="!invitations.length">
+    <ion-col>
+      EI UUSIA KUTSUJA!
+      <br/>
+      <button ion-button (click)="showCreateActivity($event)">Luo uusi tapahtuma >></button>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="invitations.length">
+    <ion-col>
+      {{invitations.length}}
+    </ion-col>
+  </ion-row>
   <!--<ion-card *ngFor="let invitation of invitations">-->
     <!--<img src="img/card-madison.png"/>-->
     <!--<div class="card-sport">{{invitation.sport}}</div>-->

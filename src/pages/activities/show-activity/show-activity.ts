@@ -3,6 +3,7 @@ import { NavParams, ViewController } from 'ionic-angular';
 import { Activity } from '../../../app/activity.interface';
 import { AngularFire } from 'angularfire2';
 import { FirebaseService } from '../../../app/firebase.service';
+import { UserService } from '../../../app/user.service';
 
 @Component({
   templateUrl: './show-activity.html'
@@ -14,6 +15,7 @@ export class ShowActivityPage {
   constructor(params: NavParams,
               private viewController: ViewController,
               private af: AngularFire,
+              private userService: UserService,
               private firebaseService: FirebaseService) {
     this.af.database.object(`/activities/${params.get('activityId')}`).subscribe(activity => {
       this.activity = activity;
@@ -23,7 +25,7 @@ export class ShowActivityPage {
       this.firebaseService.fetchUsersWithAttribute(this.activity, 'comments', 'user');
       this.firebaseService.fetchUsersToArray(this.activity, 'participants');
     });
-    this.af.auth.subscribe(auth => this.uid = auth.uid);
+    this.userService.getUser().subscribe(user => this.uid = user.uid);
   }
 
   participantsByLevel(level: number) {

@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
   templateUrl: './my-activities.html'
 })
 export class MyActivitiesPage {
-  invitationsTab: InvitationsPage;
-  calendarTab: CalendarPage;
+  invitationsTab: typeof InvitationsPage;
+  calendarTab: typeof CalendarPage;
 
   constructor() {
     this.invitationsTab = InvitationsPage;

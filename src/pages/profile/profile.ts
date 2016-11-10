@@ -5,6 +5,7 @@ import { ToastService } from '../../app/toast.service';
 import { Subscription } from 'rxjs';
 import { SportService } from '../../app/sport.service';
 import { LoginPage } from '../login/login';
+import { UserService } from '../../app/user.service';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class ProfilePage implements OnInit, OnDestroy {
 
   constructor(private navCtrl: NavController,
               private toastService: ToastService,
+              private userService: UserService,
               public sportService: SportService,
               public af: AngularFire) {
   }
@@ -31,13 +33,11 @@ export class ProfilePage implements OnInit, OnDestroy {
     }, [[]]);
 
 
-    this.authSubscription = this.af.auth.subscribe(auth => {
-      this.af.database.object(`/users/${auth.uid}`).subscribe(user => {
-        this.profile = user;
-        if (!this.profile.ratings) {
-          this.profile.ratings = {};
-        }
-      });
+    this.authSubscription = this.userService.getUser().subscribe(user => {
+      this.profile = user;
+      if (!this.profile.ratings) {
+        this.profile.ratings = {};
+      }
     });
   }
 
