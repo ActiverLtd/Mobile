@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseAuthState } from 'angularfire2';
 import { User } from './user.interface';
 import { Observable } from 'rxjs';
+import { FirebaseService } from './firebase.service';
 
 @Injectable()
 export class UserService {
   private user$: Observable<User>;
 
-  constructor(private af: AngularFire) {
+  constructor(private af: AngularFire, private firebaseService: FirebaseService) {
     this.user$ = this.af.auth.switchMap(
       (auth: FirebaseAuthState) => {
         if (!auth) {
@@ -49,6 +50,7 @@ export class UserService {
         ...Object.keys(user.activities).map(id => this.af.database.object(`/activities/${id}`).switchMap(activity => {
             return this.af.database.object(`/users/${activity.organizer}`).map(user => {
               activity.organizer = user;
+              this.firebaseService.fetchUsersToArray(activity, 'participants');
               return activity;
             })
           })
