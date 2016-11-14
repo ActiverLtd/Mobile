@@ -27,7 +27,7 @@ export class ShowActivityPage implements OnDestroy {
       this.firebaseService.fetchUsersWithAttribute(this.activity, 'comments', 'user');
       this.firebaseService.fetchUsersToArray(this.activity, 'participants');
     });
-    this.userSubscription = this.userService.getUser().subscribe(user => this.uid = user.uid);
+    this.userSubscription = this.userService.getUser().subscribe(user => this.uid = user.$key);
   }
 
   participantsByLevel(level: number = undefined) {
@@ -55,7 +55,7 @@ export class ShowActivityPage implements OnDestroy {
       activity: this.activity.$key,
       user: this.uid
     }).then(invitation => {
-      this.af.database.list(`/users/${this.activity.organizer.$key}/invitations`).push(invitation.$key);
+      this.af.database.object(`/users/${this.activity.organizer.$key}/invitations`).set({[invitation.$key]: true});
     });
   }
 
