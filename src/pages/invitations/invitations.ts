@@ -39,26 +39,26 @@ export class InvitationsPage implements OnInit {
 
   reject(invitation: Invitation) {
     this.userService.getUser().first().subscribe(user => {
-      this.af.database.object(`/activities/${invitation.activity.$key}/participants/${user.uid}`).set(false);
-      this.removeInvitation(invitation).then(() => {
-        this.toastService.show('TOAST_INVITATION_ACCEPTED');
-      });
-    });
-
-    this.toastService.show('TOAST_INVITATION_ACCEPTED');
-  }
-
-  accept(invitation: Invitation) {
-    this.userService.getUser().first().subscribe(user => {
-      this.af.database.object(`/activities/${invitation.activity.$key}/participants/${user.uid}`).set(true);
-      this.af.database.list(`/users/${invitation.user.$key}/activities`).push(invitation.activity);
+      this.af.database.object(`/activities/${invitation.activity.$key}/participants/${user.$key}`).set(false);
       this.removeInvitation(invitation).then(() => {
         this.toastService.show('TOAST_INVITATION_REJECTED');
       });
     });
   }
 
+  accept(invitation: Invitation) {
+    this.userService.getUser().first().subscribe(user => {
+      this.af.database.object(`/activities/${invitation.activity.$key}/participants/${user.$key}`).set(true);
+      this.af.database.object(`/users/${invitation.user.$key}/activities`).update({[invitation.activity.$key]: true});
+      this.removeInvitation(invitation).then(() => {
+        this.toastService.show('TOAST_INVITATION_ACCEPTED');
+      });
+    });
+  }
+
   private removeInvitation(invitation) {
-    return this.af.database.object(`/invitations/${invitation.$key}`).remove();
+    return this.af.database.object(`/users/${invitation.activity.organizer}/invitations/${invitation.$key}`).remove().then(() => {
+      return this.af.database.object(`/invitations/${invitation.$key}`).remove();
+    });
   }
 }
