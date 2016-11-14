@@ -36,13 +36,14 @@ export class CreateActivityPage implements OnInit {
 
   ngOnInit() {
     this.userService.getUser().subscribe((user: any) => {
-      this.activity.organizer = user.uid;
+      this.activity.organizer = user.$key;
     });
   }
 
   create() {
     this.activity.timestamp = Date.parse(`${this.date}T${this.time}:00`);
     this.af.database.list('/activities').push(this.activity);
+    this.af.database.list(`/users/${this.activity.organizer}/activities`).push(this.activity.$key);
     this.viewController.dismiss();
     this.toastService.show('TOAST_ACTIVITY_CREATED');
   }

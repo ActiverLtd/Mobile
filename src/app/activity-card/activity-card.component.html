@@ -1,4 +1,4 @@
-<ion-card (click)="open.emit()" class="activity-card">
+<ion-card (click)="open.emit()" class="activity-card styled-card">
   <img src="assets/img/sports/{{activity.sport}}.jpg" class="background" *ngIf="activity.sport" />
   <div class="card-sport">{{ activity.sport | translate | uppercase}} | {{activity.$key}}</div>
   <div class="card-locked">
@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="card-activity-details">
-      <span class="activity-name">{{activity.location.address.city}}, {{activity.location.address.country}}</span><br/>
+      <span class="activity-name">{{activity.location.address.city}}</span><br/>
       {{'COMMON_CLOCK' | translate}} {{activity.timestamp | date:'HH:mm'}}<br/>
       {{activity.timestamp | date:'d.M.y'}}
     </div>

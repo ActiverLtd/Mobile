@@ -1,0 +1,74 @@
+$basketball-color: rgba(210, 71, 68, 0.75);
+$cycling-color: rgba(88, 255, 43, 0.75);
+$football-color: rgba(73, 204, 255, 0.75);
+$golf-color: rgba(73, 204, 255, 0.75);
+$gym-color: rgba(153, 255, 146, 0.75);
+$jogging-color: rgba(174, 252, 255, 0.75);
+$random-color: rgba(225, 79, 255, 0.75);
+$tennis-color: rgba(252, 255, 50, 0.75);
+
+.basketball-color {
+  color: $basketball-color !important;
+}
+
+.basketball-background-color {
+  background-color: $basketball-color !important;
+}
+
+.cycling-color {
+  color: $cycling-color !important;
+}
+
+.cycling-background-color {
+  background-color: $cycling-color !important;
+}
+
+.football-color {
+  color: $football-color !important;
+}
+
+.football-background-color {
+  background-color: $football-color !important;
+}
+
+.golf-color {
+  color: $golf-color !important;
+}
+
+.golf-background-color {
+  background-color: $golf-color !important;
+}
+
+.gym-color {
+  color: $gym-color !important;
+}
+
+.gym-background-color {
+  background-color: $gym-color !important;
+}
+
+.jogging-color {
+  color: $jogging-color !important;
+}
+
+.jogging-background-color {
+  background-color: $jogging-color !important;
+}
+
+.random-color {
+  color: $random-color !important;
+}
+
+.random-background-color {
+  background-color: $random-color !important;
+}
+
+.tennis-color {
+  color: $tennis-color !important;
+}
+
+.tennis-background-color {
+  background-color: $tennis-color !important;
+}
+
+

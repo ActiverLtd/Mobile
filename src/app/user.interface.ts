@@ -4,4 +4,5 @@ export interface User {
   image: string;
   ratings: {activity_id: number; level: number;}[];
   invitations: any[];
+  activities: any[];
 }

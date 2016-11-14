@@ -25,6 +25,8 @@ import { FirebaseService } from './firebase.service';
 import { LocationPickerComponent } from './location-picker/location-picker.component';
 import { UserService } from './user.service';
 import { InvitationCardComponent } from './invitation-card/invitation-card.component';
+import { ActivityCommonDetailsComponent } from './activity-common-details/activity-common-details.component';
+import { MyActivityCardComponent } from './my-activity-card/my-activity-card.component';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -44,6 +46,8 @@ export function createTranslateLoader(http: Http) {
     ShowActivityPage,
     ActivitiesComponent,
     ActivityCardComponent,
+    ActivityCommonDetailsComponent,
+    MyActivityCardComponent,
     InvitationCardComponent,
     FacebookLoginComponent,
     LocationPickerComponent,

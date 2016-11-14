@@ -1,0 +1,24 @@
+<ion-row>
+  <ion-col class="{{activity.sport}}-color">
+    <h1>{{activity.sport | translate | uppercase}}</h1>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col class="no-padding">
+    <h4>{{activity.timestamp | date:'d. MMMM' | uppercase}}, klo {{activity.timestamp |
+      date:'HH:mm'}}</h4>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col class="no-padding">
+    <h2>{{activity.location.name}}, {{activity.location.address.city}}</h2>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col class="no-padding">
+    <h5>
+      {{activity.location.address.street}}, {{activity.location.address.zip}}
+      {{activity.location.address.city}}
+    </h5>
+  </ion-col>
+</ion-row>

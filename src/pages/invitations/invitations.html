@@ -1,16 +1,20 @@
 <ion-content class="invitations">
-  <div class="background"></div>
-  <div *ngIf="!invitations.length" class="no-invitations">
-    <ion-row>
-      <ion-col>
-        {{'INVITATIONS_NO_INVITATIONS_TITLE' | translate | uppercase}}
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <button ion-button (click)="showCreateActivity($event)">{{'INVITATIONS_NO_INVITATIONS_CREATE_BUTTON' | translate}} >></button>
-      </ion-col>
-    </ion-row>
+  <div *ngIf="!invitations.length">
+    <div class="background-image"></div>
+    <div class="empty">
+      <ion-row>
+        <ion-col>
+          {{'INVITATIONS_NO_INVITATIONS_TITLE' | translate | uppercase}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button ion-button (click)="showCreateActivity($event)">{{'INVITATIONS_NO_INVITATIONS_CREATE_BUTTON' |
+            translate}} >>
+          </button>
+        </ion-col>
+      </ion-row>
+    </div>
   </div>
   <app-invitation-card
     *ngFor="let invitation of invitations"

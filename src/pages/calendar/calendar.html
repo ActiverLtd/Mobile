@@ -1,3 +1,24 @@
-<ion-content>
-  Kalenteri
+<ion-content class="calendar">
+  <div *ngIf="!activities.length">
+    <div class="background-image"></div>
+    <div class="empty">
+      <ion-row>
+        <ion-col>
+          {{'CALENDAR_NO_ACTIVITIES_TITLE' | translate | uppercase}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button ion-button (click)="showCreateActivity($event)">{{'CALENDAR_NO_ACTIVITIES_CREATE_BUTTON' | translate}}
+            >>
+          </button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+  <app-my-activity-card
+    *ngFor="let activity of activities"
+    [activity]="activity"
+    (open)="openActivity(activity)">
+  </app-my-activity-card>
 </ion-content>

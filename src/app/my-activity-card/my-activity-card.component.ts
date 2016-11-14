@@ -2,10 +2,10 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Activity } from '../activity.interface';
 
 @Component({
-  selector: 'app-activity-card',
-  templateUrl: './activity-card.component.html'
+  selector: 'app-my-activity-card',
+  templateUrl: './my-activity-card.component.html'
 })
-export class ActivityCardComponent {
+export class MyActivityCardComponent {
   @Input()
   activity: Activity;
 

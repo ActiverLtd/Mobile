@@ -37,6 +37,22 @@ export class UserService {
         )
       }));
       return Observable.zip(...arr);
-    })
+    });
+  }
+
+  getMyActivities() {
+    return this.user$.switchMap(user => {
+      if (!user.activities) {
+        user.activities = [];
+      }
+      return Observable.zip(
+        ...Object.keys(user.activities).map(id => this.af.database.object(`/activities/${id}`).switchMap(activity => {
+            return this.af.database.object(`/users/${activity.organizer}`).map(user => {
+              activity.organizer = user;
+              return activity;
+            })
+          })
+        ));
+    });
   }
 }

@@ -1,0 +1,36 @@
+.styled-card {
+  position: relative;
+  text-align: center;
+  height: 300px;
+  max-width: 410px;
+  margin: 10px auto;
+  color: white;
+  background-color: black;
+
+  img.background {
+    max-width: initial;
+    width: auto;
+    height: 100%;
+  }
+
+  .details {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .profile-image {
+    border-radius: 50px;
+    width: 100px;
+    // height: 100px;
+    margin: 0 auto;
+    border: 4px solid rgba(60, 60, 60, 0.7);
+  }
+
+  .bottom {
+    position: absolute;
+    bottom: 0;
+  }
+}

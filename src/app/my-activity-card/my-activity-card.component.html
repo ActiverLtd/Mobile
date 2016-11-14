@@ -1,0 +1,37 @@
+<ion-card (click)="open.emit()" class="my-activity-card styled-card">
+  <img src="assets/img/sports/{{activity.sport}}.jpg" class="background" *ngIf="activity.sport"/>
+  <div class="details">
+    <app-activity-common-details [activity]="activity"></app-activity-common-details>
+    <ion-row class="bottom">
+      <ion-col>
+        <ion-row>
+          <ion-col>
+            <img [src]="activity.organizer.image" class="profile-image"/>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            {{activity.organizer.name | name:0}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col *ngIf="activity.organizer.ratings">
+            {{activity.organizer.ratings[activity.sport]}} *
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col>
+        <ion-row>
+          <ion-col>
+            {{activity.participants?.length}}/{{activity.participants_max}} {{'ACTIVITIES_PARTICIPANTS' | translate}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="view-activity {{activity.sport}}-background-color" (click)="open.emit()">
+            {{'CALENDAR_VIEW_ACTIVITY' | translate}} >>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-card>

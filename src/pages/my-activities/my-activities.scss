@@ -1,0 +1,19 @@
+.my-activities {
+  background-color: black;
+
+  .background-image {
+    opacity: 0.2;
+    background: url('../assets/img/logo.png') no-repeat center center;
+    background-size: contain;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+  .empty {
+    margin-top: 30px;
+    color: white;
+    ion-col {
+      text-align: center;
+    }
+  }
+}
