@@ -29,7 +29,7 @@ export class ActivitiesComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.activitiesSubscription = Observable.zip(activities, this.af.auth.map(auth => {
+    this.activitiesSubscription = Observable.combineLatest(activities, this.af.auth.map(auth => {
       if (!auth) {
         return -1;
       }

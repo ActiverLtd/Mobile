@@ -1,8 +1,8 @@
 <ion-card (click)="open.emit()" class="activity-card styled-card">
   <img src="assets/img/sports/{{activity.sport}}.jpg" class="background" *ngIf="activity.sport" />
   <div class="card-sport">{{ activity.sport | translate | uppercase}} | {{activity.$key}}</div>
-  <div class="card-locked">
-    <ion-icon name="lock" [hidden]="activity.shape === 'closed'"></ion-icon>
+  <div class="card-locked" *ngIf="activity.shape === 'closed'">
+    <ion-icon name="lock"></ion-icon>
   </div>
   <div class="card-bottom">
     <div class="card-organizer-details">

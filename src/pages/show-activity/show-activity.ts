@@ -51,12 +51,18 @@ export class ShowActivityPage implements OnDestroy {
   }
 
   join() {
-    this.af.database.list(`/invitations`).push({
-      activity: this.activity.$key,
-      user: this.uid
-    }).then(invitation => {
-      this.af.database.object(`/users/${this.activity.organizer.$key}/invitations`).set({[invitation.$key]: true});
-    });
+    if (this.activity.shape === 'open') {
+      this.af.database.object(`/users/${this.uid}/activities`).set({[this.activity.$key]: true});
+      this.af.database.object(`/activities/${this.activity.$key}/participants`).set({[this.uid]: true});
+    }
+    else {
+      this.af.database.list(`/invitations`).push({
+        activity: this.activity.$key,
+        user: this.uid
+      }).then(invitation => {
+        this.af.database.object(`/users/${this.activity.organizer.$key}/invitations`).set({[invitation.$key]: true});
+      });
+    }
   }
 
   isUserParticipating() {
