@@ -54,7 +54,7 @@
               <ion-icon name="star" color="star" *ngFor="let _ of profile.ratings[row[0]] | numberToArray"></ion-icon>
             </ion-col>
             <ion-col *ngIf="!hasRating(row[0])">
-              {{'NOT_SET' | translate}}
+              {{'COMMON_NOT_SET' | translate}}
             </ion-col>
           </ion-row>
         </ion-col>

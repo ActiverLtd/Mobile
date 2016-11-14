@@ -60,6 +60,11 @@
       <ion-col>
         <ion-row>
           <ion-col>
+            <h5>{{'SHOW_ACTIVITY_RATINGS_TITLE' | translate}}</h5>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="participantsByLevel(5)">
+          <ion-col>
             <ion-icon name="star" color="star"></ion-icon>
             <ion-icon name="star" color="star"></ion-icon>
             <ion-icon name="star" color="star"></ion-icon>
@@ -68,7 +73,7 @@
             x {{participantsByLevel(5)}}
           </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row *ngIf="participantsByLevel(4)">
           <ion-col>
             <ion-icon name="star" color="star"></ion-icon>
             <ion-icon name="star" color="star"></ion-icon>
@@ -78,7 +83,7 @@
             x {{participantsByLevel(4)}}
           </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row *ngIf="participantsByLevel(3)">
           <ion-col>
             <ion-icon name="star" color="star"></ion-icon>
             <ion-icon name="star" color="star"></ion-icon>
@@ -88,7 +93,7 @@
             x {{participantsByLevel(3)}}
           </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row *ngIf="participantsByLevel(2)">
           <ion-col>
             <ion-icon name="star" color="star"></ion-icon>
             <ion-icon name="star" color="star"></ion-icon>
@@ -98,7 +103,7 @@
             x {{participantsByLevel(2)}}
           </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row *ngIf="participantsByLevel(1)">
           <ion-col>
             <ion-icon name="star" color="star"></ion-icon>
             <ion-icon name="star"></ion-icon>
@@ -106,6 +111,11 @@
             <ion-icon name="star"></ion-icon>
             <ion-icon name="star"></ion-icon>
             x {{participantsByLevel(1)}}
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="participantsByLevel()">
+          <ion-col>
+            {{'COMMON_NOT_SET' | translate}} x {{participantsByLevel()}}
           </ion-col>
         </ion-row>
         <ion-row>

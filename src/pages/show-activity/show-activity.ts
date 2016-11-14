@@ -30,8 +30,13 @@ export class ShowActivityPage implements OnDestroy {
     this.userSubscription = this.userService.getUser().subscribe(user => this.uid = user.uid);
   }
 
-  participantsByLevel(level: number) {
-    return level;
+  participantsByLevel(level: number = undefined) {
+    return this.participants.filter(participant => {
+      if ((!participant.ratings || !participant.ratings[this.activity.sport])) {
+        return !level;
+      }
+      return participant.ratings[this.activity.sport] === level;
+    }).length;
   }
 
   get participants() {
