@@ -33,6 +33,8 @@ export class UserService {
           ([activity, user]) => {
             invitation.activity = activity;
             invitation.user = user;
+            6
+            this.firebaseService.fetchUsersToArray(activity, 'participants');
             return invitation;
           }
         )
