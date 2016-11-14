@@ -34,7 +34,7 @@ export class FacebookLoginComponent {
           email: auth.email,
           name: auth.displayName,
           ratings: {},
-          invitations: {abc: true}
+          invitations: {}
         })
       })
       .catch((error) => {
