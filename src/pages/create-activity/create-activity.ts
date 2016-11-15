@@ -43,7 +43,7 @@ export class CreateActivityPage implements OnInit {
   create() {
     this.activity.timestamp = Date.parse(`${this.date}T${this.time}:00`);
     this.af.database.list('/activities').push(this.activity);
-    this.af.database.list(`/users/${this.activity.organizer}/activities`).push(this.activity.$key);
+    this.af.database.object(`/users/${this.activity.organizer}/activities`).set({[this.activity.$key]: true});
     this.viewController.dismiss();
     this.toastService.show('TOAST_ACTIVITY_CREATED');
   }
