@@ -5,6 +5,7 @@ import { AngularFire } from 'angularfire2';
 import { FirebaseService } from '../../app/firebase.service';
 import { UserService } from '../../app/user.service';
 import { Subscription } from 'rxjs';
+import { ToastService } from '../../app/toast.service';
 
 @Component({
   templateUrl: './show-activity.html'
@@ -17,6 +18,7 @@ export class ShowActivityPage implements OnDestroy {
   constructor(params: NavParams,
               private viewController: ViewController,
               private af: AngularFire,
+              private toastService: ToastService,
               private userService: UserService,
               private firebaseService: FirebaseService) {
     this.af.database.object(`/activities/${params.get('activityId')}`).subscribe(activity => {
@@ -60,7 +62,8 @@ export class ShowActivityPage implements OnDestroy {
         activity: this.activity.$key,
         user: this.uid
       }).then(invitation => {
-        this.af.database.object(`/users/${this.activity.organizer.$key}/invitations`).set({[invitation.$key]: true});
+        this.af.database.object(`/users/${this.activity.organizer.$key}/invitations`).set({[invitation.key]: true});
+        this.toastService.show('TOAST_INVITATION_SENT');
       });
     }
   }
