@@ -44,10 +44,11 @@ export class CreateActivityPage implements OnInit {
 
   create() {
     this.activity.timestamp = Date.parse(`${this.date}T${this.time}:00`);
-    this.af.database.list('/activities').push(this.activity);
-    this.af.database.object(`/users/${this.activity.organizer}/activities`).set({[this.activity.$key]: true});
-    this.viewController.dismiss();
-    this.toastService.show('TOAST_ACTIVITY_CREATED');
+    this.af.database.list('/activities').push(this.activity).then(activity => {
+      this.af.database.object(`/users/${this.activity.organizer}/activities`).set({[activity.key]: true});
+      this.viewController.dismiss();
+      this.toastService.show('TOAST_ACTIVITY_CREATED');
+    });
   }
 
   locationChanged(location) {
