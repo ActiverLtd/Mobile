@@ -37,8 +37,8 @@
     "zone.js": "^0.6.21"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "^0.0.43",
-    "@types/request": "0.0.30",
+    "@ionic/app-scripts": "^0.0.44",
+    "@types/request": "^0.0.33",
     "ionic2-pgb-zipper": "0.0.1",
     "typescript": "2.0.9"
   },
