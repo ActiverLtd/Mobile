@@ -12,7 +12,7 @@ import { UserService } from '../../app/user.service';
 })
 export class CreateActivityPage implements OnInit {
   date: any;
-  time: any;
+  time: any = `18:00`;
   activity: Activity = {
     timestamp: 0,
     sport: 'football',
@@ -38,6 +38,8 @@ export class CreateActivityPage implements OnInit {
     this.userService.getUser().subscribe((user: any) => {
       this.activity.organizer = user.$key;
     });
+    const tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+    this.date = `${tomorrow.getFullYear()}-${tomorrow.getMonth() + 1}-${tomorrow.getDate()}`;
   }
 
   create() {
