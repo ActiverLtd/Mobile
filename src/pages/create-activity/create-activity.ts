@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFire } from 'angularfire2';
 import { Activity } from '../../app/activity.interface';
 import { SportService } from '../../app/sport.service';
 import { ViewController } from 'ionic-angular';
 import { ToastService } from '../../app/toast.service';
-import { UserService } from '../../app/user.service';
+import { BackendService } from '../../app/backend.service';
 
 
 @Component({
@@ -16,36 +15,32 @@ export class CreateActivityPage implements OnInit {
   activity: Activity = {
     timestamp: 0,
     sport: 'football',
-    location: '',
-    participants: [],
-    organizer: null,
+    location: {},
+    participant_list: [],
+    organizer_uid: null,
     participants_max: 2,
     additional_info: '',
-    shape: 'open'
+    shape: 'open',
+    comments: []
   };
 
   minDate: string = new Date().toISOString();
   maxDate: string = new Date().getFullYear() + 2 + '';
 
-  constructor(private af: AngularFire,
-              public sportService: SportService,
+  constructor(public sportService: SportService,
               private viewController: ViewController,
-              private userService: UserService,
+              private backendService: BackendService,
               private toastService: ToastService) {
   }
 
   ngOnInit() {
-    this.userService.getUser().subscribe((user: any) => {
-      this.activity.organizer = user.$key;
-    });
     const tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
     this.date = `${tomorrow.getFullYear()}-${tomorrow.getMonth() + 1}-${tomorrow.getDate()}`;
   }
 
   create() {
     this.activity.timestamp = Date.parse(`${this.date}T${this.time}:00`);
-    this.af.database.list('/activities').push(this.activity).then(activity => {
-      this.af.database.object(`/users/${this.activity.organizer}/activities`).set({[activity.key]: true});
+    this.backendService.createActivity(this.activity).subscribe(() => {
       this.viewController.dismiss();
       this.toastService.show('TOAST_ACTIVITY_CREATED');
     });

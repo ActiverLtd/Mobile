@@ -21,12 +21,12 @@ import { NamePipe } from './pipes/name.pipe';
 import { NumberToArrayPipe } from './pipes/number-to-array.pipe';
 import { firebaseConfig, firebaseAuthConfig } from './firebase-config';
 import { ValuesPipe } from './pipes/values.pipe';
-import { FirebaseService } from './firebase.service';
 import { LocationPickerComponent } from './location-picker/location-picker.component';
 import { UserService } from './user.service';
 import { InvitationCardComponent } from './invitation-card/invitation-card.component';
 import { ActivityCommonDetailsComponent } from './activity-common-details/activity-common-details.component';
 import { MyActivityCardComponent } from './my-activity-card/my-activity-card.component';
+import { BackendService } from './backend.service';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -80,8 +80,8 @@ export function createTranslateLoader(http: Http) {
     FacebookLoginComponent
   ],
   providers: [
-    ToastService, SportService, FirebaseService, UserService,
-    { provide: LOCALE_ID, useValue: 'fi-FI' }
+    ToastService, SportService, BackendService,
+    {provide: LOCALE_ID, useValue: 'fi-FI'}
   ]
 })
 export class AppModule {

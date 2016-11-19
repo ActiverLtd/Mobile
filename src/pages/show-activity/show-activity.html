@@ -2,23 +2,23 @@
   <div class="top">
     <ion-row>
       <ion-col>
-        <h1 class="{{activity.sport}}-color">{{activity.sport | translate | uppercase}}</h1>
+        <h1 class="{{activity?.sport}}-color">{{activity?.sport | translate | uppercase}}</h1>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col class="no-padding">
-        <h4>{{activity.timestamp | date:'d. MMMM' | uppercase}}, klo {{activity.timestamp | date:'HH:mm'}}</h4>
+        <h4>{{activity?.timestamp | date:'d. MMMM' | uppercase}}, klo {{activity?.timestamp | date:'HH:mm'}}</h4>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col class="no-padding">
-        <h2>{{activity.location.name}}, {{activity.location.address.city}}</h2>
+        <h2>{{activity?.location.name}}, {{activity?.location.address.city}}</h2>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col class="no-padding">
         <h5>
-          {{activity.location.address.street}}, {{activity.location.address.zip}} {{activity.location.address.city}}
+          {{activity?.location.address.street}}, {{activity?.location.address.zip}} {{activity?.location.address.city}}
         </h5>
       </ion-col>
     </ion-row>
@@ -28,7 +28,7 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col><span class="participant-count">{{participants?.length}}</span> / {{activity.participants_max}}
+      <ion-col><span class="participant-count">{{participants?.length}}</span> / {{activity?.participants_max}}
         {{'ACTIVITIES_PARTICIPANTS' | translate}}
       </ion-col>
     </ion-row>
@@ -42,8 +42,8 @@
     </ion-row>
     <ion-row *ngIf="isUserParticipating()">
       <ion-col>
-        <span *ngIf="!activity.comments">{{'ACTIVITIES_NO_COMMENTS' | translate}}</span>
-        <ion-row *ngFor="let comment of activity.comments | values" class="comment">
+        <span *ngIf="!activity?.comments">{{'ACTIVITIES_NO_COMMENTS' | translate}}</span>
+        <ion-row *ngFor="let comment of activity?.comments | values" class="comment">
           <span class="comment-author" [class.own-comment]="isOwnComment(comment)"><b>{{comment.user.name}}: </b></span>
           <span class="comment-text">{{comment.text}}</span>
         </ion-row>

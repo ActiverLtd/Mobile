@@ -1,7 +1,7 @@
 import { ProfilePage } from '../profile/profile';
 import { MyActivitiesPage } from '../my-activities/my-activities';
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../app/user.service';
+import { BackendService } from '../../app/backend.service';
 
 @Component({
   templateUrl: './main.html'
@@ -11,11 +11,11 @@ export class MainPage implements OnInit {
   profilePage = ProfilePage;
   invitationCount = 0;
 
-  constructor(public userService: UserService) {
+  constructor(public backendService: BackendService) {
 
   }
 
   ngOnInit() {
-    this.userService.getInvitations().subscribe(invitations => this.invitationCount = invitations.length);
+    this.backendService.getInvitations().subscribe(invitations => this.invitationCount = invitations.length);
   }
 }

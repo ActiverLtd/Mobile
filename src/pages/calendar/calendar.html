@@ -1,5 +1,5 @@
 <ion-content class="calendar">
-  <div *ngIf="!activities.length">
+  <div *ngIf="!(activities$ | async)?.length">
     <div class="background-image"></div>
     <div class="empty">
       <ion-row>
@@ -17,7 +17,7 @@
     </div>
   </div>
   <app-my-activity-card
-    *ngFor="let activity of activities"
+    *ngFor="let activity of activities$ | async"
     [activity]="activity"
     (open)="openActivity(activity)">
   </app-my-activity-card>
