@@ -5,7 +5,6 @@ import { ToastService } from '../../app/toast.service';
 import { Subscription } from 'rxjs';
 import { SportService } from '../../app/sport.service';
 import { LoginPage } from '../login/login';
-import { UserService } from '../../app/user.service';
 import { BackendService } from '../../app/backend.service';
 
 

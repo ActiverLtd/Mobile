@@ -22,7 +22,6 @@ import { NumberToArrayPipe } from './pipes/number-to-array.pipe';
 import { firebaseConfig, firebaseAuthConfig } from './firebase-config';
 import { ValuesPipe } from './pipes/values.pipe';
 import { LocationPickerComponent } from './location-picker/location-picker.component';
-import { UserService } from './user.service';
 import { InvitationCardComponent } from './invitation-card/invitation-card.component';
 import { ActivityCommonDetailsComponent } from './activity-common-details/activity-common-details.component';
 import { MyActivityCardComponent } from './my-activity-card/my-activity-card.component';
