@@ -125,6 +125,14 @@ export class BackendService {
     });
   }
 
+  updateProfile(updateObject: any) {
+    return this.getUser().update(updateObject);
+  }
+
+  getUser() {
+    return this.af.database.object(`/users/${this.uid}`);
+  }
+
   getCurrentUser(): Observable<User> {
     return this.af.auth.switchMap(
       (auth: FirebaseAuthState) => {

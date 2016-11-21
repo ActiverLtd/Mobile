@@ -1,54 +1,62 @@
-ion-row.top {
-  position: relative;
-  background-color: black;
-  padding: 16px 0;
-  .background {
-    opacity: 0.2;
-    background: url('../assets/img/logo.png') no-repeat center center;
-    background-size: contain;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-  }
-
-  img {
-    $size: 120px;
-    border-radius: $size / 2;
-    border: 4px solid white;
-    height: $size;
-    width: $size;
-    margin-left: 20px;
-  }
-  .center {
-    height: 100px;
-    width: 1px;
-    background-color: white;
-    margin: 0 auto;
+.profile {
+  ion-row.top {
     position: relative;
-  }
-  .right {
-    text-align: left;
-    .name {
-      color: white;
-      .first-part {
-        margin-bottom: 0;
+    background-color: black;
+    padding: 16px 0;
+    .background {
+      opacity: 0.2;
+      background: url('../assets/img/logo.png') no-repeat center center;
+      background-size: contain;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+
+    img {
+      $size: 120px;
+      border-radius: $size / 2;
+      border: 4px solid white;
+      height: $size;
+      width: $size;
+      margin-left: 20px;
+    }
+    .center {
+      height: 100px;
+      width: 1px;
+      background-color: white;
+      margin: 0 auto;
+      position: relative;
+    }
+    .right {
+      text-align: left;
+      .name {
+        color: white;
+        .first-part {
+          margin-bottom: 0;
+        }
+        .last-part {
+          margin-top: 0;
+        }
       }
-      .last-part {
+      .number {
+        color: cadetblue;
         margin-top: 0;
       }
     }
-    .number {
-      color: cadetblue;
-      margin-top: 0;
-    }
   }
-}
 
-.spacer {
-  height: 10px;
-  width: 100%;
-}
+  .edit {
+    color: cadetblue;
+    text-align: right;
+    font-size: 0.9em;
+  }
 
-.border-bottom {
-  border-bottom: 1px solid gray;
+  .spacer {
+    height: 10px;
+    width: 100%;
+  }
+
+  .border-bottom {
+    border-bottom: 1px solid gray;
+  }
 }

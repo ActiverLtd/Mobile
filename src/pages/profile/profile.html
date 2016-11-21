@@ -5,8 +5,7 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content>
-
+<ion-content class="profile">
   <ion-row class="top" center>
     <div class="background"></div>
     <ion-col>
@@ -21,23 +20,29 @@
         <h4 class="first-part">{{profile.name | name:0}}</h4>
         <h3 class="last-part">{{profile.name | name:1}}</h3>
       </div>
-      <h2 class="number">#22</h2>
+      <!--<h2 class="number">#22</h2>-->
     </ion-col>
   </ion-row>
   <ion-row class="border-bottom">
     <ion-col text-uppercase>
       {{'BIO' | translate}}:
     </ion-col>
+    <ion-col (click)="edit()" class="edit">
+      {{'COMMON_EDIT' | translate}}
+    </ion-col>
   </ion-row>
   <ion-row class="border-bottom">
     <ion-col>
-      {{profile.bio || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non interdum nibh, nec efficitur orci. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque a augue bibendum, commodo orci eget, commodo mi. Maecenas porta metus suscipit arcu tempus consectetur. Curabitur ipsum orci, tincidunt et vulputate sed, efficitur vitae velit. Praesent enim risus, scelerisque nec euismod id, ultrices blandit lorem. Quisque cursus sed ligula vitae luctus. Nulla mi odio, convallis in luctus ut, porttitor dignissim lorem. Suspendisse scelerisque ex sollicitudin odio vulputate semper. Ut varius ipsum nunc, sed fringilla odio malesuada id. Pellentesque finibus purus a metus sollicitudin posuere at ac nibh.'}}
+      {{profile.bio || ('COMMON_NOT_SET' | translate)}}
     </ion-col>
   </ion-row>
   <div class="spacer"></div>
   <ion-row class="border-bottom">
     <ion-col text-uppercase>
       {{'PROFILE_RATINGS' | translate}}:
+    </ion-col>
+    <ion-col (click)="edit()" class="edit">
+      {{'COMMON_EDIT' | translate}}
     </ion-col>
   </ion-row>
   <ion-row class="border-bottom">
@@ -58,7 +63,7 @@
             </ion-col>
           </ion-row>
         </ion-col>
-        <ion-col>
+        <ion-col *ngIf="row[1]">
           <ion-row>
             <ion-col>
               {{row[1] | translate}}:
@@ -69,7 +74,7 @@
               <ion-icon name="star" color="star" *ngFor="let _ of profile.ratings[row[1]] | numberToArray"></ion-icon>
             </ion-col>
             <ion-col *ngIf="!hasRating(row[1])">
-              Ei asetettu
+              {{'COMMON_NOT_SET' | translate}}
             </ion-col>
           </ion-row>
         </ion-col>

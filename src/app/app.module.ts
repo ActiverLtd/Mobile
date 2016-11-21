@@ -27,6 +27,7 @@ import { ActivityCommonDetailsComponent } from './components/activity-common-det
 import { MyActivityCardComponent } from './components/my-activity-card/my-activity-card.component';
 import { BackendService } from './services/backend.service';
 import { ShowActivityComponent } from './components/show-activity/show-activity.component';
+import { UpdateProfilePage } from '../pages/update-profile/update-profile';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -43,6 +44,7 @@ export function createTranslateLoader(http: Http) {
     CreateActivityPage,
     InvitationsPage,
     CalendarPage,
+    UpdateProfilePage,
     ShowActivityPage,
     ShowActivityComponent,
     ActivitiesComponent,
@@ -74,6 +76,7 @@ export function createTranslateLoader(http: Http) {
     ProfilePage,
     CreateActivityPage,
     InvitationsPage,
+    UpdateProfilePage,
     CalendarPage,
     ShowActivityPage,
     ActivitiesComponent,

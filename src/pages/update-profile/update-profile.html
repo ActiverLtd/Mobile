@@ -1,0 +1,47 @@
+<ion-row class="border-bottom">
+  <ion-col text-uppercase style="text-align: left;">
+    {{'PROFILE_BIO' | translate}}
+  </ion-col>
+</ion-row>
+<ion-row class="border-bottom">
+  <ion-col>
+    <ion-input [(ngModel)]="bio" name="bio"></ion-input>
+  </ion-col>
+</ion-row>
+<div class="spacer"></div>
+<ion-row class="border-bottom">
+  <ion-col text-uppercase style="text-align: left;">
+    {{'PROFILE_RATINGS' | translate}}
+  </ion-col>
+</ion-row>
+<ion-row class="border-bottom">
+  <ion-col>
+    <ion-row *ngFor="let sport of sports" center>
+      <ion-col width-25>
+        {{sport | translate}}
+      </ion-col>
+      <ion-col width-75 style="position: relative;">
+        <ion-select [(ngModel)]="ratings[sport]" style="max-width: 100%;">
+          <ion-option value="">{{'COMMON_NOT_SET' | translate}}</ion-option>
+          <ion-option [value]="1">
+            {{'UPDATE_PROFILE_1_STAR' | translate}}
+          </ion-option>
+          <ion-option [value]="2">
+            {{'UPDATE_PROFILE_2_STARS' | translate}}
+          </ion-option>
+          <ion-option [value]="3">
+            {{'UPDATE_PROFILE_3_STARS' | translate}}
+          </ion-option>
+          <ion-option [value]="4">
+            {{'UPDATE_PROFILE_4_STARS' | translate}}
+          </ion-option>
+          <ion-option [value]="5">
+            {{'UPDATE_PROFILE_5_STARS' | translate}}
+          </ion-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+  </ion-col>
+</ion-row>
+<button ion-button color="secondary" (click)="save();">{{'COMMON_SAVE' | translate}}</button>
+<button ion-button (click)="close();">{{'COMMON_CANCEL' | translate}}</button>
