@@ -27,12 +27,12 @@
     <ion-col text-uppercase>
       {{'BIO' | translate}}:
     </ion-col>
-    <ion-col (click)="edit()" class="edit">
+    <ion-col (click)="edit()" class="edit" *ngIf="isOwnProfile()">
       {{'COMMON_EDIT' | translate}}
     </ion-col>
   </ion-row>
   <ion-row class="border-bottom">
-    <ion-col>
+    <ion-col padding>
       {{profile.bio || ('COMMON_NOT_SET' | translate)}}
     </ion-col>
   </ion-row>
@@ -41,7 +41,7 @@
     <ion-col text-uppercase>
       {{'PROFILE_RATINGS' | translate}}:
     </ion-col>
-    <ion-col (click)="edit()" class="edit">
+    <ion-col (click)="edit()" class="edit" *ngIf="isOwnProfile()">
       {{'COMMON_EDIT' | translate}}
     </ion-col>
   </ion-row>

@@ -61,6 +61,10 @@ export class ProfilePage implements OnInit, OnDestroy {
     return this.profile.ratings && this.profile.ratings[sport];
   }
 
+  isOwnProfile() {
+    return this.profile.$key === this.backendService.getLastUid();
+  }
+
   ngOnDestroy() {
     this.authSubscription.unsubscribe();
   }
