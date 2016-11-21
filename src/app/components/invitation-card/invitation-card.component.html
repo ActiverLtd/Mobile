@@ -28,7 +28,8 @@
         </ion-row>
         <ion-row>
           <ion-col *ngIf="invitation.user.ratings">
-            {{invitation.user.ratings[invitation.activity.sport]}} *
+            <ion-icon name="star" color="star"
+                      *ngFor="let _ of invitation.user.ratings[invitation.activity.sport] | numberToArray"></ion-icon>
           </ion-col>
         </ion-row>
       </ion-col>
