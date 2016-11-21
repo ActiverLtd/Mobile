@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Activity } from '../activity.interface';
+import { Activity } from '../../interfaces/activity.interface';
 
 @Component({
   selector: 'app-activity-common-details',

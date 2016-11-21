@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
-import { AngularFire, FirebaseAuthState, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFire, FirebaseAuthState } from 'angularfire2';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Invitation } from './invitation.interface';
-import { Activity } from './activity.interface';
-import { User } from './user.interface';
+import { Invitation } from '../interfaces/invitation.interface';
+import { Activity } from '../interfaces/activity.interface';
+import { User } from '../interfaces/user.interface';
 
 @Injectable()
 export class BackendService {
+  uid: string;
+
   constructor(private af: AngularFire) {
+    this.lastUid().subscribe(uid => this.uid = uid);
   }
 
   lastUid(): Observable<string> {
@@ -31,8 +34,8 @@ export class BackendService {
     });
   }
 
-  getActivity(activityUid: string): FirebaseObjectObservable<Activity> {
-    return <FirebaseObjectObservable<Activity>> this.af.database.object(`/activities/${activityUid}`).switchMap((activity: Activity) => {
+  getActivity(activityUid: string): Observable<Activity> {
+    return this.af.database.object(`/activities/${activityUid}`).switchMap((activity: Activity) => {
       return this.getActivityDetails(activity, true);
     });
   }
@@ -50,7 +53,7 @@ export class BackendService {
     return this.getCurrentUser().do(user => {
       const uid = user.$key;
       if (activity.shape === 'open') {
-        this.af.database.object(`/users/${uid}/activities`).update({[activity.$key]: true});
+        this.af.database.object(`/users/${uid}/activity_list`).update({[activity.$key]: true});
         this.af.database.object(`/activities/${activity.$key}/participant_list`).update({[uid]: true});
       }
       else {
@@ -133,6 +136,10 @@ export class BackendService {
     ).take(1);
   }
 
+  getLastUid() {
+    return this.uid;
+  }
+
   private fetchOrganizer(activity: Activity): Observable<User> {
     return this.fetchUser(activity.organizer_uid).do(organizer => activity.organizer = organizer);
   }
@@ -142,7 +149,7 @@ export class BackendService {
   }
 
   private getActivityDetails(activity: Activity, fetchCommentUsers = false): Observable<Activity> {
-    return Observable.zip(
+    return Observable.combineLatest(
       this.fetchOrganizer(activity),
       this.fetchParticipants(activity),
       fetchCommentUsers ? this.fetchUsersForComments(activity) : Observable.of([])
@@ -171,7 +178,7 @@ export class BackendService {
   }
 
   private fetchUsersForComments(activity: Activity) {
-    return this.fetchUsersWithAttribute(activity, 'comments', 'user');
+    return this.fetchUsersWithAttribute(activity, 'comments');
   }
 
   private fetchUsersToArray(model, listName) {
@@ -182,18 +189,18 @@ export class BackendService {
     const users$ = Object.keys(model[listName])
       .filter(item => model[listName][item])
       .map(item => this.af.database.object(`/users/${item}`));
-    return Observable.zip(...users$);
+    return Observable.combineLatest(...users$);
   }
 
-  private fetchUsersWithAttribute(model, listName, attributeName) {
+  private fetchUsersWithAttribute(model, listName) {
     if (typeof model[listName] !== 'object') {
       return Observable.of([]);
     }
     const user$ = Object.values(model[listName])
-      .map(item => this.af.database.object(`/users/${item[attributeName]}`).map(user => {
-        item[attributeName] = user;
+      .map(item => this.af.database.object(`/users/${item['user_uid']}`).map(user => {
+        item['user'] = user;
         return item;
       }));
-    return Observable.zip(...user$);
+    return Observable.combineLatest(...user$);
   }
 }

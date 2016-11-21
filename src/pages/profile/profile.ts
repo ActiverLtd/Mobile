@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFire } from 'angularfire2';
 import { NavController } from 'ionic-angular';
-import { ToastService } from '../../app/toast.service';
+import { ToastService } from '../../app/services/toast.service';
 import { Subscription } from 'rxjs';
-import { SportService } from '../../app/sport.service';
+import { SportService } from '../../app/services/sport.service';
 import { LoginPage } from '../login/login';
-import { BackendService } from '../../app/backend.service';
+import { BackendService } from '../../app/services/backend.service';
 
 
 @Component({

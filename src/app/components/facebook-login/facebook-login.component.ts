@@ -2,7 +2,7 @@ import { Facebook } from 'ionic-native';
 import { Component } from '@angular/core';
 import { AngularFire } from 'angularfire2';
 import { Platform } from 'ionic-angular';
-import { ToastService } from '../toast.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-facebook-login',

@@ -1,7 +1,7 @@
 import { ProfilePage } from '../profile/profile';
 import { MyActivitiesPage } from '../my-activities/my-activities';
 import { Component, OnInit } from '@angular/core';
-import { BackendService } from '../../app/backend.service';
+import { BackendService } from '../../app/services/backend.service';
 
 @Component({
   templateUrl: './main.html'

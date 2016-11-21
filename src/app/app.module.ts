@@ -11,21 +11,22 @@ import { InvitationsPage } from '../pages/invitations/invitations';
 import { CalendarPage } from '../pages/calendar/calendar';
 import { ShowActivityPage } from '../pages/show-activity/show-activity';
 import { AngularFireModule } from 'angularfire2';
-import { FacebookLoginComponent } from './facebook-login/facebook-login.component';
-import { ActivitiesComponent } from './activities/activities.component';
+import { FacebookLoginComponent } from './components/facebook-login/facebook-login.component';
+import { ActivitiesComponent } from './components/activities/activities.component';
 import { LoginPage } from '../pages/login/login';
-import { ToastService } from './toast.service';
-import { ActivityCardComponent } from './activity-card/activity-card.component';
-import { SportService } from './sport.service';
+import { ToastService } from './services/toast.service';
+import { ActivityCardComponent } from './components/activity-card/activity-card.component';
+import { SportService } from './services/sport.service';
 import { NamePipe } from './pipes/name.pipe';
 import { NumberToArrayPipe } from './pipes/number-to-array.pipe';
 import { firebaseConfig, firebaseAuthConfig } from './firebase-config';
 import { ValuesPipe } from './pipes/values.pipe';
-import { LocationPickerComponent } from './location-picker/location-picker.component';
-import { InvitationCardComponent } from './invitation-card/invitation-card.component';
-import { ActivityCommonDetailsComponent } from './activity-common-details/activity-common-details.component';
-import { MyActivityCardComponent } from './my-activity-card/my-activity-card.component';
-import { BackendService } from './backend.service';
+import { LocationPickerComponent } from './components/location-picker/location-picker.component';
+import { InvitationCardComponent } from './components/invitation-card/invitation-card.component';
+import { ActivityCommonDetailsComponent } from './components/activity-common-details/activity-common-details.component';
+import { MyActivityCardComponent } from './components/my-activity-card/my-activity-card.component';
+import { BackendService } from './services/backend.service';
+import { ShowActivityComponent } from './components/show-activity/show-activity.component';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -43,6 +44,7 @@ export function createTranslateLoader(http: Http) {
     InvitationsPage,
     CalendarPage,
     ShowActivityPage,
+    ShowActivityComponent,
     ActivitiesComponent,
     ActivityCardComponent,
     ActivityCommonDetailsComponent,

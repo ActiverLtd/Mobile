@@ -3,7 +3,7 @@ import { Platform } from 'ionic-angular';
 import { StatusBar, CodePush, Splashscreen, SyncStatus } from 'ionic-native';
 import { TranslateService } from 'ng2-translate';
 import { LoginPage } from '../pages/login/login';
-import { ToastService } from './toast.service';
+import { ToastService } from './services/toast.service';
 
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`

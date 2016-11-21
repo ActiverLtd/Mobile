@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Activity } from '../activity.interface';
+import { Activity } from '../../interfaces/activity.interface';
 
 @Component({
   selector: 'app-my-activity-card',

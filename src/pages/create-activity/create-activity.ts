@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Activity } from '../../app/activity.interface';
-import { SportService } from '../../app/sport.service';
+import { Activity } from '../../app/interfaces/activity.interface';
+import { SportService } from '../../app/services/sport.service';
 import { ViewController } from 'ionic-angular';
-import { ToastService } from '../../app/toast.service';
-import { BackendService } from '../../app/backend.service';
+import { ToastService } from '../../app/services/toast.service';
+import { BackendService } from '../../app/services/backend.service';
 
 
 @Component({

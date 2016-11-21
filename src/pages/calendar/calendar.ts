@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from 'ionic-angular';
-import { Activity } from '../../app/activity.interface';
+import { Activity } from '../../app/interfaces/activity.interface';
 import { ShowActivityPage } from '../show-activity/show-activity';
 import { CreateActivityPage } from '../create-activity/create-activity';
-import { BackendService } from '../../app/backend.service';
+import { BackendService } from '../../app/services/backend.service';
 import { Observable } from 'rxjs';
 
 

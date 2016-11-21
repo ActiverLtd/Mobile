@@ -1,0 +1,138 @@
+<div class="top">
+  <ion-row>
+    <ion-col>
+      <h1 class="{{activity.sport}}-color">{{activity.sport | translate | uppercase}}</h1>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="no-padding">
+      <h4>{{activity.timestamp | date:'d. MMMM' | uppercase}}, klo {{activity.timestamp | date:'HH:mm'}}</h4>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="no-padding">
+      <h2>{{activity.location.name}}, {{activity.location.address.city}}</h2>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="no-padding">
+      <h5>
+        {{activity.location.address.street}}, {{activity.location.address.zip}} {{activity.location.address.city}}
+      </h5>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <hr/>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col><span class="participant-count">{{participants.length}}</span> / {{activity.participants_max}}
+      {{'ACTIVITIES_PARTICIPANTS' | translate}}
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <div *ngFor="let participant of participants" class="participant">
+        <img [src]="participant.image" class="participant-image"/>
+        <span class="participant-name">{{participant.name | name:0}}</span>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="isUserParticipating()">
+    <ion-col>
+      <span *ngIf="!activity.comments">{{'ACTIVITIES_NO_COMMENTS' | translate}}</span>
+      <ion-row *ngFor="let comment of activity.comments | values" class="comment">
+        <span class="comment-author" [class.own-comment]="isOwnComment(comment)"><b>{{comment.user.name}}: </b></span>
+        <span class="comment-text">{{comment.text}}</span>
+      </ion-row>
+
+      <ion-row class="write-comment">
+        <ion-input type="text" #commentInput placeholder="Kirjoita muille..."></ion-input>
+        <button
+          ion-button
+          (click)="comment.emit([activity, commentInput.value]); commentInput.value = '';"
+          [disabled]="!commentInput.value">
+          {{'COMMON_SEND' | translate}}
+        </button>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="!isUserParticipating()">
+    <ion-col>
+      <ion-row>
+        <ion-col>
+          <h5>{{'SHOW_ACTIVITY_RATINGS_TITLE' | translate}}</h5>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="participantsByLevel(5)">
+        <ion-col>
+          <ion-icon name="star" color="star"></ion-icon>
+          <ion-icon name="star" color="star"></ion-icon>
+          <ion-icon name="star" color="star"></ion-icon>
+          <ion-icon name="star" color="star"></ion-icon>
+          <ion-icon name="star" color="star"></ion-icon>
+          x {{participantsByLevel(5)}}
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="participantsByLevel(4)">
+        <ion-col>
+          <ion-icon name="star" color="star"></ion-icon>
+          <ion-icon name="star" color="star"></ion-icon>
+          <ion-icon name="star" color="star"></ion-icon>
+          <ion-icon name="star" color="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          x {{participantsByLevel(4)}}
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="participantsByLevel(3)">
+        <ion-col>
+          <ion-icon name="star" color="star"></ion-icon>
+          <ion-icon name="star" color="star"></ion-icon>
+          <ion-icon name="star" color="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          x {{participantsByLevel(3)}}
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="participantsByLevel(2)">
+        <ion-col>
+          <ion-icon name="star" color="star"></ion-icon>
+          <ion-icon name="star" color="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          x {{participantsByLevel(2)}}
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="participantsByLevel(1)">
+        <ion-col>
+          <ion-icon name="star" color="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          x {{participantsByLevel(1)}}
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="participantsByLevel()">
+        <ion-col>
+          {{'COMMON_NOT_SET' | translate}} x {{participantsByLevel()}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>{{'COMMON_READ_MORE' | translate}}</ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</div>
+<div class="bottom" *ngIf="!isUserParticipating()">
+  <div class="round-button" (click)="join.emit(activity);">
+    <span>{{'COMMON_JOIN' | translate}}<br/>>></span>
+  </div>
+</div>
+<div class="top-left">
+  <div class="round-button small close" (click)="close.emit(activity);">
+    <span>x</span>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Invitation } from '../invitation.interface';
+import { Invitation } from '../../interfaces/invitation.interface';
 
 @Component({
   selector: 'app-invitation-card',
