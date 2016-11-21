@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFire, FirebaseAuthState } from 'angularfire2';
+import { AngularFire, FirebaseAuthState, FirebaseObjectObservable } from 'angularfire2';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Invitation } from '../interfaces/invitation.interface';
 import { Activity } from '../interfaces/activity.interface';
@@ -129,7 +129,7 @@ export class BackendService {
     return this.getUser().update(updateObject);
   }
 
-  getUser() {
+  getUser(): FirebaseObjectObservable<User> {
     return this.af.database.object(`/users/${this.uid}`);
   }
 
