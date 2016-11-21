@@ -15,4 +15,9 @@ export class InvitationCardComponent {
   reject: EventEmitter<any> = new EventEmitter();
   @Output()
   accept: EventEmitter<any> = new EventEmitter();
+
+  acceptHandler(event) {
+    this.accept.emit();
+    event.stopPropagation();
+  }
 }

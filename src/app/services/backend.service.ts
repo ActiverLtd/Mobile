@@ -80,10 +80,10 @@ export class BackendService {
       if (!currentUser.invitation_list) {
         return Observable.of([]);
       }
-      return Observable.zip(...Object.keys(currentUser.invitation_list)
+      return Observable.combineLatest(...Object.keys(currentUser.invitation_list)
         .map(id => this.af.database.object(`/invitations/${id}`)
           .switchMap(invitation => {
-            return Observable.zip(
+            return Observable.combineLatest(
               this.af.database.object(`/activities/${invitation.activity_uid}`), this.fetchUser(invitation.user_uid)
             ).switchMap(
               ([activity, user]) => {
@@ -112,15 +112,15 @@ export class BackendService {
 
   rejectInvitation(invitation: Invitation) {
     return this.lastUid().do(uid => {
-      this.af.database.object(`/activities/${invitation.activity.$key}/participants/${uid}`).set(false);
+      this.af.database.object(`/activities/${invitation.activity.$key}/participant_list`).update({[uid]: false});
       this.removeInvitation(invitation);
     });
   }
 
   acceptInvitation(invitation: Invitation) {
     return this.lastUid().do(uid => {
-      this.af.database.object(`/activities/${invitation.activity.$key}/participants/${uid}`).set(true);
-      this.af.database.object(`/users/${invitation.user.$key}/activities`).update({[invitation.activity.$key]: true});
+      this.af.database.object(`/activities/${invitation.activity_uid}/participant_list`).update({[uid]: true});
+      this.af.database.object(`/users/${invitation.user_uid}/activity_list`).update({[invitation.activity_uid]: true});
       this.removeInvitation(invitation);
     });
   }
@@ -165,7 +165,7 @@ export class BackendService {
   }
 
   private removeInvitation(invitation) {
-    this.af.database.object(`/users/${invitation.activity.organizer}/invitations/${invitation.$key}`).remove();
+    this.af.database.object(`/users/${invitation.activity.organizer.$key}/invitation_list/${invitation.$key}`).remove();
     this.af.database.object(`/invitations/${invitation.$key}`).remove();
   }
 

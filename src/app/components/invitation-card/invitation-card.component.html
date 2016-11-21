@@ -36,7 +36,7 @@
       <ion-col>
         <ion-row>
           <ion-col>
-            <div class="option-button accept" (click)="accept.emit(); $event.stopPropagation();">
+            <div class="option-button accept" (click)="acceptHandler($event);">
               <span>{{'INVITATIONS_ACCEPT' | translate}}<br/>>></span>
             </div>
           </ion-col>
