@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Geocoder, GeocoderResult } from 'ionic-native';
 import { Platform } from 'ionic-angular';
 
@@ -6,7 +6,7 @@ import { Platform } from 'ionic-angular';
   selector: 'app-location-picker',
   templateUrl: './location-picker.component.html'
 })
-export class LocationPickerComponent {
+export class LocationPickerComponent implements OnInit {
   @Output()
   selected: EventEmitter<any> = new EventEmitter();
 
