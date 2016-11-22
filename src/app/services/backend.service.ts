@@ -61,7 +61,7 @@ export class BackendService {
           activity_uid: activity.$key,
           user_uid: uid
         });
-        this.af.database.object(`/users/${activity.organizer.$key}/invitations`).update({[invitation.key]: true});
+        this.af.database.object(`/users/${activity.organizer.$key}/invitation_list`).update({[invitation.key]: true});
       }
     });
   }
