@@ -10,7 +10,10 @@
         {{activity.organizer?.name | name:0}}
       </div>
       <div class="card-organizer-rating" *ngIf="!!activity.organizer?.ratings">
-        <ion-icon name="star" *ngFor="let _ of activity.organizer?.ratings[activity.sport] | numberToArray"></ion-icon>
+        <ion-icon
+          name="star"
+          color="star"
+          *ngFor="let _ of activity.organizer?.ratings[activity.sport] | numberToArray"></ion-icon>
       </div>
     </div>
     <div class="card-activity-details">
