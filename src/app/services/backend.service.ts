@@ -112,7 +112,6 @@ export class BackendService {
 
   rejectInvitation(invitation: Invitation) {
     return this.lastUid().do(uid => {
-      this.af.database.object(`/activities/${invitation.activity.$key}/participant_list`).update({[uid]: false});
       this.removeInvitation(invitation);
     });
   }
@@ -165,8 +164,8 @@ export class BackendService {
   }
 
   private removeInvitation(invitation) {
-    this.af.database.object(`/users/${invitation.activity.organizer.$key}/invitation_list/${invitation.$key}`).remove();
     this.af.database.object(`/invitations/${invitation.$key}`).remove();
+    this.af.database.object(`/users/${invitation.activity.organizer.$key}/invitation_list/${invitation.$key}`).remove();
   }
 
   private isUserParticipating(activity: Activity, uid: string) {
