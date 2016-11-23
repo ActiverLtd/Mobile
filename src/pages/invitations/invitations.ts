@@ -36,14 +36,12 @@ export class InvitationsPage implements OnInit {
   }
 
   reject(invitation: Invitation) {
-    this.backendService.rejectInvitation(invitation).subscribe(() => {
-      this.toastService.show('TOAST_INVITATION_REJECTED');
-    });
+    this.backendService.rejectInvitation(invitation);
+    this.toastService.show('TOAST_INVITATION_REJECTED');
   }
 
   accept(invitation: Invitation) {
-    this.backendService.acceptInvitation(invitation).subscribe(() => {
-      this.toastService.show('TOAST_INVITATION_ACCEPTED');
-    });
+    this.backendService.acceptInvitation(invitation);
+    this.toastService.show('TOAST_INVITATION_ACCEPTED');
   }
 }

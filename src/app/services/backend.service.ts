@@ -111,17 +111,13 @@ export class BackendService {
   }
 
   rejectInvitation(invitation: Invitation) {
-    return this.lastUid().do(uid => {
-      this.removeInvitation(invitation);
-    });
+    this.removeInvitation(invitation);
   }
 
   acceptInvitation(invitation: Invitation) {
-    return this.lastUid().do(uid => {
-      this.af.database.object(`/activities/${invitation.activity_uid}/participant_list`).update({[uid]: true});
-      this.af.database.object(`/users/${invitation.user_uid}/activity_list`).update({[invitation.activity_uid]: true});
-      this.removeInvitation(invitation);
-    });
+    this.af.database.object(`/activities/${invitation.activity_uid}/participant_list`).update({[invitation.user_uid]: true});
+    this.af.database.object(`/users/${invitation.user_uid}/activity_list`).update({[invitation.activity_uid]: true});
+    this.removeInvitation(invitation);
   }
 
   updateProfile(updateObject: any) {
