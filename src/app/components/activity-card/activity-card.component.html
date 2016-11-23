@@ -1,5 +1,5 @@
 <ion-card (click)="open.emit()" class="activity-card styled-card">
-  <img src="assets/img/sports/{{activity.sport}}.jpg" class="background" *ngIf="activity.sport" />
+  <img src="assets/img/sports/{{activity.sport}}.jpg" class="background" *ngIf="activity.sport"/>
   <div class="card-sport">{{ activity.sport | translate | uppercase}}</div>
   <div class="card-locked" *ngIf="activity.shape === 'closed'">
     <ion-icon name="lock"></ion-icon>
@@ -9,11 +9,13 @@
       <div class="card-organizer-name">
         {{activity.organizer?.name | name:0}}
       </div>
-      <div class="card-organizer-rating" *ngIf="!!activity.organizer?.ratings">
-        <ion-icon
-          name="star"
-          color="star"
-          *ngFor="let _ of activity.organizer?.ratings[activity.sport] | numberToArray"></ion-icon>
+      <div class="card-organizer-rating">
+        <div *ngIf="!!activity.organizer?.ratings">
+          <ion-icon
+            name="star"
+            color="star"
+            *ngFor="let _ of activity.organizer?.ratings[activity.sport] | numberToArray"></ion-icon>
+        </div>
       </div>
     </div>
     <div class="card-activity-details">

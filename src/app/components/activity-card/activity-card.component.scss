@@ -59,7 +59,7 @@ ion-card.activity-card {
 
     .card-activity-details {
       position: relative;
-      top: -52px;
+      bottom: 29px;
       left: 40%;
       width: 36%;
       text-align: left;
@@ -73,10 +73,13 @@ ion-card.activity-card {
       position: relative;
       left: 30px;
       width: 60px;
-      bottom: -20px;
+      bottom: -19px;
       text-align: center;
       text-overflow: ellipsis;
       overflow: hidden;
+      .card-organizer-rating {
+        height: 18px;
+      }
     }
   }
 }
