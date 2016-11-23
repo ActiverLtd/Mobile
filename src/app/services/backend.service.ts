@@ -104,7 +104,7 @@ export class BackendService {
       return Observable.zip(
         ...Object.keys(currentUser.activity_list)
           .map(id => this.af.database.object(`/activities/${id}`).switchMap(activity => {
-              return this.fetchOrganizer(activity).mapTo(activity);
+            return Observable.zip(this.fetchOrganizer(activity), this.fetchParticipants(activity)).mapTo(activity);
             })
           ));
     });
