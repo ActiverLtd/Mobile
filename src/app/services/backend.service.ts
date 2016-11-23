@@ -140,7 +140,7 @@ export class BackendService {
         }
         return this.af.database.object(`/users/${auth.auth.uid}`);
       }
-    ).take(1);
+    );
   }
 
   getLastUid() {
