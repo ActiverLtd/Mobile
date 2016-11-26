@@ -38,6 +38,7 @@
   "CREATE_ACTIVITY_SHAPE_CLOSED": "Suljettu",
   "CREATE_ACTIVITY_BUTTON": "Luo tapahtuma",
   "CREATE_ACTIVITY_INVITE": "Kutsu osallistujia",
+  "CREATE_ACTIVITY_PARTICIPANTS_MAX": "Osallistujamäärä",
   "SIGN_OUT": "Kirjaudu ulos",
   "LOCATION_PICKER_NO_RESULTS": "Ei tuloksia",
   "LOCATION_PICKER_SEARCH_PLACEHOLDER": "Etsi...",
