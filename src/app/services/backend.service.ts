@@ -14,7 +14,7 @@ export class BackendService {
   }
 
   lastUid(): Observable<string> {
-    return this.getCurrentUser().map(user => user.$key);
+    return this.getCurrentUser().map(user => user.$key).first();
   }
 
   getActivities(orderBySubject: BehaviorSubject<string>): Observable<Activity[]> {

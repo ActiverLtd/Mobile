@@ -1,0 +1,15 @@
+.location-picker {
+  ion-input[name="location"] input {
+    margin-bottom: 0;
+  }
+  .predictions {
+    position: absolute;
+    z-index: 100;
+    background-color: white;
+    padding: 4px;
+    .prediction {
+      padding: 3px 0;
+      border-bottom: 1px solid gray;
+    }
+  }
+}

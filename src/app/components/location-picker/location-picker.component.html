@@ -1,2 +1,17 @@
-Valittu sijainti: {{selection.name}}
-<ion-input type="text" name="location" (input)="locationSelected($event.target.value)" required></ion-input>
+<div class="location-picker">
+  <span *ngIf="selection">Valittu sijainti: {{selection?.name}}</span>
+  <ion-input
+    type="text"
+    name="location"
+    [formControl]="locationControl"
+    [placeholder]="'LOCATION_PICKER_SEARCH_PLACEHOLDER' | translate"
+    required></ion-input>
+  <div *ngIf="!(predictions$ | async)?.length && showPredictions">
+    {{'LOCATION_PICKER_NO_RESULTS' | translate}}
+  </div>
+  <div class="predictions" *ngIf="showPredictions">
+    <div *ngFor="let prediction of predictions$ | async" (click)="selectPrediction(prediction)" class="prediction">
+      {{prediction.description}}
+    </div>
+  </div>
+</div>

@@ -39,6 +39,8 @@
   "CREATE_ACTIVITY_BUTTON": "Luo tapahtuma",
   "CREATE_ACTIVITY_INVITE": "Kutsu osallistujia",
   "SIGN_OUT": "Kirjaudu ulos",
+  "LOCATION_PICKER_NO_RESULTS": "Ei tuloksia",
+  "LOCATION_PICKER_SEARCH_PLACEHOLDER": "Etsi...",
   "INVITATIONS_NO_INVITATIONS_TITLE": "Ei uusia kutsuja!",
   "INVITATIONS_NO_INVITATIONS_CREATE_BUTTON": "Luo uusi tapahtuma",
   "TOAST_INVITATION_SENT": "Kutsu lähetetty. Saat ilmoituksen järjestäjän hyväksyttyä osallistumisesi.",
