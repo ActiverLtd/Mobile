@@ -60,7 +60,7 @@
   "TOAST_ACTIVITY_CREATED": "Aktiviteetti luotu!",
   "TOAST_COMMENTED": "Kommentti lisätty",
   "TOAST_JOINED": "Liitytty!",
-  "TOAST_UPDATES_INSTALLED": "Päivitykset asennettu. Käynnistä sovellus uudestaan käyttääksesi uusinta versiota.",
+  "TOAST_UPDATES_INSTALLED": "Päivitykset asennettu.",
   "TOAST_PROFILE_UPDATED": "Profiili päivitetty.",
   "TOAST_SIGNED_IN": "Kirjauduttu sisään",
   "TOAST_SIGNED_OUT": "Kirjauduttu ulos"

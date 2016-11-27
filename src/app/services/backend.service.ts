@@ -143,6 +143,11 @@ export class BackendService {
     return this.uid;
   }
 
+  storeNotificationId(uid: string, notificationId: string) {
+    alert(notificationId);
+    this.af.database.object(`/users/${uid}`).update({notificationId});
+  }
+
   private fetchOrganizer(activity: Activity): Observable<User> {
     return this.fetchUser(activity.organizer_uid).do(organizer => activity.organizer = organizer);
   }

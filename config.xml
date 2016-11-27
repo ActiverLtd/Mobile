@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="net.activer.app" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="net.activer.app" version="0.0.1" xmlns="http://www.w3.org/ns/widgets">
   <name>Activer</name>
   <description>Activer</description>
   <author email="roope.hakulinen@activer.net" href="http://activer.net/">Activer</author>
@@ -82,10 +82,9 @@
     <variable name="APP_ID" value="375866282577187"/>
     <variable name="APP_NAME" value="Activer"/>
   </plugin>
-  <!--<plugin name="cordova-plugin-googlemaps" spec="~1.3.9">-->
-    <!--<variable name="API_KEY_FOR_ANDROID" value="AIzaSyDYsRE37Cjb2zawE8EM64264EVW-XKhkQg"/>-->
-    <!--<variable name="API_KEY_FOR_IOS" value="AIzaSyDo3i8JrzbK5H8bBdDGWIRWkrLdc-jJxh4"/>-->
-  <!--</plugin>-->
+  <plugin name="cordova-plugin-fcm" spec="~1.1.5"/>
+  <plugin name="cordova-plugin-fcm-config" source="git" spec="StoppedApp/cordova-plugin-fcm-config.git"/>
+
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
   <splash src="resources/android/splash/drawable-port-xhdpi-screen.png"/>
 </widget>
