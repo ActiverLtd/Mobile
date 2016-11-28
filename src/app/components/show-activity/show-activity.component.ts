@@ -55,6 +55,12 @@ export class ShowActivityComponent {
     return this.activity.organizer_uid === this.currentUserUid;
   }
 
+  joinActivity() {
+    if (confirm(this.translateService.instant('CONFIRM_JOIN_ACTIVITY'))) {
+      this.join.emit(this.activity);
+    }
+  }
+
   leaveOrCancel() {
     if (confirm(this.translateService.instant(this.isOrganizer() ? 'CONFIRM_CANCEL_ACTIVITY' : 'CONFIRM_LEAVE_ACTIVITY'))) {
       this.leave.emit(this.activity);

@@ -132,7 +132,7 @@
   </ion-row>
 </div>
 <div class="bottom" *ngIf="!isUserParticipating()">
-  <div class="round-button" (click)="join.emit(activity);">
+  <div class="round-button" (click)="joinActivity()">
     <span>{{'COMMON_JOIN' | translate}}<br/>>></span>
   </div>
 </div>
