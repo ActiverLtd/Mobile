@@ -4,6 +4,7 @@ import { Activity } from '../../app/interfaces/activity.interface';
 import { ToastService } from '../../app/services/toast.service';
 import { BackendService } from '../../app/services/backend.service';
 import { Observable } from 'rxjs';
+import { TranslateService } from 'ng2-translate';
 
 @Component({
   templateUrl: './show-activity.html'
@@ -15,6 +16,7 @@ export class ShowActivityPage implements OnInit {
   constructor(private params: NavParams,
               private viewController: ViewController,
               private toastService: ToastService,
+              private translateService: TranslateService,
               private backendService: BackendService) {
   }
 
@@ -38,6 +40,13 @@ export class ShowActivityPage implements OnInit {
           this.close();
         }
       });
+  }
+
+  leave(activity: Activity) {
+    if (confirm(this.translateService.instant('CONFIRM_LEAVE'))) {
+      this.backendService.leaveActivity(activity);
+      this.close();
+    }
   }
 
   comment(data: [Activity, string]) {

@@ -66,6 +66,11 @@ export class BackendService {
     });
   }
 
+  leaveActivity(activity: Activity) {
+    this.af.database.object(`/users/${this.uid}/activity_list/${activity.$key}`).remove();
+    this.af.database.object(`/activities/${activity.$key}/participant_list/${this.uid}`).remove();
+  }
+
   addComment(activity: Activity, text: string) {
     return this.lastUid().do(uid =>
       this.af.database.list(`/activities/${activity.$key}/comments`).push({

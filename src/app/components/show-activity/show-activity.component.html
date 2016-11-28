@@ -125,6 +125,11 @@
       </ion-row>
     </ion-col>
   </ion-row>
+  <ion-row *ngIf="isUserParticipating()" (click)="leave.emit(activity);">
+    <ion-col>
+      {{'SHOW_ACTIVITY_LEAVE' | translate}} >>
+    </ion-col>
+  </ion-row>
 </div>
 <div class="bottom" *ngIf="!isUserParticipating()">
   <div class="round-button" (click)="join.emit(activity);">

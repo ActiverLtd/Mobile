@@ -3,6 +3,7 @@
     [activity]="activity$ | async"
     [currentUserUid]="uid"
     (join)="join($event)"
+    (leave)="leave($event)"
     (comment)="comment($event)"
     (close)="close()"></app-show-activity>
 </ion-content>

@@ -16,6 +16,8 @@ export class ShowActivityComponent {
   @Output()
   join: EventEmitter<Activity> = new EventEmitter<Activity>();
   @Output()
+  leave: EventEmitter<Activity> = new EventEmitter<Activity>();
+  @Output()
   close: EventEmitter<void> = new EventEmitter<void>();
   @Output()
   comment: EventEmitter<[Activity, string]> = new EventEmitter<[Activity, string]>();
