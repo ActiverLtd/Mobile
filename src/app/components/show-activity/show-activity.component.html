@@ -125,9 +125,9 @@
       </ion-row>
     </ion-col>
   </ion-row>
-  <ion-row *ngIf="isUserParticipating()" (click)="leave.emit(activity);">
+  <ion-row *ngIf="isUserParticipating()" (click)="leaveOrCancel()">
     <ion-col>
-      {{'SHOW_ACTIVITY_LEAVE' | translate}} >>
+      {{(isOrganizer() ? 'SHOW_ACTIVITY_CANCEL' : 'SHOW_ACTIVITY_LEAVE') | translate}} >>
     </ion-col>
   </ion-row>
 </div>

@@ -62,13 +62,27 @@ export class BackendService {
           user_uid: uid
         });
         this.af.database.object(`/users/${activity.organizer.$key}/invitation_list`).update({[invitation.key]: true});
+        this.af.database.object(`/activities/${activity.$key}/invitation_list`).update({[invitation.key]: true});
       }
     });
   }
 
   leaveActivity(activity: Activity) {
+    if (this.uid === activity.organizer_uid) { // If user is organizer
+      activity.participants.forEach((user) => {
+        this.af.database.object(`/users/${user.uid}/activity_list/${activity.$key}`).remove();
+      });
+      if (activity.invitation_list) {
+        Object.keys(activity.invitation_list).forEach((invitation_uid) => {
+          this.actuallyRemoveInvitation(invitation_uid, activity.organizer_uid);
+        });
+      }
+      this.af.database.object(`/activities/${activity.$key}`).remove();
+    }
+    else {
+      this.af.database.object(`/activities/${activity.$key}/participant_list/${this.uid}`).remove();
+    }
     this.af.database.object(`/users/${this.uid}/activity_list/${activity.$key}`).remove();
-    this.af.database.object(`/activities/${activity.$key}/participant_list/${this.uid}`).remove();
   }
 
   addComment(activity: Activity, text: string) {
@@ -169,8 +183,12 @@ export class BackendService {
   }
 
   private removeInvitation(invitation) {
-    this.af.database.object(`/invitations/${invitation.$key}`).remove();
-    this.af.database.object(`/users/${invitation.activity.organizer.$key}/invitation_list/${invitation.$key}`).remove();
+    this.actuallyRemoveInvitation(invitation.$key, invitation.activity.organizer.$key);
+  }
+
+  private actuallyRemoveInvitation(invitationUid, organizerUid) {
+    this.af.database.object(`/invitations/${invitationUid}`).remove();
+    this.af.database.object(`/users/${organizerUid}/invitation_list/${invitationUid}`).remove();
   }
 
   private isUserParticipating(activity: Activity, uid: string) {

@@ -91,7 +91,7 @@ export function createTranslateLoader(http: Http) {
 export class AppModule {
 }
 
-window.onerror = function (message, url, lineNumber) {
-  alert(`ERROR: ${message}\n${url}:${lineNumber}`);
+window.onerror = function (message, url, lineNumber, column, error) {
+  alert(`ERROR: ${message}\n${url}:${lineNumber}:${column}\n${error.stack}`);
   return true;
 };

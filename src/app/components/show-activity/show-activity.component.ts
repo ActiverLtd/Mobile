@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Activity } from '../../interfaces/activity.interface';
 import { User } from '../../interfaces/user.interface';
+import { TranslateService } from 'ng2-translate';
 
 @Component({
   selector: 'app-show-activity',
@@ -22,6 +23,10 @@ export class ShowActivityComponent {
   @Output()
   comment: EventEmitter<[Activity, string]> = new EventEmitter<[Activity, string]>();
 
+  constructor(private translateService: TranslateService) {
+
+  }
+
   participantsByLevel(level: number = undefined) {
     return this.participants.filter(participant => {
       if ((!participant.ratings || !participant.ratings[this.activity.sport])) {
@@ -38,12 +43,21 @@ export class ShowActivityComponent {
     return this.activity.participants.concat(this.activity.organizer);
   }
 
-
   isUserParticipating() {
     return this.participants.map(participant => participant.$key).includes(this.currentUserUid);
   }
 
   isOwnComment(comment: any) {
     return comment.user.$key === this.currentUserUid;
+  }
+
+  isOrganizer() {
+    return this.activity.organizer_uid === this.currentUserUid;
+  }
+
+  leaveOrCancel() {
+    if (confirm(this.translateService.instant(this.isOrganizer() ? 'CONFIRM_CANCEL_ACTIVITY' : 'CONFIRM_LEAVE_ACTIVITY'))) {
+      this.leave.emit(this.activity);
+    }
   }
 }

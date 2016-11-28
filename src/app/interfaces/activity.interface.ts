@@ -13,5 +13,6 @@ export interface Activity {
   participants_max: number;
   shape: string;
   additional_info?: string;
+  invitation_list?: string[];
   comments: Comment[];
 }
