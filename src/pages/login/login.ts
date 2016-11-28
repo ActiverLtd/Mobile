@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFire } from 'angularfire2';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 import { MainPage } from '../main/main';
 import { BackendService } from '../../app/services/backend.service';
 
@@ -9,16 +9,21 @@ import { BackendService } from '../../app/services/backend.service';
   templateUrl: './login.html'
 })
 export class LoginPage implements OnInit {
-  constructor(private navCtrl: NavController, private af: AngularFire, private backendService: BackendService) {
+  constructor(private navCtrl: NavController,
+              private af: AngularFire,
+              private platform: Platform,
+              private backendService: BackendService) {
   }
 
   ngOnInit() {
     this.af.auth.subscribe(auth => {
       if (auth) {
-        FCMPlugin.getToken(
-          token => this.backendService.storeNotificationId(auth.uid, token),
-          err => console.error('Error retrieving FCM token: ' + err)
-        );
+        if (this.platform.is('cordova')) {
+          FCMPlugin.getToken(
+            token => this.backendService.storeNotificationId(auth.uid, token),
+            err => console.error('Error retrieving FCM token: ' + err)
+          );
+        }
         this.navCtrl.setRoot(MainPage);
       }
     });

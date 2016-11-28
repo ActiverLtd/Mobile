@@ -144,7 +144,6 @@ export class BackendService {
   }
 
   storeNotificationId(uid: string, notificationId: string) {
-    alert(notificationId);
     this.af.database.object(`/users/${uid}`).update({notificationId});
   }
 
