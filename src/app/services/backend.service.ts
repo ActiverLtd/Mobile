@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFire, FirebaseAuthState, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFire, FirebaseAuthState } from 'angularfire2';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Invitation } from '../interfaces/invitation.interface';
 import { Activity } from '../interfaces/activity.interface';
@@ -7,14 +7,28 @@ import { User } from '../interfaces/user.interface';
 
 @Injectable()
 export class BackendService {
-  uid: string;
+  user$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   constructor(private af: AngularFire) {
-    this.lastUid().subscribe(uid => this.uid = uid);
+    this.af.auth.switchMap((auth: FirebaseAuthState) => {
+        if (!auth) {
+          return Observable.of({});
+        }
+        return this.af.database.object(`/users/${auth.auth.uid}`);
+      }
+    ).subscribe(this.user$);
   }
 
-  lastUid(): Observable<string> {
-    return this.getCurrentUser().map(user => user.$key).first();
+  getUser() {
+    return this.user$;
+  }
+
+  getCurrentUser() {
+    return this.user$.getValue();
+  }
+
+  getCurrentUserUid() {
+    return this.getCurrentUser().$key;
   }
 
   getActivities(orderBySubject: BehaviorSubject<string>): Observable<Activity[]> {
@@ -25,10 +39,10 @@ export class BackendService {
       }
     );
 
-    return Observable.combineLatest(activities$, this.lastUid()).switchMap(([activities, uid]) => {
+    return activities$.switchMap((activities) => {
       return Observable.zip(
         ...activities
-          .filter(activity => !this.isUserParticipating(activity, uid))
+          .filter(activity => !this.isUserParticipating(activity, this.getCurrentUserUid()))
           .map(activity => this.fetchOrganizer(activity).map(() => activity))
       );
     });
@@ -40,65 +54,22 @@ export class BackendService {
     });
   }
 
-  createActivity(activity: Activity) {
-    return this.lastUid().do(uid => {
-        activity.organizer_uid = uid;
-        const activityRef = this.af.database.list('/activities').push(activity);
-        this.af.database.object(`/users/${activity.organizer_uid}/activity_list`).update({[activityRef.key]: true});
+  getUserActivities() {
+    return this.user$.switchMap(currentUser => {
+      if (!currentUser.activity_list) {
+        return Observable.of([]);
       }
-    );
-  }
-
-  joinActivity(activity: Activity) {
-    return this.getCurrentUser().do(user => {
-      const uid = user.$key;
-      if (activity.shape === 'open') {
-        this.af.database.object(`/users/${uid}/activity_list`).update({[activity.$key]: true});
-        this.af.database.object(`/activities/${activity.$key}/participant_list`).update({[uid]: true});
-      }
-      else {
-        const invitation: any = this.af.database.list(`/invitations`).push({
-          activity_uid: activity.$key,
-          user_uid: uid
-        });
-        this.af.database.object(`/users/${activity.organizer.$key}/invitation_list`).update({[invitation.key]: true});
-        this.af.database.object(`/activities/${activity.$key}/invitation_list`).update({[invitation.key]: true});
-      }
+      return Observable.zip(
+        ...Object.keys(currentUser.activity_list)
+          .map(id => this.af.database.object(`/activities/${id}`).switchMap(activity => {
+              return Observable.zip(this.fetchOrganizer(activity), this.fetchParticipants(activity)).mapTo(activity);
+            })
+          ));
     });
   }
 
-  leaveActivity(activity: Activity) {
-    if (this.uid === activity.organizer_uid) { // If user is organizer
-      activity.participants.forEach((user) => {
-        this.af.database.object(`/users/${user.uid}/activity_list/${activity.$key}`).remove();
-      });
-      if (activity.invitation_list) {
-        Object.keys(activity.invitation_list).forEach((invitation_uid) => {
-          this.actuallyRemoveInvitation(invitation_uid, activity.organizer_uid);
-        });
-      }
-      this.af.database.object(`/activities/${activity.$key}`).remove();
-    }
-    else {
-      this.af.database.object(`/activities/${activity.$key}/participant_list/${this.uid}`).remove();
-    }
-    this.af.database.object(`/users/${this.uid}/activity_list/${activity.$key}`).remove();
-  }
-
-  addComment(activity: Activity, text: string) {
-    return this.lastUid().do(uid =>
-      this.af.database.list(`/activities/${activity.$key}/comments`).push({
-        user_uid: uid,
-        text
-      })
-    );
-  }
-
   getInvitations(): Observable<Invitation[]> {
-    return this.getCurrentUser().switchMap(currentUser => {
-      if (!currentUser.invitation_list) {
-        return Observable.of([]);
-      }
+    return this.user$.filter(user => !!user && !!user.invitation_list).switchMap(currentUser => {
       return Observable.combineLatest(...Object.keys(currentUser.invitation_list)
         .map(id => this.af.database.object(`/invitations/${id}`)
           .switchMap(invitation => {
@@ -115,17 +86,51 @@ export class BackendService {
     });
   }
 
-  getUserActivities() {
-    return this.getCurrentUser().switchMap(currentUser => {
-      if (!currentUser.activity_list) {
-        return Observable.of([]);
+  createActivity(activity: Activity) {
+    activity.organizer_uid = this.getCurrentUserUid();
+    const activityRef = this.af.database.list('/activities').push(activity);
+    this.af.database.object(`/users/${activity.organizer_uid}/activity_list`).update({[activityRef.key]: true});
+  }
+
+  joinActivity(activity: Activity) {
+    const uid = this.getCurrentUserUid();
+    if (activity.shape === 'open') {
+      this.af.database.object(`/users/${uid}/activity_list`).update({[activity.$key]: true});
+      this.af.database.object(`/activities/${activity.$key}/participant_list`).update({[uid]: true});
+    }
+    else {
+      const invitation: any = this.af.database.list(`/invitations`).push({
+        activity_uid: activity.$key,
+        user_uid: uid
+      });
+      this.af.database.object(`/users/${activity.organizer.$key}/invitation_list`).update({[invitation.key]: true});
+      this.af.database.object(`/activities/${activity.$key}/invitation_list`).update({[invitation.key]: true});
+    }
+  }
+
+  leaveActivity(activity: Activity) {
+    const uid = this.getCurrentUserUid();
+    if (uid === activity.organizer_uid) { // If user is organizer
+      activity.participants.forEach((user) => {
+        this.af.database.object(`/users/${user.uid}/activity_list/${activity.$key}`).remove();
+      });
+      if (activity.invitation_list) {
+        Object.keys(activity.invitation_list).forEach((invitation_uid) => {
+          this.actuallyRemoveInvitation(invitation_uid, activity.organizer_uid);
+        });
       }
-      return Observable.zip(
-        ...Object.keys(currentUser.activity_list)
-          .map(id => this.af.database.object(`/activities/${id}`).switchMap(activity => {
-            return Observable.zip(this.fetchOrganizer(activity), this.fetchParticipants(activity)).mapTo(activity);
-            })
-          ));
+      this.af.database.object(`/activities/${activity.$key}`).remove();
+    }
+    else {
+      this.af.database.object(`/activities/${activity.$key}/participant_list/${uid}`).remove();
+    }
+    this.af.database.object(`/users/${uid}/activity_list/${activity.$key}`).remove();
+  }
+
+  addComment(activity: Activity, text: string) {
+    this.af.database.list(`/activities/${activity.$key}/comments`).push({
+      user_uid: this.getCurrentUserUid(),
+      text
     });
   }
 
@@ -140,30 +145,11 @@ export class BackendService {
   }
 
   updateProfile(updateObject: any) {
-    return this.getUser().update(updateObject);
-  }
-
-  getUser(): FirebaseObjectObservable<User> {
-    return this.af.database.object(`/users/${this.uid}`);
-  }
-
-  getCurrentUser(): Observable<User> {
-    return this.af.auth.switchMap(
-      (auth: FirebaseAuthState) => {
-        if (!auth) {
-          return Observable.of({});
-        }
-        return this.af.database.object(`/users/${auth.auth.uid}`);
-      }
-    );
-  }
-
-  getLastUid() {
-    return this.uid;
+    this.fetchUser(this.getCurrentUserUid()).update(updateObject);
   }
 
   storeNotificationId(uid: string, notificationId: string) {
-    this.af.database.object(`/users/${uid}`).update({notificationId});
+    this.fetchUser(uid).update({notificationId});
   }
 
   private fetchOrganizer(activity: Activity): Observable<User> {

@@ -23,16 +23,14 @@ export class UpdateProfilePage implements OnInit {
   }
 
   ngOnInit() {
-    this.backendService.getCurrentUser().subscribe(user => {
-      this.user = user;
-      this.bio = user.bio || '';
-      this.ratings = Object.assign({}, user.ratings);
-      this.sports = this.sportService.getSports(false);
-    });
+    const user = this.backendService.getCurrentUser();
+    this.user = user;
+    this.bio = user.bio || '';
+    this.ratings = Object.assign({}, user.ratings);
+    this.sports = this.sportService.getSports(false);
   }
 
   save() {
-    console.log({bio: this.bio, ratings: this.ratings});
     this.backendService.updateProfile({bio: this.bio, ratings: this.ratings});
     this.close();
     this.toastService.show('TOAST_PROFILE_UPDATED');

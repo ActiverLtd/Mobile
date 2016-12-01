@@ -20,7 +20,7 @@ export class ShowActivityPage implements OnInit {
 
   ngOnInit() {
     this.activity$ = this.backendService.getActivity(this.params.get('activityId'));
-    this.uid = this.backendService.getLastUid();
+    this.uid = this.backendService.getCurrentUserUid();
   }
 
   close() {
@@ -28,16 +28,14 @@ export class ShowActivityPage implements OnInit {
   }
 
   join(activity: Activity) {
-    this.backendService.joinActivity(activity).subscribe(
-      () => {
-        if (activity.shape === 'open') {
-          this.toastService.show('TOAST_JOINED');
-        }
-        else {
-          this.toastService.show('TOAST_INVITATION_SENT');
-          this.close();
-        }
-      });
+    this.backendService.joinActivity(activity);
+    if (activity.shape === 'open') {
+      this.toastService.show('TOAST_JOINED');
+    }
+    else {
+      this.toastService.show('TOAST_INVITATION_SENT');
+      this.close();
+    }
   }
 
   leave(activity: Activity) {
@@ -47,6 +45,7 @@ export class ShowActivityPage implements OnInit {
   }
 
   comment(data: [Activity, string]) {
-    this.backendService.addComment(data[0], data[1]).subscribe(() => this.toastService.show('TOAST_COMMENTED'));
+    this.backendService.addComment(data[0], data[1]);
+    this.toastService.show('TOAST_COMMENTED');
   }
 }

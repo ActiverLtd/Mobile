@@ -40,10 +40,9 @@ export class CreateActivityPage implements OnInit {
 
   create() {
     this.activity.timestamp = Date.parse(`${this.date}T${this.time}:00`);
-    this.backendService.createActivity(this.activity).subscribe(() => {
-      this.viewController.dismiss();
-      this.toastService.show('TOAST_ACTIVITY_CREATED');
-    });
+    this.backendService.createActivity(this.activity);
+    this.viewController.dismiss();
+    this.toastService.show('TOAST_ACTIVITY_CREATED');
   }
 
   locationChanged(location) {

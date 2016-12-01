@@ -62,7 +62,7 @@ export class ProfilePage implements OnInit, OnDestroy {
   }
 
   isOwnProfile() {
-    return this.profile.$key === this.backendService.getLastUid();
+    return this.profile.$key === this.backendService.getCurrentUserUid();
   }
 
   ngOnDestroy() {
