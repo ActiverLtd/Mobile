@@ -36,12 +36,13 @@ export class LocationPickerComponent implements OnInit {
       .map(res => res.json())
       .subscribe(data => {
         const place = data.result;
+        const addressComponents = place.address_components;
         const location = {
           name: place.name,
           address: {
-            street: place.address_components[0].long_name,
-            city: place.address_components[1].long_name,
-            country: place.address_components[3].long_name
+            street: addressComponents[0] ? addressComponents[0].long_name : '',
+            city: addressComponents[1] ? addressComponents[1].long_name : '',
+            country: addressComponents[3] ? addressComponents[3].long_name : ''
           },
           location: place.geometry.location
         };
