@@ -32,18 +32,23 @@ export class NotificationService {
   }
 
   newComment(activity: Activity, name: string, text: string, currentUserUid: string) {
-    if (activity.participant_list) {
-      Object.keys(activity.participant_list).concat(activity.organizer_uid).forEach((participant_uid) => {
-        if (participant_uid !== currentUserUid) {
-          this.sendNotification(
-            participant_uid,
-            this.translateService.instant('NOTIFICATIONS.NEW_COMMENT.TITLE'),
-            this.translateService.instant('NOTIFICATIONS.NEW_COMMENT.TEXT', {text, name}),
-            {}
-          );
-        }
-      });
+    let participantList = activity.participant_list;
+    if (!participantList) {
+      participantList = [activity.organizer_uid];
     }
+    else {
+      participantList = Object.keys(participantList).concat(activity.organizer_uid)
+    }
+    participantList.forEach((participant_uid) => {
+      if (participant_uid !== currentUserUid) {
+        this.sendNotification(
+          participant_uid,
+          this.translateService.instant('NOTIFICATIONS.NEW_COMMENT.TITLE'),
+          this.translateService.instant('NOTIFICATIONS.NEW_COMMENT.TEXT', {text, name}),
+          {}
+        );
+      }
+    });
   }
 
   private sendNotification(uid: string, title: string, text: string, data: any) {
