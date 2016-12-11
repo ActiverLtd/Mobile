@@ -28,6 +28,7 @@ import { MyActivityCardComponent } from './components/my-activity-card/my-activi
 import { BackendService } from './services/backend.service';
 import { ShowActivityComponent } from './components/show-activity/show-activity.component';
 import { UpdateProfilePage } from '../pages/update-profile/update-profile';
+import { NotificationService } from './services/notification.service';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -84,7 +85,7 @@ export function createTranslateLoader(http: Http) {
     FacebookLoginComponent
   ],
   providers: [
-    ToastService, SportService, BackendService,
+    ToastService, SportService, BackendService, NotificationService,
     {provide: LOCALE_ID, useValue: 'fi-FI'}
   ]
 })

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from 'ionic-angular';
+import { Observable } from 'rxjs';
 import { CreateActivityPage } from '../create-activity/create-activity';
 import { Activity } from '../../app/interfaces/activity.interface';
 import { ShowActivityPage } from '../show-activity/show-activity';
@@ -11,7 +12,7 @@ import { BackendService } from '../../app/services/backend.service';
   templateUrl: './invitations.html'
 })
 export class InvitationsPage implements OnInit {
-  invitations: Invitation[] = [];
+  invitations: Observable<Invitation[]>;
 
   constructor(private popoverCtrl: PopoverController,
               private toastService: ToastService,
@@ -20,7 +21,7 @@ export class InvitationsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.backendService.getInvitations().subscribe(invitations => this.invitations = invitations);
+    this.invitations = this.backendService.getInvitations();
   }
 
   showCreateActivity($event) {

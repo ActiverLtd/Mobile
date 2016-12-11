@@ -68,5 +68,19 @@
   "TOAST_UPDATES_INSTALLED": "Päivitykset asennettu.",
   "TOAST_PROFILE_UPDATED": "Profiili päivitetty.",
   "TOAST_SIGNED_IN": "Kirjauduttu sisään",
-  "TOAST_SIGNED_OUT": "Kirjauduttu ulos"
+  "TOAST_SIGNED_OUT": "Kirjauduttu ulos",
+  "NOTIFICATIONS": {
+    "NEW_INVITATION": {
+      "TITLE": "Uusi pyyntö liittyä",
+      "TEXT": "Joku haluaa liittyä aktiviteettiisi"
+    },
+    "INVITATION_ACCEPTED": {
+      "TITLE": "Sinut on hyväksytty",
+      "TEXT": "Pyyntösi liittyä hyväksyttiin."
+    },
+    "NEW_COMMENT": {
+      "TITLE": "Uusi kommentti",
+      "TEXT": "{{name}}: \"{{text}}\""
+    }
+  }
 }

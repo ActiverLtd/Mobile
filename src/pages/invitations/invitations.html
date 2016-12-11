@@ -1,5 +1,5 @@
 <ion-content class="invitations">
-  <div *ngIf="!invitations.length">
+  <div *ngIf="!(invitations | async).length">
     <div class="background-image"></div>
     <div class="empty">
       <ion-row>
@@ -17,7 +17,7 @@
     </div>
   </div>
   <app-invitation-card
-    *ngFor="let invitation of invitations"
+    *ngFor="let invitation of invitations | async"
     [invitation]="invitation"
     (open)="openActivity(invitation.activity)"
     (reject)="reject(invitation)"

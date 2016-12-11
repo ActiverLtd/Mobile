@@ -4,12 +4,13 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { Invitation } from '../interfaces/invitation.interface';
 import { Activity } from '../interfaces/activity.interface';
 import { User } from '../interfaces/user.interface';
+import { NotificationService } from './notification.service';
 
 @Injectable()
 export class BackendService {
   user$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
-  constructor(private af: AngularFire) {
+  constructor(private af: AngularFire, private notificationService: NotificationService) {
     this.af.auth.switchMap((auth: FirebaseAuthState) => {
         if (!auth) {
           return Observable.of({});
@@ -17,6 +18,7 @@ export class BackendService {
         return this.af.database.object(`/users/${auth.auth.uid}`);
       }
     ).subscribe(this.user$);
+    this.user$.subscribe(console.log);
   }
 
   getUser() {
@@ -69,7 +71,10 @@ export class BackendService {
   }
 
   getInvitations(): Observable<Invitation[]> {
-    return this.user$.filter(user => !!user && !!user.invitation_list).switchMap(currentUser => {
+    return this.user$.switchMap(currentUser => {
+      if (!currentUser || !currentUser.invitation_list || !Object.keys(currentUser.invitation_list).length) {
+        return Observable.of([]);
+      }
       return Observable.combineLatest(...Object.keys(currentUser.invitation_list)
         .map(id => this.af.database.object(`/invitations/${id}`)
           .switchMap(invitation => {
@@ -105,6 +110,7 @@ export class BackendService {
       });
       this.af.database.object(`/users/${activity.organizer.$key}/invitation_list`).update({[invitation.key]: true});
       this.af.database.object(`/activities/${activity.$key}/invitation_list`).update({[invitation.key]: true});
+      this.notificationService.newInvitation(activity.organizer_uid);
     }
   }
 
@@ -132,6 +138,7 @@ export class BackendService {
       user_uid: this.getCurrentUserUid(),
       text
     });
+    this.notificationService.newComment(activity, this.getCurrentUser().name, text, this.getCurrentUserUid());
   }
 
   rejectInvitation(invitation: Invitation) {
@@ -141,6 +148,7 @@ export class BackendService {
   acceptInvitation(invitation: Invitation) {
     this.af.database.object(`/activities/${invitation.activity_uid}/participant_list`).update({[invitation.user_uid]: true});
     this.af.database.object(`/users/${invitation.user_uid}/activity_list`).update({[invitation.activity_uid]: true});
+    this.notificationService.acceptInvitation(invitation);
     this.removeInvitation(invitation);
   }
 
