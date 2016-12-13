@@ -3,6 +3,7 @@ import { AngularFire } from 'angularfire2';
 import { NavController, Platform } from 'ionic-angular';
 import { MainPage } from '../main/main';
 import { BackendService } from '../../app/services/backend.service';
+import { Push } from 'ionic-native';
 
 
 @Component({
@@ -19,10 +20,22 @@ export class LoginPage implements OnInit {
     this.af.auth.subscribe(auth => {
       if (auth) {
         if (this.platform.is('cordova')) {
-          FCMPlugin.getToken(
-            token => this.backendService.storeNotificationId(auth.uid, token),
-            err => console.error('Error retrieving FCM token: ' + err)
-          );
+          const push = Push.init({
+            android: {
+              senderID: '12345679'
+            },
+            ios: {
+              alert: 'true',
+              badge: true,
+              sound: 'false'
+            },
+            windows: {}
+          });
+          push.on('registration', (data) => {
+            alert(JSON.stringify(data));
+            alert(data.registrationId);
+            this.backendService.storeNotificationId(auth.uid, data.registrationId);
+          });
         }
         this.navCtrl.setRoot(MainPage);
       }

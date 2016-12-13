@@ -33,7 +33,7 @@ export class MyApp {
         window.setTimeout(() => {
           Splashscreen.hide();
         }, 300);
-        FCMPlugin.onNotification(
+        /*FCMPlugin.onNotification(
           (data) => {
             if (data.wasTapped) { // Notification was received on device tray and tapped by the user.
               alert(JSON.stringify(data));
@@ -48,7 +48,7 @@ export class MyApp {
           (err) => {
             alert('Error registering onNotification callback: ' + err);
           }
-        );
+         );*/
       }
     });
   }

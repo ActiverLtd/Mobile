@@ -82,8 +82,7 @@
     <variable name="APP_ID" value="375866282577187"/>
     <variable name="APP_NAME" value="Activer"/>
   </plugin>
-  <plugin name="cordova-plugin-fcm" spec="~1.1.5"/>
-  <plugin name="cordova-plugin-fcm-config" source="git" spec="StoppedApp/cordova-plugin-fcm-config.git"/>
+  <plugin name="phonegap-plugin-push" spec="~2.0.0-rc1"/>
 
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
   <splash src="resources/android/splash/drawable-port-xhdpi-screen.png"/>
