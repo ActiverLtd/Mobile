@@ -82,7 +82,7 @@
     <variable name="APP_ID" value="375866282577187"/>
     <variable name="APP_NAME" value="Activer"/>
   </plugin>
-  <plugin name="cordova-plugin-fcm" spec="~1.1.5"/>
+  <plugin name="cordova-plugin-fcm" spec="~2.1.1"/>
   <plugin name="cordova-plugin-fcm-config" source="git" spec="StoppedApp/cordova-plugin-fcm-config.git"/>
 
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
