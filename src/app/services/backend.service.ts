@@ -18,7 +18,6 @@ export class BackendService {
         return this.af.database.object(`/users/${auth.auth.uid}`);
       }
     ).subscribe(this.user$);
-    this.user$.subscribe(console.log);
   }
 
   getUser() {
