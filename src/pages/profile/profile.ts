@@ -54,7 +54,7 @@ export class ProfilePage implements OnInit, OnDestroy {
         this.toastService.show('TOAST_SIGNED_OUT');
         this.navCtrl.popToRoot().then(() => {
           this.navCtrl.setRoot(LoginPage).then(() => {
-            console.log('Done');
+            console.log('Logged out!');
           });
         });
       });

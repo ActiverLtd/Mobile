@@ -1,8 +1,9 @@
 import { Facebook } from 'ionic-native';
 import { Component } from '@angular/core';
-import { AngularFire, AngularFireAuth, AuthProviders, FirebaseAuthState } from 'angularfire2';
+import { AngularFire, AngularFireAuth, AuthProviders, FirebaseAuthState, AuthMethods } from 'angularfire2';
 import { Platform } from 'ionic-angular';
 import { ToastService } from '../../services/toast.service';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-facebook-login',
@@ -25,10 +26,11 @@ export class FacebookLoginComponent {
   }
 
   private angularFireAuth(accessToken) {
-    this.auth.login(accessToken, {provider: AuthProviders.Facebook})
+    let creds = firebase.auth.FacebookAuthProvider.credential(accessToken);
+    this.auth.login(creds, {provider: AuthProviders.Facebook, method: AuthMethods.OAuthToken})
       .then((auth: FirebaseAuthState) => {
-        const data = auth.auth;
         this.toastService.show('TOAST_SIGNED_IN');
+        const data = auth.auth;
         this.af.database.object(`/users/${auth.uid}`).update({
           image: data.photoURL,
           email: data.email,
