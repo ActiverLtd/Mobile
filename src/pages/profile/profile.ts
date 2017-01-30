@@ -50,10 +50,14 @@ export class ProfilePage implements OnInit, OnDestroy {
 
   signOut() {
     if (confirm('Oletko varma, että haluat kirjautua ulos?')) {
-      this.af.auth.logout();
-      this.toastService.show('TOAST_SIGNED_OUT');
-      this.navCtrl.setRoot(LoginPage);
-      this.navCtrl.popToRoot();
+      this.af.auth.logout().then(() => {
+        this.toastService.show('TOAST_SIGNED_OUT');
+        this.navCtrl.popToRoot().then(() => {
+          this.navCtrl.setRoot(LoginPage).then(() => {
+            console.log('Done');
+          });
+        });
+      });
     }
   }
 
