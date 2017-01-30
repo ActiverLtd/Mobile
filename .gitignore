@@ -34,3 +34,6 @@ Thumbs.db
 UserInterfaceState.xcuserstate
 
 *.zip
+
+google-services.json
+GoogleService-Info.plist

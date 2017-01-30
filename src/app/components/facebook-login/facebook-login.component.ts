@@ -1,6 +1,6 @@
 import { Facebook } from 'ionic-native';
 import { Component } from '@angular/core';
-import { AngularFire } from 'angularfire2';
+import { AngularFire, AngularFireAuth, AuthProviders, FirebaseAuthState } from 'angularfire2';
 import { Platform } from 'ionic-angular';
 import { ToastService } from '../../services/toast.service';
 
@@ -9,7 +9,7 @@ import { ToastService } from '../../services/toast.service';
   templateUrl: `./facebook-login.component.html`
 })
 export class FacebookLoginComponent {
-  constructor(private platform: Platform, private toastService: ToastService, public af: AngularFire) {
+  constructor(private platform: Platform, private toastService: ToastService, public af: AngularFire, private auth: AngularFireAuth) {
   }
 
   login() {
@@ -25,14 +25,14 @@ export class FacebookLoginComponent {
   }
 
   private angularFireAuth(accessToken) {
-    const provider = firebase.auth.FacebookAuthProvider.credential(accessToken);
-    firebase.auth().signInWithCredential(provider)
-      .then((auth) => {
+    this.auth.login(accessToken, {provider: AuthProviders.Facebook})
+      .then((auth: FirebaseAuthState) => {
+        const data = auth.auth;
         this.toastService.show('TOAST_SIGNED_IN');
         this.af.database.object(`/users/${auth.uid}`).update({
-          image: auth.photoURL,
-          email: auth.email,
-          name: auth.displayName,
+          image: data.photoURL,
+          email: data.email,
+          name: data.displayName,
           ratings: {},
           invitations: {}
         })
