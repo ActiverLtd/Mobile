@@ -39,22 +39,24 @@ export class MyApp {
               hideSplashScreen();
             }
           });
-          FCMPlugin.onNotification(
-            (data) => {
-              if (data.wasTapped) { // Notification was received on device tray and tapped by the user.
-                alert(JSON.stringify(data));
+          if (FCMPlugin) {
+            FCMPlugin.onNotification(
+              (data) => {
+                if (data.wasTapped) { // Notification was received on device tray and tapped by the user.
+                  alert(JSON.stringify(data));
+                }
+                else { // Notification was received in foreground. Maybe the user needs to be notified.
+                  alert(JSON.stringify(data));
+                }
+              },
+              (msg) => {
+                console.log('onNotification callback successfully registered: ' + msg);
+              },
+              (err) => {
+                alert('Error registering onNotification callback: ' + err);
               }
-              else { // Notification was received in foreground. Maybe the user needs to be notified.
-                alert(JSON.stringify(data));
-              }
-            },
-            (msg) => {
-              console.log('onNotification callback successfully registered: ' + msg);
-            },
-            (err) => {
-              alert('Error registering onNotification callback: ' + err);
-            }
-          );
+            );
+          }
         }
       }
     );
