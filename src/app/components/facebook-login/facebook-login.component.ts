@@ -31,17 +31,11 @@ export class FacebookLoginComponent {
       .then((auth: FirebaseAuthState) => {
         this.toastService.show('TOAST_SIGNED_IN');
         const data = auth.auth;
-        this.af.database.object(`/users/${auth.uid}`).$ref.once('value', (snapshot) => {
-          if (snapshot.val() === null) {
-            const facebookUid = data['providerData'][0].uid;
-            this.af.database.object(`/users/${auth.uid}`).update({
-              image: `http://graph.facebook.com/${facebookUid}/picture?type=large`,
-              email: data.email,
-              name: data.displayName,
-              ratings: {},
-              invitations: {}
-            });
-          }
+        const facebookUid = data['providerData'][0].uid;
+        this.af.database.object(`/users/${auth.uid}`).update({
+          image: `http://graph.facebook.com/${facebookUid}/picture?type=large`,
+          email: data.email,
+          name: data.displayName
         });
       })
       .catch((error) => {
