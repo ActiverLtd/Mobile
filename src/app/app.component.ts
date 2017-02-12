@@ -29,7 +29,6 @@ export class MyApp {
             if (syncStatus === SyncStatus.DOWNLOADING_PACKAGE
               || syncStatus === SyncStatus.IN_PROGRESS
               || syncStatus === SyncStatus.INSTALLING_UPDATE) {
-              toastService.show('Loading2: ' + !loading ? 'true' : 'false', true);
               if (!loading) {
                 loading = loadingCtrl.create({
                   content: 'New version available, downloading... '
@@ -42,7 +41,6 @@ export class MyApp {
               || syncStatus === SyncStatus.UPDATE_INSTALLED
               || syncStatus === SyncStatus.UPDATE_IGNORED) {
               if (loading) {
-                toastService.show('Dismissing', true);
                 loading.dismiss();
               }
             }
